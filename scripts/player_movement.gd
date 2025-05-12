@@ -7,6 +7,7 @@ class_name Player extends CharacterBody2D
 @onready var attack_timer: Timer = $AttackTimer
 
 const SPEED = 100.0
+const ATTACK_POWER = 20.0
 
 var last_direction := Vector2.DOWN
 var is_moving := false
@@ -41,6 +42,7 @@ func handle_move(delta: float) -> void:
 			is_moving = false
 
 	move_and_collide(velocity)
+	
 
 func handle_attack() -> void:
 	if Input.is_action_just_pressed("attack"):
@@ -87,10 +89,13 @@ func play_idle_animation() -> void:
 		animated_sprite_2d.play("idle_side")
 		animated_sprite_2d.flip_h = last_direction == Vector2.LEFT
 
-func _on_attack_hitbox_body_entered(body: Node2D) -> void:
+func _on_vertical_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body is Enemy and vertical_hitbox.visible:
-		body.attack_received(position)
+		body.attack_received(global_position, ATTACK_POWER)
 
+func _on_horizontal_attack_hitbox_body_entered(body: Node2D) -> void:
+	if body is Enemy and horizontal_hitbox.visible:
+		body.attack_received(global_position, ATTACK_POWER)
 
 func _on_attack_timer_timeout() -> void:
 	vertical_hitbox.set_deferred("monitoring", false)

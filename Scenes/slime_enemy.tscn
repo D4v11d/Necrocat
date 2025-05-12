@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/slime-blue.png" id="1_gbwud"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nndgq"]
@@ -68,7 +68,6 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hto71")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.310376
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)

@@ -1093,7 +1093,7 @@ tile_map_data = PackedByteArray("AAABAAEAAAAIAAoAAAAAAAEAAAAHAAoAAAD//wEAAAAIAAo
 tile_set = SubResource("TileSet_8v1aj")
 
 [node name="SlimeEnemy" parent="." instance=ExtResource("3_k5b10")]
-position = Vector2(83, 49)
+position = Vector2(-62, 55)
 
 [node name="Player" parent="." instance=ExtResource("2_gaflk")]
 

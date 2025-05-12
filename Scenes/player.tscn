@@ -1,7 +1,7 @@
 [gd_scene load_steps=55 format=3 uid="uid://ljn1arg6ompw"]
 
 [ext_resource type="Texture2D" uid="uid://dh7w8dyk1dx03" path="res://Art/Characters/player.png" id="1_6bahf"]
-[ext_resource type="Script" uid="uid://b8aeteh3n0qih" path="res://scripts/player_movement.gd" id="1_bnl8f"]
+[ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_bnl8f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coob6"]
 atlas = ExtResource("1_6bahf")
@@ -391,10 +391,10 @@ animations = [{
 radius = 3.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fjel"]
-size = Vector2(26, 14)
+size = Vector2(22, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wsmjb"]
-size = Vector2(27, 16)
+size = Vector2(24, 14)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_bnl8f")
@@ -402,8 +402,9 @@ script = ExtResource("1_bnl8f")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4s2oa")
-animation = &"attack_side"
+animation = &"attack_back"
 autoplay = "idle_front"
+frame_progress = 0.623112
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 14)
@@ -412,18 +413,18 @@ shape = SubResource("CircleShape2D_qdans")
 [node name="VerticalAttackHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VerticalAttackHitbox"]
-position = Vector2(3, 18)
+position = Vector2(2, 17.5)
 shape = SubResource("RectangleShape2D_1fjel")
 
 [node name="HorizontalAttackHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalAttackHitbox"]
-position = Vector2(6.5, 14)
+position = Vector2(7, 14)
 shape = SubResource("RectangleShape2D_wsmjb")
 debug_color = Color(0.725745, 0.590853, 0.0707804, 0.42)
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.15
 one_shot = true
 
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]

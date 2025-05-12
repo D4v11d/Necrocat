@@ -50,14 +50,14 @@ func handle_attack() -> void:
 
 		if last_direction == Vector2.UP:
 			animated_sprite_2d.play("attack_back")
-			activate_hitbox(vertical_hitbox, Vector2(0, -16))
+			activate_hitbox(vertical_hitbox, Vector2(-2, -15))
 		elif last_direction == Vector2.DOWN:
 			animated_sprite_2d.play("attack_front")
-			activate_hitbox(vertical_hitbox, Vector2(0, 16))
+			activate_hitbox(vertical_hitbox, Vector2(0, 0))
 		else:
 			animated_sprite_2d.play("attack_side")
 			animated_sprite_2d.flip_h = last_direction == Vector2.LEFT
-			activate_hitbox(horizontal_hitbox, Vector2(-16 if last_direction == Vector2.LEFT else 16, 0))
+			activate_hitbox(horizontal_hitbox, Vector2(-14 if last_direction == Vector2.LEFT else 0, 0))
 
 		attack_timer.start()
 

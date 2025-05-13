@@ -68,7 +68,7 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hto71")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.411762
+frame_progress = 0.873041
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -87,7 +87,7 @@ shape = SubResource("CircleShape2D_vopo4")
 debug_color = Color(0.850682, 0.337885, 0.417851, 0.42)
 
 [node name="KnockbackTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [connection signal="body_entered" from="ChaseArea" to="." method="_on_chase_area_body_entered"]

@@ -19,6 +19,7 @@ var is_knocked_back := false
 @onready var knockback_timer: Timer = $KnockbackTimer
 @onready var player: Player = $"../Player"
 @onready var check_surroundings_timer: Timer = $CheckSurroundingsTimer
+@onready var hit_flash_anim_player = $HitflashAnimationPlayer
 
 @export var is_ally := false
 @export var mob_type := "" # Enemy or ally for now
@@ -73,7 +74,7 @@ func attack_received(from_position: Vector2, damage: float) -> void:
 	hp = hp - damage
 	if hp <= 0:
 		queue_free()
-	print("attack_received, Remaining HP: ", hp, "/", MAX_HP)
+	hit_flash_anim_player.play("hit_flash")
 	
 
 func _on_knockback_timer_timeout() -> void:

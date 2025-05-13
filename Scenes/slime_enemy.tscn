@@ -139,6 +139,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_ltp7a")
 }
 
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -4)
+
 [connection signal="body_entered" from="ChaseArea" to="." method="_on_chase_area_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

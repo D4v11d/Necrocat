@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @onready var vertical_hitbox: Area2D = $VerticalAttackHitbox
 @onready var horizontal_hitbox: Area2D = $HorizontalAttackHitbox
 @onready var attack_timer: Timer = $AttackTimer
+@onready var damage_numbers_origin := $DamageNumbersOrigin
 
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/BoxContainer/Q-summon/Slime-blue"
 
@@ -21,6 +22,9 @@ var can_arise_mob := false
 var Q_summon_enabled := false # should be an array for Q, E and R
 
 signal delete_mob # called after arising
+
+const MAX_HP:= 100
+var hp:= MAX_HP
 
 func _ready() -> void:
 	animated_sprite_2d.play("idle_front")
@@ -116,6 +120,13 @@ func _on_attack_timer_timeout() -> void:
 	is_attacking = false
 	play_idle_animation()
 
+
+func _on_hurt_box_body_entered(body: Node2D) -> void:
+	if body is Mob:
+		hp -= body.attack_damage
+		print("Player HP: ", hp, "/", MAX_HP)
+		DamageNumbers.display_number(body.attack_damage, damage_numbers_origin.global_position, "#F00")
+		
 func handle_arise_mob() -> void:
 	if Input.is_key_pressed(KEY_SHIFT):
 		Q_summon_enabled = true

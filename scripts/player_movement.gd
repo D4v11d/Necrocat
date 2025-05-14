@@ -6,12 +6,15 @@ class_name Player extends CharacterBody2D
 @onready var horizontal_hitbox: Area2D = $HorizontalAttackHitbox
 @onready var attack_timer: Timer = $AttackTimer
 
+@export var slime_summon: PackedScene 
+
 const SPEED = 100.0
 const ATTACK_POWER = 20.0
 
 var last_direction := Vector2.DOWN
 var is_moving := false
 var is_attacking := false
+var can_summon := true
 
 func _ready() -> void:
 	animated_sprite_2d.play("idle_front")

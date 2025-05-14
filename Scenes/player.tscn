@@ -1,7 +1,8 @@
-[gd_scene load_steps=55 format=3 uid="uid://ljn1arg6ompw"]
+[gd_scene load_steps=56 format=3 uid="uid://ljn1arg6ompw"]
 
 [ext_resource type="Texture2D" uid="uid://dh7w8dyk1dx03" path="res://Art/Characters/player.png" id="1_6bahf"]
 [ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_bnl8f"]
+[ext_resource type="Script" path="res://scripts/summon.gd" id="3_srn2t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coob6"]
 atlas = ExtResource("1_6bahf")
@@ -427,6 +428,13 @@ debug_color = Color(0.725745, 0.590853, 0.0707804, 0.42)
 wait_time = 0.15
 one_shot = true
 
+[node name="SummonCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Summon" type="Node2D" parent="."]
+script = ExtResource("3_srn2t")
+
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="HorizontalAttackHitbox" to="." method="_on_horizontal_attack_hitbox_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="SummonCooldown" to="Summon" method="_on_summon_cooldown_timeout"]

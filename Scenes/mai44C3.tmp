@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=15 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
 [ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="3_k5b10"]
 [ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="4_okkmp"]
-[ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/slime-blue.png" id="5_aeiip"]
 [ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
 [ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="6_n4050"]
 
@@ -1211,13 +1210,6 @@ scale = Vector2(2.5, 2.5)
 texture_filter = 1
 position = Vector2(19, 26)
 texture = ExtResource("4_okkmp")
-
-[node name="Slime-blue" type="Sprite2D" parent="CanvasLayer/BoxContainer/Q-summon"]
-texture_filter = 1
-position = Vector2(0.199999, -1.2)
-texture = ExtResource("5_aeiip")
-region_enabled = true
-region_rect = Rect2(0, 10.249, 15.5191, 12.2631)
 
 [node name="E-summon" type="Sprite2D" parent="CanvasLayer/BoxContainer"]
 texture_filter = 1

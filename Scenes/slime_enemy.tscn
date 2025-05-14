@@ -1,10 +1,11 @@
 [gd_scene load_steps=17 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
+resource_local_to_scene = true
 shader = ExtResource("2_ssmms")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
@@ -99,8 +100,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ltp7a"]
 _data = {
-&"RESET": SubResource("Animation_ltp7a"),
-&"hit_flash": SubResource("Animation_ssmms")
+"RESET": SubResource("Animation_ltp7a"),
+"hit_flash": SubResource("Animation_ssmms")
 }
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
@@ -136,7 +137,7 @@ one_shot = true
 
 [node name="HitflashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_ltp7a")
+"": SubResource("AnimationLibrary_ltp7a")
 }
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]

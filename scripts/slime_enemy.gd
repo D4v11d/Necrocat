@@ -12,6 +12,13 @@ var targets_in_chase_area: Array[Node2D] = []
 
 var is_knocked_back := false
 
+const JUMP_COOLDOWN := -1.5
+#const JUMP_DISTANCE := 30.0  # Distance to target when jump occurs
+const JUMP_HEIGHT := 30.0    # How high the jump goes
+const JUMP_DURATION := 0.7    # How long the jump takes (seconds)
+var jump_progress := 0.0      # Tracks current jump state
+var original_y := 0.0         # Stores starting Y position
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var chase_player_area: Area2D = $ChaseArea
 @onready var attack_area: Area2D = $AttackArea
@@ -30,8 +37,35 @@ func _physics_process(delta: float) -> void:
 	if is_knocked_back:
 		move_and_collide(velocity * delta)
 		return
+	
+	if jump_progress < 0:
+		jump_progress += delta
+		if jump_progress > 0:
+			jump_progress = 0
+	
+	# Store original Y position if not jumping
+	if jump_progress == 0:
+		original_y = position.y
+		
+	# Handle jump movement if active
+	if jump_progress > 0:
+		handle_jump(delta)
 
 	handle_chasing_targets(delta)
+	
+func handle_jump(delta: float) -> void:
+	# Currently jumping - update position
+	jump_progress += delta
+	var jump_completion = min(jump_progress / JUMP_DURATION, 1.0)
+	
+	# Simple parabolic jump curve
+	var jump_offset = sin(jump_completion * PI) * JUMP_HEIGHT
+	position.y = original_y - jump_offset
+	
+	# End jump when duration completes
+	if jump_progress >= JUMP_DURATION:
+		jump_progress = JUMP_COOLDOWN
+		position.y = original_y
 
 func handle_chasing_targets(delta: float) -> void:
 	if is_ally:
@@ -77,7 +111,12 @@ func move_towards_target(target: Node2D, delta: float) -> void:
 		return
 
 	var direction = (target.position - position).normalized()
-	velocity = speed * direction
+	
+	if jump_progress > 0:
+		velocity = (speed + 30) * direction
+		
+	else:
+		velocity = speed * direction
 
 	if direction.x > 0:
 		animated_sprite.flip_h = false
@@ -120,3 +159,8 @@ func _on_chase_area_body_exited(body: Node2D) -> void:
 
 func _is_enemy(body: Node2D) -> bool:
 	return body is Mob and not body.is_ally
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if (current_target and jump_progress == 0):
+		jump_progress = 0.001  # Start jump

@@ -33,6 +33,11 @@ var original_y := 0.0         # Stores starting Y position
 @export var mob_type := ""
 @export var is_recruitable := false
 
+var jump_start_position: Vector2
+var jump_target_position: Vector2
+var jump_direction: Vector2
+var jump_distance: float
+
 func _ready() -> void:
 	player.connect("delete_mob", Callable(self, "delete_spirit_mob"))
 
@@ -40,35 +45,49 @@ func _physics_process(delta: float) -> void:
 	if is_knocked_back:
 		move_and_collide(velocity * delta)
 		return
-	
+
 	if jump_progress < 0:
 		jump_progress += delta
 		if jump_progress > 0:
 			jump_progress = 0
-	
-	# Store original Y position if not jumping
+
+	# Start jump
 	if jump_progress == 0:
 		original_y = position.y
-		
-	# Handle jump movement if active
+
+	# Execute jump logic
 	if jump_progress > 0:
 		handle_jump(delta)
+	else:
+		handle_chasing_targets(delta)
 
-	handle_chasing_targets(delta)
-	
+func start_jump(target_position: Vector2) -> void:
+	jump_progress = 0.001  # Start jump
+	jump_start_position = position
+	jump_target_position = target_position
+	jump_direction = (jump_target_position - jump_start_position).normalized()
+	jump_distance = jump_start_position.distance_to(jump_target_position)
+	original_y = position.y
+
 func handle_jump(delta: float) -> void:
-	# Currently jumping - update position
 	jump_progress += delta
 	var jump_completion = min(jump_progress / JUMP_DURATION, 1.0)
-	
-	# Simple parabolic jump curve
+
+	# Compute movement along direction
+	var horizontal_move = jump_direction * jump_distance * jump_completion
+
+	# Vertical offset using jump arc
 	var jump_offset = sin(jump_completion * PI) * JUMP_HEIGHT
-	position.y = original_y - jump_offset
-	
-	# End jump when duration completes
+
+	# Combine movement and vertical arc
+	position = jump_start_position + horizontal_move
+	position.y -= jump_offset
+
+	# End jump
 	if jump_progress >= JUMP_DURATION:
 		jump_progress = JUMP_COOLDOWN
-		position.y = original_y
+		position.y = jump_target_position.y
+
 
 func handle_chasing_targets(delta: float) -> void:
 	if is_ally:
@@ -169,7 +188,7 @@ func _is_enemy(body: Node2D) -> bool:
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if (current_target and jump_progress == 0):
-		jump_progress = 0.001  # Start jump
+		start_jump(current_target.position)
 		
 func handle_slime_death() -> void:
 	if is_recruitable:

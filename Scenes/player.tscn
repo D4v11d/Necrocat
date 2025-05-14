@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dh7w8dyk1dx03" path="res://Art/Characters/player.png" id="1_6bahf"]
 [ext_resource type="Script" uid="uid://b8aeteh3n0qih" path="res://scripts/player_movement.gd" id="1_bnl8f"]
-[ext_resource type="Script" uid="uid://ig4yr2orv2fe" path="res://scripts/summon.gd" id="3_srn2t"]
+[ext_resource type="Script" uid="uid://dgar4w41re2eh" path="res://scripts/summon.gd" id="3_srn2t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coob6"]
 atlas = ExtResource("1_6bahf")
@@ -411,7 +411,7 @@ autoplay = "idle_front"
 frame_progress = 0.623112
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(2, 11)
 shape = SubResource("CircleShape2D_qdans")
 
 [node name="VerticalAttackHitbox" type="Area2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=18 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
@@ -1255,7 +1255,6 @@ mob_type = "enemy"
 
 [node name="SlimeEnemy2" parent="Enemies" instance=ExtResource("3_k5b10")]
 material = SubResource("ShaderMaterial_hptm8")
-position = Vector2(112, 2)
 position = Vector2(94, -18)
 mob_type = "enemy"
 is_recruitable = true

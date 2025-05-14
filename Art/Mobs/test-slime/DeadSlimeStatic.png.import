@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cimvymvaqct7p"
-path="res://.godot/imported/slime-blue.png-133648ba9441744b46ee45406b93937b.ctex"
+uid="uid://bldu00w55v5rq"
+path="res://.godot/imported/DeadSlimeStatic.png-e6414a23563f2e70c70a9d0ef7a732f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Mobs/slime-blue.png"
-dest_files=["res://.godot/imported/slime-blue.png-133648ba9441744b46ee45406b93937b.ctex"]
+source_file="res://Art/Mobs/test-slime/DeadSlimeStatic.png"
+dest_files=["res://.godot/imported/DeadSlimeStatic.png-e6414a23563f2e70c70a9d0ef7a732f6.ctex"]
 
 [params]
 

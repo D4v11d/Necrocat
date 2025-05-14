@@ -1,10 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=10 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
 [ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="3_k5b10"]
 [ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="4_okkmp"]
-[ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/slime-blue.png" id="5_aeiip"]
+[ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="5_aeiip"]
 [ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
 [ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="6_n4050"]
 
@@ -1256,7 +1256,9 @@ mob_type = "enemy"
 [node name="SlimeEnemy2" parent="Enemies" instance=ExtResource("3_k5b10")]
 material = SubResource("ShaderMaterial_hptm8")
 position = Vector2(112, 2)
+position = Vector2(94, -18)
 mob_type = "enemy"
+is_recruitable = true
 
 [node name="Player" parent="." instance=ExtResource("2_gaflk")]
 position = Vector2(-54, -9)
@@ -1272,7 +1274,7 @@ offset_left = 1.0
 offset_top = 1.0
 offset_right = 90.0
 offset_bottom = 99.0
-scale = Vector2(2.5, 2.5)
+scale = Vector2(3, 3)
 
 [node name="Q-summon" type="Sprite2D" parent="CanvasLayer/BoxContainer"]
 texture_filter = 1
@@ -1280,6 +1282,7 @@ position = Vector2(19, 26)
 texture = ExtResource("4_okkmp")
 
 [node name="Slime-blue" type="Sprite2D" parent="CanvasLayer/BoxContainer/Q-summon"]
+visible = false
 texture_filter = 1
 position = Vector2(0.199999, -1.2)
 texture = ExtResource("5_aeiip")

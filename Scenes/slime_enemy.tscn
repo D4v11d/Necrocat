@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgk5ekyx2oijf"]
+[gd_scene load_steps=25 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
-[ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/slime-blue.png" id="1_gbwud"]
+[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
+[ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="4_xy8nd"]
+[ext_resource type="Texture2D" uid="uid://ccvhh08kjmuea" path="res://Art/Mobs/test-slime/SlimeSpirit.png" id="5_4t6ok"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true
@@ -13,6 +15,10 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nndgq"]
 atlas = ExtResource("1_gbwud")
 region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33o5n"]
+atlas = ExtResource("4_xy8nd")
+region = Rect2(0, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ltbt"]
 atlas = ExtResource("1_gbwud")
@@ -30,6 +36,22 @@ region = Rect2(32, 0, 16, 24)
 atlas = ExtResource("1_gbwud")
 region = Rect2(48, 0, 16, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bdon"]
+atlas = ExtResource("5_4t6ok")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8dpj"]
+atlas = ExtResource("5_4t6ok")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkfx4"]
+atlas = ExtResource("5_4t6ok")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u0ai"]
+atlas = ExtResource("5_4t6ok")
+region = Rect2(48, 0, 16, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_hto71"]
 animations = [{
 "frames": [{
@@ -38,6 +60,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"charging",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33o5n")
+}],
+"loop": true,
+"name": &"dead-static",
 "speed": 5.0
 }, {
 "frames": [{
@@ -56,6 +86,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bdon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8dpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkfx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u0ai")
+}],
+"loop": true,
+"name": &"spirit",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ywmc"]
@@ -66,6 +113,9 @@ radius = 82.0549
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vopo4"]
 radius = 38.0526
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xx0lc"]
+radius = 24.1868
 
 [sub_resource type="Animation" id="Animation_ltp7a"]
 length = 0.001
@@ -111,9 +161,9 @@ script = ExtResource("1_1ubh8")
 texture_filter = 1
 material = SubResource("ShaderMaterial_ltp7a")
 sprite_frames = SubResource("SpriteFrames_hto71")
-animation = &"idle"
+animation = &"spirit"
 autoplay = "idle"
-frame_progress = 0.873041
+frame_progress = 0.121572
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -131,6 +181,13 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_vopo4")
 debug_color = Color(0.850682, 0.337885, 0.417851, 0.42)
 
+[node name="AriseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AriseArea"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_xx0lc")
+debug_color = Color(0, 0.64012, 0.354681, 0.42)
+
 [node name="KnockbackTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -147,4 +204,5 @@ position = Vector2(0, -4)
 [connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="AriseArea" to="." method="_on_arise_area_body_entered"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

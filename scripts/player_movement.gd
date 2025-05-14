@@ -7,6 +7,8 @@ class_name Player extends CharacterBody2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var damage_numbers_origin := $DamageNumbersOrigin
 
+@onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/BoxContainer/Q-summon/Slime-blue"
+
 @export var slime_summon: PackedScene 
 
 const SPEED = 100.0
@@ -15,7 +17,11 @@ const ATTACK_POWER = 20.0
 var last_direction := Vector2.DOWN
 var is_moving := false
 var is_attacking := false
-var can_summon := true
+
+var can_arise_mob := false
+var Q_summon_enabled := false # should be an array for Q, E and R
+
+signal delete_mob # called after arising
 
 const MAX_HP:= 100
 var hp:= MAX_HP
@@ -28,6 +34,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_attacking:
 		return
+	
+	if can_arise_mob:
+		handle_arise_mob()
 
 	handle_attack()
 	handle_move(delta)
@@ -118,3 +127,8 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		print("Player HP: ", hp, "/", MAX_HP)
 		DamageNumbers.display_number(body.attack_damage, damage_numbers_origin.global_position, "#F00")
 		
+func handle_arise_mob() -> void:
+	if Input.is_key_pressed(KEY_SHIFT):
+		Q_summon_enabled = true
+		slime_summon_sprite.visible = true
+		emit_signal("delete_mob")

@@ -1,6 +1,6 @@
 class_name Mob extends CharacterBody2D
 
-const MAX_HP := 300
+const MAX_HP := 100
 const FOLLOW_DISTANCE := 40.0
 
 var speed := 40.0
@@ -11,6 +11,7 @@ var current_target: Node2D = null
 var targets_in_chase_area: Array[Node2D] = []
 
 var is_knocked_back := false
+var is_spirit_slime := false
 
 const JUMP_COOLDOWN := -1.5
 #const JUMP_DISTANCE := 30.0  # Distance to target when jump occurs
@@ -26,12 +27,14 @@ var original_y := 0.0         # Stores starting Y position
 @onready var player: Player = $"../../Player"
 @onready var hit_flash_anim_player = $HitflashAnimationPlayer
 @onready var damage_numbers_origin = $DamageNumbersOrigin
+@onready var arise_area: Area2D = $AriseArea
 
 @export var is_ally := false
 @export var mob_type := ""
+@export var is_recruitable := false
 
 func _ready() -> void:
-	pass
+	player.connect("delete_mob", Callable(self, "delete_spirit_mob"))
 
 func _physics_process(delta: float) -> void:
 	if is_knocked_back:
@@ -107,6 +110,9 @@ func find_valid_enemy_target() -> Node2D:
 	return null
 
 func move_towards_target(target: Node2D, delta: float) -> void:
+	if is_spirit_slime:
+		return
+
 	if is_knocked_back:
 		return
 
@@ -130,7 +136,7 @@ func attack_received(from_position: Vector2, damage: float) -> void:
 	knockback_timer.start()
 	hp -= damage
 	if hp <= 0:
-		queue_free()
+		handle_slime_death()
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	hit_flash_anim_player.play("hit_flash")
 
@@ -164,3 +170,18 @@ func _is_enemy(body: Node2D) -> bool:
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if (current_target and jump_progress == 0):
 		jump_progress = 0.001  # Start jump
+		
+func handle_slime_death() -> void:
+	if is_recruitable:
+		is_spirit_slime = true
+		animated_sprite.play("spirit")
+	else:
+		queue_free()
+
+func _on_arise_area_body_entered(body: Node2D) -> void:
+	if body is Player and is_spirit_slime:
+		player.can_arise_mob = true
+
+func delete_spirit_mob() -> void:
+	if is_spirit_slime:
+		queue_free()

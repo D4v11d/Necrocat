@@ -3,7 +3,7 @@ class_name Summon extends Node2D
 @onready var summon_cooldown: Timer = $"../SummonCooldown"
 @onready var player: Player = $".."
 
-var can_summon := true
+var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []
 
 func _physics_process(_delta: float) -> void:
@@ -13,7 +13,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func summon_ally() -> void:
-	if Input.is_key_pressed(KEY_Q) and can_summon:
+	if Input.is_key_pressed(KEY_Q) and can_summon and player.Q_summon_enabled:
 		if player.slime_summon != null:
 			var new_ally = player.slime_summon.instantiate()
 			summoned_allies_list.append(new_ally)

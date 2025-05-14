@@ -6,6 +6,8 @@ class_name Player extends CharacterBody2D
 @onready var horizontal_hitbox: Area2D = $HorizontalAttackHitbox
 @onready var attack_timer: Timer = $AttackTimer
 
+@onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/BoxContainer/Q-summon/Slime-blue"
+
 @export var slime_summon: PackedScene 
 
 const SPEED = 100.0
@@ -14,7 +16,11 @@ const ATTACK_POWER = 20.0
 var last_direction := Vector2.DOWN
 var is_moving := false
 var is_attacking := false
-var can_summon := true
+
+var can_arise_mob := false
+var Q_summon_enabled := false # should be an array for Q, E and R
+
+signal delete_mob # called after arising
 
 func _ready() -> void:
 	animated_sprite_2d.play("idle_front")
@@ -24,6 +30,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_attacking:
 		return
+	
+	if can_arise_mob:
+		handle_arise_mob()
 
 	handle_attack()
 	handle_move(delta)
@@ -106,3 +115,9 @@ func _on_attack_timer_timeout() -> void:
 	horizontal_hitbox.set_deferred("monitoring", false)
 	is_attacking = false
 	play_idle_animation()
+
+func handle_arise_mob() -> void:
+	if Input.is_key_pressed(KEY_SHIFT):
+		Q_summon_enabled = true
+		slime_summon_sprite.visible = true
+		emit_signal("delete_mob")

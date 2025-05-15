@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=20 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
 [ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="6_n4050"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="8_5gtdi"]
+[ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="9_l0lmb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agtqk"]
 texture = ExtResource("1_pq2s6")
@@ -1102,7 +1103,7 @@ default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ghuuw"]
 input_name = "color"
 
-[sub_resource type="VisualShader" id="VisualShader_344ge"]
+[sub_resource type="VisualShader" id="VisualShader_y0nxf"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -1163,13 +1164,13 @@ nodes/fragment/5/node = SubResource("VisualShaderNodeInput_ghuuw")
 nodes/fragment/5/position = Vector2(-100, 700)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 4, 0, 0, 0, 5, 0, 4, 5, 5, 0, 4, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_465wu"]
 resource_local_to_scene = true
-shader = SubResource("VisualShader_344ge")
+shader = SubResource("VisualShader_y0nxf")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="VisualShader" id="VisualShader_hptm8"]
+[sub_resource type="VisualShader" id="VisualShader_nvi3l"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -1230,9 +1231,9 @@ nodes/fragment/5/node = SubResource("VisualShaderNodeInput_ghuuw")
 nodes/fragment/5/position = Vector2(-100, 700)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 4, 0, 0, 0, 5, 0, 4, 5, 5, 0, 4, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1ilt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q12ym"]
 resource_local_to_scene = true
-shader = SubResource("VisualShader_hptm8")
+shader = SubResource("VisualShader_nvi3l")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -1250,36 +1251,33 @@ tile_set = SubResource("TileSet_8v1aj")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="SlimeEnemy" parent="Enemies" instance=ExtResource("3_k5b10")]
-material = SubResource("ShaderMaterial_ynf5e")
+material = SubResource("ShaderMaterial_465wu")
 position = Vector2(132, 27)
-mob_type = "enemy"
 
 [node name="SlimeEnemy2" parent="Enemies" instance=ExtResource("3_k5b10")]
-material = SubResource("ShaderMaterial_d1ilt")
+material = SubResource("ShaderMaterial_q12ym")
 position = Vector2(21, -33)
-mob_type = "enemy"
 is_recruitable = true
 
 [node name="Player" parent="." instance=ExtResource("2_gaflk")]
 position = Vector2(-54, -9)
-slime_summon = ExtResource("3_k5b10")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3.5, 3.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+[node name="HUD" type="BoxContainer" parent="CanvasLayer"]
 offset_right = 89.0
 offset_bottom = 98.0
 scale = Vector2(3, 3)
 
-[node name="Q-summon" type="Sprite2D" parent="CanvasLayer/BoxContainer"]
+[node name="Q-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(19, 26)
 texture = ExtResource("4_okkmp")
 
-[node name="Slime-blue" type="Sprite2D" parent="CanvasLayer/BoxContainer/Q-summon"]
+[node name="Slime-blue" type="Sprite2D" parent="CanvasLayer/HUD/Q-summon"]
 visible = false
 texture_filter = 1
 position = Vector2(0.199999, -1.2)
@@ -1287,12 +1285,12 @@ texture = ExtResource("5_aeiip")
 region_enabled = true
 region_rect = Rect2(0, 10.249, 15.5191, 12.2631)
 
-[node name="E-summon" type="Sprite2D" parent="CanvasLayer/BoxContainer"]
+[node name="E-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(52, 44)
 texture = ExtResource("5_mipw0")
 
-[node name="R-summon" type="Sprite2D" parent="CanvasLayer/BoxContainer"]
+[node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(25, 65)
 texture = ExtResource("6_n4050")
@@ -1316,3 +1314,42 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_5gtdi")
 theme_override_font_sizes/font_size = 48
 text = "New Summon Arised"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScreenTop" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="Black" type="Sprite2D" parent="CanvasLayer/ScreenTop"]
+position = Vector2(-37, 26.5)
+scale = Vector2(10.2013, 0.244)
+texture = ExtResource("9_l0lmb")
+
+[node name="ScreenBottom" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Black2" type="Sprite2D" parent="CanvasLayer/ScreenBottom"]
+position = Vector2(-102, 25.4481)
+scale = Vector2(11.1494, 0.283584)
+texture = ExtResource("9_l0lmb")

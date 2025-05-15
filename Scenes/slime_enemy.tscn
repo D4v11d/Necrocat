@@ -1,10 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://cgk5ekyx2oijf"]
+[gd_scene load_steps=28 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="4_xy8nd"]
 [ext_resource type="Texture2D" uid="uid://ccvhh08kjmuea" path="res://Art/Mobs/test-slime/SlimeSpirit.png" id="5_4t6ok"]
+[ext_resource type="Script" path="res://scripts/mob_hurtbox.gd" id="6_kcif8"]
+[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="6_vqilo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true
@@ -150,9 +152,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ltp7a"]
 _data = {
-&"RESET": SubResource("Animation_ltp7a"),
-&"hit_flash": SubResource("Animation_ssmms")
+"RESET": SubResource("Animation_ltp7a"),
+"hit_flash": SubResource("Animation_ssmms")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ao4r"]
+radius = 6.0
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
 script = ExtResource("1_1ubh8")
@@ -161,15 +166,15 @@ script = ExtResource("1_1ubh8")
 texture_filter = 1
 material = SubResource("ShaderMaterial_ltp7a")
 sprite_frames = SubResource("SpriteFrames_hto71")
-animation = &"spirit"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.121572
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_4ywmc")
 
 [node name="ChaseArea" type="Area2D" parent="."]
+script = ExtResource("6_vqilo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
 shape = SubResource("CircleShape2D_a7b7j")
@@ -194,16 +199,30 @@ one_shot = true
 
 [node name="HitflashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_ltp7a")
+"": SubResource("AnimationLibrary_ltp7a")
 }
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -4)
 
-[connection signal="body_entered" from="ChaseArea" to="." method="_on_chase_area_body_entered"]
-[connection signal="body_exited" from="ChaseArea" to="." method="_on_chase_area_body_exited"]
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("6_kcif8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_3ao4r")
+debug_color = Color(0.797108, 0.414388, 0.23775, 0.42)
+
+[node name="JumpCooldown" type="Timer" parent="Hurtbox"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
+[connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="body_entered" from="AriseArea" to="." method="_on_arise_area_body_entered"]
 [connection signal="body_exited" from="AriseArea" to="." method="_on_arise_area_body_exited"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="Hurtbox/JumpCooldown" to="." method="_on_jump_cooldown_timeout"]

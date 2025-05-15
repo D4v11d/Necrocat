@@ -16,7 +16,7 @@ class_name Player extends CharacterBody2D
 @onready var summon_component: Summon = $Summon
 
 # Canvas Layer objects
-@onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/BoxContainer/Q-summon/Slime-blue"
+@onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime-blue"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
 
 const SPEED = 100.0
@@ -69,14 +69,14 @@ func handle_attack() -> void:
 
 		if last_direction == Vector2.UP:
 			animated_sprite_2d.play("attack_back")
-			activate_hitbox(vertical_hitbox, Vector2(-2, -15))
+			activate_hitbox(vertical_hitbox, Vector2(0, -25))
 		elif last_direction == Vector2.DOWN:
 			animated_sprite_2d.play("attack_front")
-			activate_hitbox(vertical_hitbox, Vector2(0, 0))
+			activate_hitbox(vertical_hitbox, Vector2(0, 15))
 		else:
 			animated_sprite_2d.play("attack_side")
 			animated_sprite_2d.flip_h = last_direction == Vector2.LEFT
-			activate_hitbox(horizontal_hitbox, Vector2(-14 if last_direction == Vector2.LEFT else 0, 0))
+			activate_hitbox(horizontal_hitbox, Vector2(-20 if last_direction == Vector2.LEFT else 0, 0))
 
 		attack_timer.start()
 

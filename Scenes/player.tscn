@@ -1,17 +1,18 @@
-[gd_scene load_steps=88 format=3 uid="uid://ljn1arg6ompw"]
+[gd_scene load_steps=89 format=3 uid="uid://ljn1arg6ompw"]
 
 [ext_resource type="Texture2D" uid="uid://dh7w8dyk1dx03" path="res://Art/Characters/player.png" id="1_6bahf"]
-[ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_bnl8f"]
+[ext_resource type="Script" uid="uid://b8aeteh3n0qih" path="res://scripts/player_movement.gd" id="1_bnl8f"]
 [ext_resource type="Texture2D" uid="uid://jvoxpdxxtsum" path="res://Art/UI/Keys/E.png" id="2_1il5t"]
 [ext_resource type="Texture2D" uid="uid://dxgep23lfi4i" path="res://Art/Characters/cat_idle_back.png" id="3_8sjai"]
 [ext_resource type="Texture2D" uid="uid://cjrxqrulwpxq7" path="res://Art/Characters/cat_idle_front.png" id="3_ppoih"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="3_pym4b"]
-[ext_resource type="Script" path="res://scripts/summon.gd" id="3_srn2t"]
+[ext_resource type="Script" uid="uid://dgar4w41re2eh" path="res://scripts/summon.gd" id="3_srn2t"]
 [ext_resource type="Texture2D" uid="uid://ctl0d4n6x4rp0" path="res://Art/Characters/cat_idle_side.png" id="5_a0n1o"]
 [ext_resource type="Texture2D" uid="uid://bcxp26tiocole" path="res://Art/Characters/cat_run_back.png" id="6_s744m"]
 [ext_resource type="Texture2D" uid="uid://cy6hlx28cho53" path="res://Art/Characters/cat_run_front.png" id="7_wu5ve"]
 [ext_resource type="Texture2D" uid="uid://4g86chq7dk0v" path="res://Art/Characters/cat_run_side.png" id="8_r4ycq"]
 [ext_resource type="Texture2D" uid="uid://ckonytssvioat" path="res://Art/Characters/Cat_Shadow.png" id="10_c7ibx"]
+[ext_resource type="Script" uid="uid://djmbtg0syo1f2" path="res://Scenes/scripts/player_hurt_box.gd" id="12_7dp3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ju7s"]
 atlas = ExtResource("2_1il5t")
@@ -620,13 +621,13 @@ one_shot = true
 script = ExtResource("3_srn2t")
 
 [node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("12_7dp3o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(2, 9)
 shape = SubResource("CircleShape2D_6t5aa")
 
-[node name="DamageNumbersOrigin" type="Node2D" parent="."]
-position = Vector2(2, -5)
+[node name="DamageCooldown" type="Timer" parent="HurtBox"]
 
 [node name="CatShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.372549)
@@ -634,8 +635,14 @@ texture_filter = 1
 position = Vector2(0, 1)
 texture = ExtResource("10_c7ibx")
 
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(2, -5)
+
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="HorizontalAttackHitbox" to="." method="_on_horizontal_attack_hitbox_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="SummonCooldown" to="Summon" method="_on_summon_cooldown_timeout"]
-[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="HurtBox" method="_on_body_exited"]
+[connection signal="damage_taken" from="HurtBox" to="." method="_on_hurt_box_damage_taken"]
+[connection signal="timeout" from="HurtBox/DamageCooldown" to="HurtBox" method="_on_DamageCooldown_timeout"]

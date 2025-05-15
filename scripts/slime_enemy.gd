@@ -138,8 +138,7 @@ func move_towards_target(target: Node2D, delta: float) -> void:
 	var direction = (target.position - position).normalized()
 	
 	if jump_progress > 0:
-		velocity = (speed + 30) * direction
-		
+		velocity = (speed + 30) * direction		
 	else:
 		velocity = speed * direction
 

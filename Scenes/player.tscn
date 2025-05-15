@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://ljn1arg6ompw"]
+[gd_scene load_steps=92 format=3 uid="uid://ljn1arg6ompw"]
 
 [ext_resource type="Texture2D" uid="uid://dh7w8dyk1dx03" path="res://Art/Characters/player.png" id="1_6bahf"]
 [ext_resource type="Script" uid="uid://b8aeteh3n0qih" path="res://scripts/player_movement.gd" id="1_bnl8f"]
@@ -565,6 +565,43 @@ size = Vector2(24, 14)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t5aa"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_ukyrk"]
+resource_name = "damage_cooldown"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.313726), Color(1, 1, 1, 1), Color(1, 1, 1, 0.313726), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7dp3o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h4iuc"]
+_data = {
+&"RESET": SubResource("Animation_7dp3o"),
+&"damage_cooldown": SubResource("Animation_ukyrk")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_bnl8f")
 
@@ -637,6 +674,11 @@ texture = ExtResource("10_c7ibx")
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(2, -5)
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h4iuc")
+}
 
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="HorizontalAttackHitbox" to="." method="_on_horizontal_attack_hitbox_body_entered"]

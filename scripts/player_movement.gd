@@ -11,6 +11,7 @@ class_name Player extends CharacterBody2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var damage_numbers_origin := $DamageNumbersOrigin
 @onready var e_key_animation: AnimatedSprite2D = $EKeyAnimation
+@onready var damage_animation_player:= $DamageAnimationPlayer
 
 # Funcionality:
 @onready var summon_component: Summon = $Summon
@@ -125,3 +126,4 @@ func _on_attack_timer_timeout() -> void:
 	
 func _on_hurt_box_damage_taken(amount: Variant) -> void:
 	DamageNumbers.display_text(str(amount), damage_numbers_origin.global_position, "#F00")
+	damage_animation_player.play("damage_cooldown")

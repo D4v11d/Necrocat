@@ -16,7 +16,7 @@ var is_spirit_slime := false
 const JUMP_COOLDOWN := -1.5
 #const JUMP_DISTANCE := 30.0  # Distance to target when jump occurs
 const JUMP_HEIGHT := 30.0    # How high the jump goes
-const JUMP_DURATION := 0.7    # How long the jump takes (seconds)
+const JUMP_DURATION := 0.6    # How long the jump takes (seconds)
 var jump_progress := 0.0      # Tracks current jump state
 var original_y := 0.0         # Stores starting Y position
 
@@ -39,7 +39,7 @@ var jump_direction: Vector2
 var jump_distance: float
 
 func _ready() -> void:
-	player.connect("delete_mob", Callable(self, "delete_spirit_mob"))
+	pass
 
 func _physics_process(delta: float) -> void:
 	if is_knocked_back:
@@ -153,11 +153,14 @@ func attack_received(from_position: Vector2, damage: float) -> void:
 	velocity = knockback_direction * 200.0
 	is_knocked_back = true
 	knockback_timer.start()
-	hp -= damage
-	if hp <= 0:
-		handle_slime_death()
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	hit_flash_anim_player.play("hit_flash")
+	
+	if not is_spirit_slime:
+		hp -= damage
+		if hp <= 0:
+			handle_slime_death()
+		DamageNumbers.display_text(str(damage), damage_numbers_origin.global_position)
+	
 
 func _on_knockback_timer_timeout() -> void:
 	is_knocked_back = false
@@ -187,12 +190,13 @@ func _is_enemy(body: Node2D) -> bool:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if (current_target and jump_progress == 0):
+	if (current_target and jump_progress == 0 and not is_spirit_slime):
 		start_jump(current_target.position)
 		
 func handle_slime_death() -> void:
 	if is_recruitable:
 		is_spirit_slime = true
+		player.summon_component.connect("delete_mob", Callable(self, "delete_spirit_mob"))
 		animated_sprite.play("spirit")
 	else:
 		queue_free()
@@ -200,6 +204,12 @@ func handle_slime_death() -> void:
 func _on_arise_area_body_entered(body: Node2D) -> void:
 	if body is Player and is_spirit_slime:
 		player.can_arise_mob = true
+		player.e_key_animation.visible = true
+
+func _on_arise_area_body_exited(body: Node2D) -> void:
+	if body is Player and is_spirit_slime:
+		player.can_arise_mob = false
+		player.e_key_animation.visible = false
 
 func delete_spirit_mob() -> void:
 	if is_spirit_slime:

@@ -1,15 +1,23 @@
 class_name Player extends CharacterBody2D
 
+# Set from inspector
+@export var slime_summon: PackedScene 
+
+# Components
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var vertical_hitbox: Area2D = $VerticalAttackHitbox
 @onready var horizontal_hitbox: Area2D = $HorizontalAttackHitbox
 @onready var attack_timer: Timer = $AttackTimer
 @onready var damage_numbers_origin := $DamageNumbersOrigin
+@onready var e_key_animation: AnimatedSprite2D = $EKeyAnimation
 
+# Funcionality:
+@onready var summon_component: Summon = $Summon
+
+# Canvas Layer objects
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/BoxContainer/Q-summon/Slime-blue"
-
-@export var slime_summon: PackedScene 
+@onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
 
 const SPEED = 100.0
 const ATTACK_POWER = 20.0
@@ -21,9 +29,7 @@ var is_attacking := false
 var can_arise_mob := false
 var Q_summon_enabled := false # should be an array for Q, E and R
 
-signal delete_mob # called after arising
-
-const MAX_HP:= 100
+const MAX_HP:= 200
 var hp:= MAX_HP
 
 func _ready() -> void:
@@ -36,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if can_arise_mob:
-		handle_arise_mob()
+		summon_component.handle_arise_mob()
 
 	handle_attack()
 	handle_move(delta)
@@ -123,12 +129,7 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
 	if body is Mob:
-		hp -= body.attack_damage
-		print("Player HP: ", hp, "/", MAX_HP)
-		DamageNumbers.display_number(body.attack_damage, damage_numbers_origin.global_position, "#F00")
-		
-func handle_arise_mob() -> void:
-	if Input.is_key_pressed(KEY_SHIFT):
-		Q_summon_enabled = true
-		slime_summon_sprite.visible = true
-		emit_signal("delete_mob")
+		if not body.is_ally and body.hp > 0:
+			hp -= body.attack_damage
+			print("Player HP: ", hp, "/", MAX_HP)
+			DamageNumbers.display_text(str(body.attack_damage), damage_numbers_origin.global_position, "#F00")

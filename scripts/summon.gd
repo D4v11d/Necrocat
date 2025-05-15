@@ -6,6 +6,8 @@ class_name Summon extends Node2D
 var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []
 
+signal delete_mob # called after arising
+
 func _physics_process(_delta: float) -> void:
 	summon_ally()
 	
@@ -58,3 +60,15 @@ func clear_all_summons() -> void:
 		for summon in summoned_allies_list:
 			summoned_allies_list.erase(summon)
 			summon.queue_free()
+
+func handle_arise_mob() -> void:
+	if Input.is_action_just_pressed("arise"):
+		player.Q_summon_enabled = true
+		player.slime_summon_sprite.visible = true
+		emit_signal("delete_mob")
+		show_arise_message()
+		player.e_key_animation.visible = false
+		
+func show_arise_message() -> void:
+	var label = player.new_summon_label
+	DamageNumbers.animate_label(label, "New Summon Arised")

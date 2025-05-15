@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=18 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="5_aeiip"]
 [ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
 [ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="6_n4050"]
-[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="8_5gtdi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agtqk"]
 texture = ExtResource("1_pq2s6")
@@ -1102,7 +1101,7 @@ default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ghuuw"]
 input_name = "color"
 
-[sub_resource type="VisualShader" id="VisualShader_ha7fu"]
+[sub_resource type="VisualShader" id="VisualShader_qitba"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -1163,13 +1162,13 @@ nodes/fragment/5/node = SubResource("VisualShaderNodeInput_ghuuw")
 nodes/fragment/5/position = Vector2(-100, 700)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 4, 0, 0, 0, 5, 0, 4, 5, 5, 0, 4, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rgaj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqfun"]
 resource_local_to_scene = true
-shader = SubResource("VisualShader_ha7fu")
+shader = SubResource("VisualShader_qitba")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="VisualShader" id="VisualShader_4blnv"]
+[sub_resource type="VisualShader" id="VisualShader_36c6u"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode blend_mix;
@@ -1230,9 +1229,9 @@ nodes/fragment/5/node = SubResource("VisualShaderNodeInput_ghuuw")
 nodes/fragment/5/position = Vector2(-100, 700)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 4, 0, 0, 0, 5, 0, 4, 5, 5, 0, 4, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7eppt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utin1"]
 resource_local_to_scene = true
-shader = SubResource("VisualShader_4blnv")
+shader = SubResource("VisualShader_36c6u")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -1250,12 +1249,12 @@ tile_set = SubResource("TileSet_8v1aj")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="SlimeEnemy" parent="Enemies" instance=ExtResource("3_k5b10")]
-material = SubResource("ShaderMaterial_0rgaj")
+material = SubResource("ShaderMaterial_jqfun")
 position = Vector2(132, 27)
 mob_type = "enemy"
 
 [node name="SlimeEnemy2" parent="Enemies" instance=ExtResource("3_k5b10")]
-material = SubResource("ShaderMaterial_7eppt")
+material = SubResource("ShaderMaterial_utin1")
 position = Vector2(21, -33)
 mob_type = "enemy"
 is_recruitable = true
@@ -1265,13 +1264,15 @@ position = Vector2(-54, -9)
 slime_summon = ExtResource("3_k5b10")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(3.5, 3.5)
+zoom = Vector2(3, 3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
-offset_right = 89.0
-offset_bottom = 98.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 90.0
+offset_bottom = 99.0
 scale = Vector2(3, 3)
 
 [node name="Q-summon" type="Sprite2D" parent="CanvasLayer/BoxContainer"]
@@ -1296,23 +1297,3 @@ texture = ExtResource("5_mipw0")
 texture_filter = 1
 position = Vector2(25, 65)
 texture = ExtResource("6_n4050")
-
-[node name="NewSummonLabel" type="Label" parent="CanvasLayer"]
-visible = false
-texture_filter = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -44.0
-offset_right = 20.0
-offset_bottom = -21.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.343396, 0.147218, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_5gtdi")
-theme_override_font_sizes/font_size = 48
-text = "New Summon Arised"

@@ -28,7 +28,7 @@ var is_moving := false
 var is_attacking := false
 
 var can_arise_mob := false
-var Q_summon_enabled := false # should be an array for Q, E and R
+var Q_summon_enabled := true # should be an array for Q, E and R
 
 var is_knocked_back := false
 

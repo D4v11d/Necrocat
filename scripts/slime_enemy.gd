@@ -118,6 +118,8 @@ func handle_slime_death() -> void:
 		player.summon_component.connect("delete_mob", Callable(self, "delete_spirit_mob"))
 		animated_sprite.play("spirit")
 	else:
+		if is_ally:
+			player.summon_component.summon_killed(self)
 		queue_free()
 
 func _on_arise_area_body_entered(body: Node2D) -> void:
@@ -134,12 +136,5 @@ func delete_spirit_mob() -> void:
 	if is_spirit_slime:
 		queue_free()
 
-# Fix crashing repeatedly
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	if body is Mob:
-		if body.is_ally and not is_ally:
-			attack_received(body.position, body.attack_damage)
-			return
-		if not body.is_ally and is_ally:
-			attack_received(body.position, body.attack_damage)
-			return
+func _on_hurtbox_damage_taken(amount: Variant, source: Variant) -> void:
+	attack_received(source.position, amount)

@@ -63,7 +63,6 @@ func move_towards_target(target: Node2D, delta: float) -> void:
 		mob.animated_sprite.flip_h = true
 
 func _on_body_entered(body: Node2D) -> void:
-	print("body entered")
 	if body == self:
 		return
 

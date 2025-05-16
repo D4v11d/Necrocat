@@ -25,7 +25,9 @@ func summon_ally() -> void:
 			if new_ally:
 				new_ally.is_ally = true
 				
-				new_ally.position = player.position + get_spawn_position_offset()
+				
+				
+				new_ally.position = player.position + calculate_summon_position()
 				
 				# Spawn inside Summons node
 				var summons_node = get_tree().current_scene.get_node("Summons")
@@ -34,6 +36,13 @@ func summon_ally() -> void:
 				else:
 					push_warning("Summons node not found!")
 
+func calculate_summon_position() -> Vector2:
+	var spawn_offset = get_spawn_position_offset()
+	for summon in summoned_allies_list:
+		if summon.position == player.position + spawn_offset:
+			spawn_offset.x += 2
+			
+	return spawn_offset
 
 func get_spawn_position_offset() -> Vector2:
 	
@@ -56,7 +65,7 @@ func _on_summon_cooldown_timeout() -> void:
 	can_summon = true
 	
 func clear_all_summons() -> void:
-	if Input.is_key_pressed(KEY_BACKSPACE):
+	if Input.is_action_pressed("delete_summons"):
 		for summon in summoned_allies_list:
 			summoned_allies_list.erase(summon)
 			summon.queue_free()
@@ -72,3 +81,6 @@ func handle_arise_mob() -> void:
 func show_arise_message() -> void:
 	var label = player.new_summon_label
 	DamageNumbers.animate_label(label, "New Summon Arised")
+
+func summon_killed(summon: Mob) -> void:
+	summoned_allies_list.erase(summon)

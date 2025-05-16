@@ -34,7 +34,8 @@ var jump_direction: Vector2
 var jump_distance: float
 
 func _ready() -> void:
-	pass
+	set_collision_layer_value(1, true)
+	set_collision_layer_value(2, true)
 
 func _physics_process(delta: float) -> void:
 	if is_knocked_back:
@@ -63,6 +64,7 @@ func start_jump(target_position: Vector2) -> void:
 	jump_direction = (jump_target_position - jump_start_position).normalized()
 	jump_distance = jump_start_position.distance_to(jump_target_position)
 	original_y = position.y
+	set_collision_layer_value(1, false)
 
 func handle_jump(delta: float) -> void:
 	jump_progress += delta
@@ -82,6 +84,7 @@ func handle_jump(delta: float) -> void:
 	if jump_progress >= JUMP_DURATION:
 		jump_progress = JUMP_COOLDOWN
 		position.y = jump_target_position.y
+		set_collision_layer_value(1, true)
 
 
 

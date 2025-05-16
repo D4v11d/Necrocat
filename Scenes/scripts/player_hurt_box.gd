@@ -10,9 +10,13 @@ var damage_cooldown := DAMAGE_COOLDOWN  # seconds between damage ticks
 var enemies_in_hurtbox := []
 var can_take_damage := true
 
+func _ready() -> void:
+	set_collision_mask_value(2, false)
+
 func add_attacker(body: Node2D):
 	if can_take_damage:
 		take_damage(body)
+		can_take_damage = false
 	enemies_in_hurtbox.append(body)
 	if enemies_in_hurtbox.size() == 1:
 		$DamageCooldown.start(damage_cooldown)

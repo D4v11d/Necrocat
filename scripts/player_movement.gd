@@ -19,7 +19,7 @@ class_name Player extends CharacterBody2D
 # Canvas Layer objects
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime-blue"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
-
+@onready var knockback_timer:= $KnockbackTimer
 const SPEED = 100.0
 const ATTACK_POWER = 20.0
 
@@ -30,6 +30,8 @@ var is_attacking := false
 var can_arise_mob := false
 var Q_summon_enabled := false # should be an array for Q, E and R
 
+var is_knocked_back := false
+
 func _ready() -> void:
 	animated_sprite_2d.play("idle_front")
 	vertical_hitbox.set_deferred("monitoring", false)
@@ -37,6 +39,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_attacking:
+		return
+	
+	if is_knocked_back:
+		move_and_collide(velocity * delta)
 		return
 	
 	if can_arise_mob:
@@ -124,6 +130,17 @@ func _on_attack_timer_timeout() -> void:
 	is_attacking = false
 	play_idle_animation()
 	
-func _on_hurt_box_damage_taken(amount: Variant) -> void:
+func _on_hurt_box_damage_taken(amount: Variant, source: Node2D) -> void:
 	DamageNumbers.display_text(str(amount), damage_numbers_origin.global_position, "#F00")
 	damage_animation_player.play("damage_cooldown")
+	
+	if not is_knocked_back:
+		var knockback_direction = (position - source.position).normalized()
+		velocity = knockback_direction * 100.0 # parametrize knockback or change by enemy
+		is_knocked_back = true
+		knockback_timer.start(0.2)
+
+
+func _on_knockback_timer_timeout() -> void:
+	is_knocked_back = false
+	velocity = Vector2.ZERO

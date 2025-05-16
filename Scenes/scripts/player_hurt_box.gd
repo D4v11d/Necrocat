@@ -1,6 +1,6 @@
 extends Area2D
 
-signal damage_taken(amount)  # Define your custom signal
+signal damage_taken(amount, source)  # Define your custom signal
 
 const MAX_HP:= 200
 const DAMAGE_COOLDOWN:= 1.0
@@ -40,7 +40,7 @@ func _on_DamageCooldown_timeout():
 func take_damage(enemy):
 	hp -= enemy.attack_damage
 	print("HP: ", hp, "/", MAX_HP)
-	emit_signal("damage_taken", enemy.attack_damage)
+	emit_signal("damage_taken", enemy.attack_damage, enemy)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Mob:

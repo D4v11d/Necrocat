@@ -1,12 +1,12 @@
 [gd_scene load_steps=28 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="4_xy8nd"]
 [ext_resource type="Texture2D" uid="uid://ccvhh08kjmuea" path="res://Art/Mobs/test-slime/SlimeSpirit.png" id="5_4t6ok"]
-[ext_resource type="Script" path="res://scripts/mob_hurtbox.gd" id="6_kcif8"]
-[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="6_vqilo"]
+[ext_resource type="Script" uid="uid://cjbw1m7iw5w3" path="res://scripts/mob_hurtbox.gd" id="6_kcif8"]
+[ext_resource type="Script" uid="uid://615ln7khhy8g" path="res://scripts/mob_follow.gd" id="6_vqilo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true
@@ -152,8 +152,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ltp7a"]
 _data = {
-"RESET": SubResource("Animation_ltp7a"),
-"hit_flash": SubResource("Animation_ssmms")
+&"RESET": SubResource("Animation_ltp7a"),
+&"hit_flash": SubResource("Animation_ssmms")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ao4r"]
@@ -199,7 +199,7 @@ one_shot = true
 
 [node name="HitflashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ltp7a")
+&"": SubResource("AnimationLibrary_ltp7a")
 }
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]

@@ -20,9 +20,16 @@ class_name Player extends CharacterBody2D
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime-blue"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
 @onready var knockback_timer:= $KnockbackTimer
-const SPEED = 100.0
-const ATTACK_POWER = 20.0
+@onready var dash_timer:= $DashTimer
 
+const ATTACK_POWER = 20.0
+const NORMAL_SPEED = 100.0
+const DASH_SPEED = 400.0
+const DASH_DURATION = 0.1
+var is_dashing = false
+var last_real_direction := Vector2.DOWN
+
+var speed = 100.0
 var last_direction := Vector2.DOWN
 var is_moving := false
 var is_attacking := false
@@ -51,22 +58,35 @@ func _physics_process(delta: float) -> void:
 	
 	if can_arise_mob:
 		summon_component.handle_arise_mob()
+		
+	if Input.is_action_just_pressed("dash"):
+		is_dashing = true
+		speed = DASH_SPEED
+		dash_timer.start(DASH_DURATION)
 
 	handle_attack()
 	handle_move(delta)
 
 func handle_move(delta: float) -> void:
-	var direction := Vector2(
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down")
-	).normalized()
+	
+	var direction: Vector2
+	
+	if is_dashing:
+		direction = last_real_direction
+	else:
+		direction = Vector2(
+			Input.get_axis("move_left", "move_right"),
+			Input.get_axis("move_up", "move_down")
+		).normalized()
+		if (direction != Vector2.ZERO):
+			last_real_direction = direction
 
 	if direction != Vector2.ZERO:
-		velocity = direction * SPEED * delta
+		velocity = direction * speed * delta
 		update_move_animation(direction)
 		is_moving = true
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		velocity = velocity.move_toward(Vector2.ZERO, speed)
 		if is_moving and velocity == Vector2.ZERO:
 			play_idle_animation()
 			is_moving = false
@@ -151,3 +171,7 @@ func _on_knockback_timer_timeout() -> void:
 	is_knocked_back = false
 	velocity = Vector2.ZERO
 	
+
+func _on_dash_timer_timeout() -> void:
+	speed = NORMAL_SPEED
+	is_dashing = false

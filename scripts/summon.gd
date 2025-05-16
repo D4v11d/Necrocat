@@ -2,6 +2,7 @@ class_name Summon extends Node2D
 
 @onready var summon_cooldown: Timer = $"../SummonCooldown"
 @onready var player: Player = $".."
+@onready var casting_timer: Timer = $"../CastingTimer"
 
 var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []
@@ -72,15 +73,32 @@ func clear_all_summons() -> void:
 
 func handle_arise_mob() -> void:
 	if Input.is_action_just_pressed("arise"):
+		play_cast_animation()
+		casting_timer.start()
+		player.is_casting_spell = true
 		player.Q_summon_enabled = true
 		player.slime_summon_sprite.visible = true
 		emit_signal("delete_mob")
-		show_arise_message()
 		player.e_key_animation.visible = false
-		
+
+func play_cast_animation() -> void:
+	if player.last_direction == Vector2.UP:
+		player.animated_sprite_2d.play("cast_back")
+	elif player.last_direction == Vector2.DOWN:
+		player.animated_sprite_2d.play("cast_front")
+	else:
+		player.animated_sprite_2d.play("cast_side")
+		player.animated_sprite_2d.flip_h = player.last_direction == Vector2.LEFT
+
 func show_arise_message() -> void:
 	var label = player.new_summon_label
 	DamageNumbers.animate_label(label, "New Summon Arised")
 
 func summon_killed(summon: Mob) -> void:
 	summoned_allies_list.erase(summon)
+
+
+func _on_casting_timer_timeout() -> void:
+	player.is_casting_spell = false
+	show_arise_message()
+	player.play_idle_animation()

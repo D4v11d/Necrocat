@@ -583,7 +583,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8d7v2")
 }],
-"loop": true,
+"loop": false,
 "name": &"cast_back",
 "speed": 10.0
 }, {
@@ -627,7 +627,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eabmt")
 }],
-"loop": true,
+"loop": false,
 "name": &"cast_front",
 "speed": 10.0
 }, {
@@ -671,7 +671,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7o687")
 }],
-"loop": true,
+"loop": false,
 "name": &"cast_side",
 "speed": 10.0
 }, {
@@ -943,9 +943,8 @@ text = "Arise"
 texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_4s2oa")
-animation = &"cast_side"
+animation = &"attack_back"
 autoplay = "idle_front"
-frame_progress = 0.583862
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -1002,6 +1001,9 @@ libraries = {
 
 [node name="KnockbackTimer" type="Timer" parent="."]
 
+[node name="CastingTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="HorizontalAttackHitbox" to="." method="_on_horizontal_attack_hitbox_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
@@ -1011,3 +1013,4 @@ libraries = {
 [connection signal="damage_taken" from="HurtBox" to="." method="_on_hurt_box_damage_taken"]
 [connection signal="timeout" from="HurtBox/DamageCooldown" to="HurtBox" method="_on_DamageCooldown_timeout"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="CastingTimer" to="Summon" method="_on_casting_timer_timeout"]

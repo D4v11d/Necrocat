@@ -29,6 +29,7 @@ var is_attacking := false
 
 var can_arise_mob := false
 var Q_summon_enabled := true # should be an array for Q, E and R
+var is_casting_spell := false
 
 var is_knocked_back := false
 
@@ -43,6 +44,9 @@ func _physics_process(delta: float) -> void:
 	
 	if is_knocked_back:
 		move_and_collide(velocity * delta)
+		return
+	
+	if is_casting_spell:
 		return
 	
 	if can_arise_mob:
@@ -76,7 +80,7 @@ func handle_attack() -> void:
 
 		if last_direction == Vector2.UP:
 			animated_sprite_2d.play("attack_back")
-			activate_hitbox(vertical_hitbox, Vector2(0, -25))
+			activate_hitbox(vertical_hitbox, Vector2(0, -16))
 		elif last_direction == Vector2.DOWN:
 			animated_sprite_2d.play("attack_front")
 			activate_hitbox(vertical_hitbox, Vector2(0, 15))
@@ -92,6 +96,9 @@ func activate_hitbox(hitbox: Area2D, offset: Vector2) -> void:
 	hitbox.set_deferred("monitoring", true)
 
 func update_move_animation(direction: Vector2) -> void:
+	if is_casting_spell:
+		return
+		
 	if not is_attacking:
 		if abs(direction.y) > abs(direction.x):
 			if direction.y < 0:
@@ -140,7 +147,7 @@ func _on_hurt_box_damage_taken(amount: Variant, source: Node2D) -> void:
 		is_knocked_back = true
 		knockback_timer.start(0.2)
 
-
 func _on_knockback_timer_timeout() -> void:
 	is_knocked_back = false
 	velocity = Vector2.ZERO
+	

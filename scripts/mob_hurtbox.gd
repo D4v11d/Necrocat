@@ -4,7 +4,7 @@ signal damage_taken(amount, source)  # Define your custom signal
 
 @onready var mob: Mob = $".."
 
-const DAMAGE_COOLDOWN:= 1.0
+const DAMAGE_COOLDOWN:= 0.6
 var hp:= mob.MAX_HP
 
 var damage_cooldown := DAMAGE_COOLDOWN  # seconds between damage ticks

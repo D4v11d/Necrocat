@@ -214,7 +214,7 @@ shape = SubResource("CircleShape2D_3ao4r")
 debug_color = Color(0.797108, 0.414388, 0.23775, 0.42)
 
 [node name="DamageCooldown" type="Timer" parent="Hurtbox"]
-wait_time = 0.5
+wait_time = 0.4
 one_shot = true
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]

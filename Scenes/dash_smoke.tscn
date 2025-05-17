@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dphcelpad7edg"]
+
+[ext_resource type="Texture2D" uid="uid://ct6kg81mmt8tm" path="res://Art/VFX/FX052_01.png" id="1_ayo54"]
+[ext_resource type="Texture2D" uid="uid://dy1a0go1gl1i7" path="res://Art/VFX/FX052_02.png" id="2_jissh"]
+[ext_resource type="Texture2D" uid="uid://ygmwc7ahiybk" path="res://Art/VFX/FX052_03.png" id="3_ffeft"]
+[ext_resource type="Texture2D" uid="uid://cp55uswsftvgx" path="res://Art/VFX/FX052_04.png" id="4_m536m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yd7r2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ayo54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jissh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ffeft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m536m")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 12.0
+}]
+
+[node name="DashSmoke" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_yd7r2")
+animation = &"dash"

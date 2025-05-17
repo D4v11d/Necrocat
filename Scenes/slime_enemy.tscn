@@ -1,12 +1,16 @@
-[gd_scene load_steps=28 format=3 uid="uid://cgk5ekyx2oijf"]
+[gd_scene load_steps=35 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="4_xy8nd"]
 [ext_resource type="Texture2D" uid="uid://ccvhh08kjmuea" path="res://Art/Mobs/test-slime/SlimeSpirit.png" id="5_4t6ok"]
-[ext_resource type="Script" uid="uid://cjbw1m7iw5w3" path="res://scripts/mob_hurtbox.gd" id="6_kcif8"]
-[ext_resource type="Script" uid="uid://615ln7khhy8g" path="res://scripts/mob_follow.gd" id="6_vqilo"]
+[ext_resource type="Texture2D" uid="uid://xd5uwa23lwdy" path="res://Art/Mobs/test-slime/slime-death.png" id="5_kstit"]
+[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="6_vqilo"]
+[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy/hitflash_animation_player.tscn" id="8_b5mvh"]
+[ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy/damage_numbers_origin.tscn" id="9_xh71l"]
+[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy/hurtbox.tscn" id="10_vngdl"]
+[ext_resource type="Script" path="res://scripts/slime_jumping.gd" id="11_r23qg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true
@@ -21,6 +25,30 @@ region = Rect2(32, 0, 16, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_33o5n"]
 atlas = ExtResource("4_xy8nd")
 region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8266"]
+atlas = ExtResource("5_kstit")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq7oj"]
+atlas = ExtResource("5_kstit")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cp7n"]
+atlas = ExtResource("5_kstit")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fhrh"]
+atlas = ExtResource("5_kstit")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21xct"]
+atlas = ExtResource("5_kstit")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjp0u"]
+atlas = ExtResource("5_kstit")
+region = Rect2(64, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ltbt"]
 atlas = ExtResource("1_gbwud")
@@ -74,6 +102,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_k8266")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq7oj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cp7n")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fhrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21xct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjp0u")
+}],
+"loop": false,
+"name": &"emerge",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5ltbt")
 }, {
 "duration": 1.0,
@@ -119,45 +175,8 @@ radius = 38.0526
 [sub_resource type="CircleShape2D" id="CircleShape2D_xx0lc"]
 radius = 24.1868
 
-[sub_resource type="Animation" id="Animation_ltp7a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_ssmms"]
-resource_name = "hit_flash"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltp7a"]
-_data = {
-&"RESET": SubResource("Animation_ltp7a"),
-&"hit_flash": SubResource("Animation_ssmms")
-}
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3ao4r"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1injq"]
+radius = 7.0
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
 script = ExtResource("1_1ubh8")
@@ -166,7 +185,7 @@ script = ExtResource("1_1ubh8")
 texture_filter = 1
 material = SubResource("ShaderMaterial_ltp7a")
 sprite_frames = SubResource("SpriteFrames_hto71")
-animation = &"idle"
+animation = &"spirit"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -197,34 +216,23 @@ debug_color = Color(0, 0.64012, 0.354681, 0.42)
 wait_time = 0.1
 one_shot = true
 
-[node name="HitflashAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ltp7a")
-}
+[node name="HitflashAnimationPlayer" parent="." instance=ExtResource("8_b5mvh")]
 
-[node name="DamageNumbersOrigin" type="Node2D" parent="."]
-position = Vector2(0, -4)
+[node name="DamageNumbersOrigin" parent="." instance=ExtResource("9_xh71l")]
 
-[node name="Hurtbox" type="Area2D" parent="."]
-script = ExtResource("6_kcif8")
+[node name="Hurtbox" parent="." instance=ExtResource("10_vngdl")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 5)
-shape = SubResource("CircleShape2D_3ao4r")
-debug_color = Color(0.797108, 0.414388, 0.23775, 0.42)
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_1injq")
+debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
 
-[node name="DamageCooldown" type="Timer" parent="Hurtbox"]
-wait_time = 0.4
-one_shot = true
+[node name="Jumping" type="Node2D" parent="."]
+script = ExtResource("11_r23qg")
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="Jumping" method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="AriseArea" to="." method="_on_arise_area_body_entered"]
 [connection signal="body_exited" from="AriseArea" to="." method="_on_arise_area_body_exited"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
-[connection signal="body_entered" from="Hurtbox" to="Hurtbox" method="_on_body_entered"]
-[connection signal="body_exited" from="Hurtbox" to="Hurtbox" method="_on_body_exited"]
-[connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]
-[connection signal="timeout" from="Hurtbox/DamageCooldown" to="Hurtbox" method="_on_damage_cooldown_timeout"]

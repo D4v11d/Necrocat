@@ -5,7 +5,7 @@ signal damage_taken(amount, source)  # Define your custom signal
 @onready var mob: Mob = $".."
 
 const DAMAGE_COOLDOWN:= 0.6
-var hp:= mob.MAX_HP
+var hp: int
 
 var damage_cooldown := DAMAGE_COOLDOWN  # seconds between damage ticks
 var enemies_in_hurtbox := []
@@ -13,6 +13,7 @@ var can_take_damage := true
 
 func _ready() -> void:
 	set_collision_mask_value(2, false)
+	hp = mob.MAX_HP
 
 func add_attacker(body: Node2D):
 	if can_take_damage:

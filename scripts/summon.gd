@@ -1,8 +1,8 @@
 class_name Summon extends Node2D
 
-@onready var summon_cooldown: Timer = $"../SummonCooldown"
+@onready var summon_cooldown: Timer = $"../Timers/SummonCooldown"
 @onready var player: Player = $".."
-@onready var casting_timer: Timer = $"../CastingTimer"
+@onready var casting_timer: Timer = $"../Timers/CastingTimer"
 
 var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []

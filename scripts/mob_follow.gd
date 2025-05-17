@@ -35,6 +35,7 @@ func handle_chasing_targets(delta: float) -> void:
 	mob.move_and_collide(mob.velocity * delta)
 
 func find_enemy_in_area() -> Node2D:
+			
 	for target in targets_in_chase_area:
 		if _is_enemy(target):
 			return target

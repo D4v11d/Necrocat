@@ -3,30 +3,40 @@ class_name Player extends CharacterBody2D
 # Set from inspector
 @export var slime_summon: PackedScene 
 
-# Components
+# Animations
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var e_key_animation: AnimatedSprite2D = $EKeyAnimation
+@onready var dash_smoke: AnimatedSprite2D = $"../DashSmoke" # set in MainScene
+
+# Hitboxes
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var vertical_hitbox: Area2D = $VerticalAttackHitbox
 @onready var horizontal_hitbox: Area2D = $HorizontalAttackHitbox
-@onready var attack_timer: Timer = $AttackTimer
-@onready var damage_numbers_origin := $DamageNumbersOrigin
-@onready var e_key_animation: AnimatedSprite2D = $EKeyAnimation
-@onready var damage_animation_player:= $DamageAnimationPlayer
 
 # Funcionality:
 @onready var summon_component: Summon = $Summon
 
+# Timers:
+@onready var attack_timer: Timer = $Timers/AttackTimer
+@onready var knockback_timer:= $Timers/KnockbackTimer
+@onready var dash_timer:= $Timers/DashTimer
+@onready var dash_cooldown: Timer = $Timers/DashCooldown
+
+# Damage numbers
+@onready var damage_numbers_origin := $DamageNumbersOrigin
+@onready var damage_animation_player:= $DamageAnimationPlayer
+
 # Canvas Layer objects
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime-blue"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
-@onready var knockback_timer:= $KnockbackTimer
-@onready var dash_timer:= $DashTimer
 
 const ATTACK_POWER = 20.0
 const NORMAL_SPEED = 100.0
 const DASH_SPEED = 400.0
 const DASH_DURATION = 0.1
 var is_dashing = false
+var can_dash = true
+
 var last_real_direction := Vector2.DOWN
 
 var speed = 100.0
@@ -59,7 +69,12 @@ func _physics_process(delta: float) -> void:
 	if can_arise_mob:
 		summon_component.handle_arise_mob()
 		
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and can_dash :
+		can_dash = false
+		dash_cooldown.start()
+		dash_smoke.visible = true
+		dash_smoke.position = global_position
+		dash_smoke.play("dash")
 		is_dashing = true
 		speed = DASH_SPEED
 		dash_timer.start(DASH_DURATION)
@@ -175,3 +190,11 @@ func _on_knockback_timer_timeout() -> void:
 func _on_dash_timer_timeout() -> void:
 	speed = NORMAL_SPEED
 	is_dashing = false
+
+
+func _on_dash_smoke_animation_finished() -> void:
+	dash_smoke.visible = false
+
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true

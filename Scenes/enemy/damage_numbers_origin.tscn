@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://b3ioorn7pclbg"]
+
+[node name="DamageNumbersOrigin" type="Node2D"]
+position = Vector2(0, -4)

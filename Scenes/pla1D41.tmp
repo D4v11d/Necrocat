@@ -1,16 +1,20 @@
-[gd_scene load_steps=140 format=3 uid="uid://ljn1arg6ompw"]
+[gd_scene load_steps=145 format=3 uid="uid://ljn1arg6ompw"]
 
 [ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_bnl8f"]
 [ext_resource type="Texture2D" uid="uid://jvoxpdxxtsum" path="res://Art/UI/Keys/E.png" id="2_1il5t"]
 [ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="2_qe6c1"]
 [ext_resource type="Texture2D" uid="uid://dxgep23lfi4i" path="res://Art/Characters/cat_idle_back.png" id="3_8sjai"]
+[ext_resource type="Texture2D" uid="uid://ct6kg81mmt8tm" path="res://Art/VFX/FX052_01.png" id="3_nqrmq"]
 [ext_resource type="Texture2D" uid="uid://cjrxqrulwpxq7" path="res://Art/Characters/cat_idle_front.png" id="3_ppoih"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="3_pym4b"]
 [ext_resource type="Script" path="res://scripts/summon.gd" id="3_srn2t"]
 [ext_resource type="Texture2D" uid="uid://c6sirvg57tign" path="res://Art/Characters/cat_attack_back.png" id="4_cibhi"]
+[ext_resource type="Texture2D" uid="uid://dy1a0go1gl1i7" path="res://Art/VFX/FX052_02.png" id="4_ylauo"]
 [ext_resource type="Texture2D" uid="uid://cmd0fbbmp47eu" path="res://Art/Characters/cat_attack_front.png" id="5_3ykmt"]
 [ext_resource type="Texture2D" uid="uid://ctl0d4n6x4rp0" path="res://Art/Characters/cat_idle_side.png" id="5_a0n1o"]
+[ext_resource type="Texture2D" uid="uid://ygmwc7ahiybk" path="res://Art/VFX/FX052_03.png" id="5_fkje0"]
 [ext_resource type="Texture2D" uid="uid://du2jnd8su6h2a" path="res://Art/Characters/cat_attack_side.png" id="6_ea230"]
+[ext_resource type="Texture2D" uid="uid://cp55uswsftvgx" path="res://Art/VFX/FX052_04.png" id="6_fl38q"]
 [ext_resource type="Texture2D" uid="uid://bcxp26tiocole" path="res://Art/Characters/cat_run_back.png" id="6_s744m"]
 [ext_resource type="Texture2D" uid="uid://cy6hlx28cho53" path="res://Art/Characters/cat_run_front.png" id="7_wu5ve"]
 [ext_resource type="Texture2D" uid="uid://4g86chq7dk0v" path="res://Art/Characters/cat_run_side.png" id="8_r4ycq"]
@@ -19,6 +23,26 @@
 [ext_resource type="Texture2D" uid="uid://ckonytssvioat" path="res://Art/Characters/Cat_Shadow.png" id="10_c7ibx"]
 [ext_resource type="Texture2D" uid="uid://nwk0jpg77i4b" path="res://Art/Characters/cat_cast_side.png" id="10_sk6l2"]
 [ext_resource type="Script" path="res://Scenes/scripts/player_hurt_box.gd" id="12_7dp3o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kksbb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nqrmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ylauo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fkje0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fl38q")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ju7s"]
 atlas = ExtResource("2_1il5t")
@@ -921,6 +945,14 @@ _data = {
 script = ExtResource("1_bnl8f")
 slime_summon = ExtResource("2_qe6c1")
 
+[node name="DashSmoke" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.529412)
+texture_filter = 1
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_kksbb")
+frame = 3
+frame_progress = 1.0
+
 [node name="EKeyAnimation" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
@@ -965,6 +997,13 @@ position = Vector2(11, 0)
 shape = SubResource("RectangleShape2D_wsmjb")
 debug_color = Color(0.725745, 0.590853, 0.0707804, 0.42)
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="SummonCooldown" type="Timer" parent="."]
+one_shot = true
+
 [node name="Summon" type="Node2D" parent="."]
 position = Vector2(0, -1)
 script = ExtResource("3_srn2t")
@@ -992,34 +1031,21 @@ libraries = {
 "": SubResource("AnimationLibrary_h4iuc")
 }
 
-[node name="Timers" type="Node2D" parent="."]
+[node name="KnockbackTimer" type="Timer" parent="."]
 
-[node name="KnockbackTimer" type="Timer" parent="Timers"]
-
-[node name="CastingTimer" type="Timer" parent="Timers"]
+[node name="CastingTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DashTimer" type="Timer" parent="Timers"]
-
-[node name="DashCooldown" type="Timer" parent="Timers"]
-wait_time = 0.5
-
-[node name="AttackTimer" type="Timer" parent="Timers"]
-wait_time = 0.15
-one_shot = true
-
-[node name="SummonCooldown" type="Timer" parent="Timers"]
-one_shot = true
+[node name="DashTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="HorizontalAttackHitbox" to="." method="_on_horizontal_attack_hitbox_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="SummonCooldown" to="Summon" method="_on_summon_cooldown_timeout"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="HurtBox" method="_on_body_exited"]
 [connection signal="damage_taken" from="HurtBox" to="." method="_on_hurt_box_damage_taken"]
 [connection signal="timeout" from="HurtBox/DamageCooldown" to="HurtBox" method="_on_DamageCooldown_timeout"]
-[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
-[connection signal="timeout" from="Timers/CastingTimer" to="Summon" method="_on_casting_timer_timeout"]
-[connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Timers/DashCooldown" to="." method="_on_dash_cooldown_timeout"]
-[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="Timers/SummonCooldown" to="Summon" method="_on_summon_cooldown_timeout"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="CastingTimer" to="Summon" method="_on_casting_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

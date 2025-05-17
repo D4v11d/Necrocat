@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bta06xs8obxpk"]
+
+[ext_resource type="Script" path="res://scripts/mob_hurtbox.gd" id="1_3g44q"]
+
+[node name="Hurtbox" type="Area2D"]
+script = ExtResource("1_3g44q")
+
+[node name="DamageCooldown" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]

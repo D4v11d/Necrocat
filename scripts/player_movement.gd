@@ -56,14 +56,11 @@ func _ready() -> void:
 	horizontal_hitbox.set_deferred("monitoring", false)
 
 func _physics_process(delta: float) -> void:
-	if is_attacking:
+	if is_attacking or is_casting_spell:
 		return
 	
 	if is_knocked_back:
 		move_and_collide(velocity * delta)
-		return
-	
-	if is_casting_spell:
 		return
 	
 	if can_arise_mob:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://oyb85fvkqynr"]
+[gd_scene load_steps=76 format=3 uid="uid://oyb85fvkqynr"]
 
 [ext_resource type="Texture2D" uid="uid://brfkouqpspvs7" path="res://Art/Mobs/Skeleton/skel-death.png" id="1_2tf5s"]
 [ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_2y41n"]
@@ -12,8 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ckamhj2neq28q" path="res://Art/Mobs/Skeleton/skel-run-front.png" id="8_m5f8l"]
 [ext_resource type="Texture2D" uid="uid://p6u7vcm41gjw" path="res://Art/Mobs/Skeleton/skel-run-side.png" id="9_m3oek"]
 [ext_resource type="Script" path="res://scripts/mob_follow.gd" id="10_43kt5"]
-[ext_resource type="Script" path="res://scripts/play_animations.gd" id="11_l0djc"]
-[ext_resource type="Script" path="res://scripts/mob_hurtbox.gd" id="11_te7af"]
+[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy/hurtbox.tscn" id="13_42d2q"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy/hitflash_animation_player.tscn" id="13_ib6us"]
 [ext_resource type="Script" path="res://scripts/skeleton_movement.gd" id="16_jf5iu"]
 
@@ -501,9 +500,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbmnr"]
 radius = 135.059
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fos63"]
-radius = 7.0
-height = 24.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjy6j"]
+radius = 6.0
+height = 26.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cegnb"]
 radius = 30.0
@@ -519,10 +518,8 @@ is_recruitable = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_jtu33")
 sprite_frames = SubResource("SpriteFrames_l1w28")
-animation = &"spirit"
+animation = &"idle_side"
 autoplay = "idle_front"
-frame_progress = 0.603542
-script = ExtResource("11_l0djc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -539,16 +536,12 @@ script = ExtResource("10_43kt5")
 shape = SubResource("CircleShape2D_xbmnr")
 debug_color = Color(0.619686, 0.524543, 0.295074, 0.42)
 
-[node name="Hurtbox" type="Area2D" parent="."]
-script = ExtResource("11_te7af")
+[node name="Hurtbox" parent="." instance=ExtResource("13_42d2q")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_fos63")
-debug_color = Color(0.907259, 0.272541, 0.340514, 0.42)
-
-[node name="DamageCooldown" type="Timer" parent="Hurtbox"]
-one_shot = true
+shape = SubResource("CapsuleShape2D_bjy6j")
+debug_color = Color(0.884472, 0.304921, 0.355866, 0.42)
 
 [node name="AttackArea" type="Area2D" parent="."]
 
@@ -574,9 +567,9 @@ one_shot = true
 script = ExtResource("16_jf5iu")
 
 [node name="EmergeTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
-[connection signal="body_entered" from="AriseArea" to="." method="_on_arise_area_body_entered"]
-[connection signal="body_exited" from="AriseArea" to="." method="_on_arise_area_body_exited"]
-[connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]

@@ -176,7 +176,7 @@ radius = 38.0526
 radius = 24.1868
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1injq"]
-radius = 7.0
+radius = 6.0
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
 script = ExtResource("1_1ubh8")
@@ -233,6 +233,4 @@ script = ExtResource("11_r23qg")
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="Jumping" method="_on_attack_area_body_entered"]
-[connection signal="body_entered" from="AriseArea" to="." method="_on_arise_area_body_entered"]
-[connection signal="body_exited" from="AriseArea" to="." method="_on_arise_area_body_exited"]
-[connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]

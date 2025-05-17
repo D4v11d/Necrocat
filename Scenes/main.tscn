@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=14 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
 [ext_resource type="PackedScene" uid="uid://oyb85fvkqynr" path="res://Scenes/skeleton.tscn" id="3_7fy2b"]
 [ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="3_36x2x"]
+[ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="3_nnliv"]
 [ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="4_okkmp"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="5_aeiip"]
 [ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
@@ -1101,17 +1102,32 @@ tile_set = SubResource("TileSet_8v1aj")
 
 [node name="Summons" type="Node2D" parent="."]
 
+[node name="SlimeEnemy" parent="Summons" instance=ExtResource("3_nnliv")]
+position = Vector2(-92, 6)
+is_ally = true
+
+[node name="SlimeEnemy2" parent="Summons" instance=ExtResource("3_nnliv")]
+position = Vector2(-51, 20)
+is_ally = true
+
+[node name="SlimeEnemy3" parent="Summons" instance=ExtResource("3_nnliv")]
+position = Vector2(-89, 27)
+is_ally = true
+
+[node name="SlimeEnemy4" parent="Summons" instance=ExtResource("3_nnliv")]
+position = Vector2(-54, -7)
+is_ally = true
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Skeleton" parent="Enemies" instance=ExtResource("3_7fy2b")]
-position = Vector2(-88, -110)
 
 [node name="DashSmoke" parent="." instance=ExtResource("3_36x2x")]
 visible = false
 position = Vector2(43, -41)
 
 [node name="Player" parent="." instance=ExtResource("2_gaflk")]
-position = Vector2(44, -46)
+position = Vector2(-110, -42)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3.5, 3.5)

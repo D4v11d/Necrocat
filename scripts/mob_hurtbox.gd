@@ -4,7 +4,7 @@ signal damage_taken(amount, source)  # Define your custom signal
 
 @onready var mob: Mob = $".."
 
-const DAMAGE_COOLDOWN:= 0.6
+const DAMAGE_COOLDOWN:= 0.4
 var hp: int
 
 var damage_cooldown := DAMAGE_COOLDOWN  # seconds between damage ticks
@@ -31,7 +31,7 @@ func take_damage(enemy):
 	if enemy == mob:
 		return  # Don't damage yourself
 	hp -= enemy.attack_damage
-	print("HP: ", hp, "/", mob.MAX_HP)
+	print("Mob HP: ", hp, "/", mob.MAX_HP)
 	emit_signal("damage_taken", enemy.attack_damage, enemy)
 
 func _on_body_entered(body: Node2D) -> void:

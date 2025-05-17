@@ -28,24 +28,26 @@ func _physics_process(delta: float) -> void:
 
 	# Start jump
 	if jump_progress == 0:
-		original_y = position.y
+		original_y = mob.position.y
 
 	# Execute jump logic
 	if jump_progress > 0:
 		handle_jump(delta)
 	else:
-		chase_area.handle_chasing_targets(delta)
+		if mob.hp > 0:
+			chase_area.handle_chasing_targets(delta)
 
 func start_jump(target_position: Vector2) -> void:	
 	jump_progress = 0.001  # Start jump
-	jump_start_position = position
+	jump_start_position = mob.position
 	jump_target_position = target_position
 	jump_direction = (jump_target_position - jump_start_position).normalized()
 	jump_distance = jump_start_position.distance_to(jump_target_position)
-	original_y = position.y
+	original_y = mob.position.y
 	mob.set_collision_layer_value(1, false)
 
 func handle_jump(delta: float) -> void:
+	print("called handle_jump")
 	jump_progress += delta
 	var jump_completion = min(jump_progress / JUMP_DURATION, 1.0)
 
@@ -56,13 +58,13 @@ func handle_jump(delta: float) -> void:
 	var jump_offset = sin(jump_completion * PI) * JUMP_HEIGHT
 
 	# Combine movement and vertical arc
-	position = jump_start_position + horizontal_move
-	position.y -= jump_offset
+	mob.position = jump_start_position + horizontal_move
+	mob.position.y -= jump_offset
 
 	# End jump
 	if jump_progress >= JUMP_DURATION:
 		jump_progress = JUMP_COOLDOWN
-		position.y = jump_target_position.y
+		mob.position.y = jump_target_position.y
 		mob.set_collision_layer_value(1, true)
 
 func _on_attack_area_body_entered(body: Node2D) -> void:

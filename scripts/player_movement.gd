@@ -29,7 +29,7 @@ class_name Player extends CharacterBody2D
 @onready var damage_animation_player:= $DamageAnimationPlayer
 
 # Canvas Layer objects
-@onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime-blue"
+@onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime"
 @onready var skeleton_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/E-summon/SkeletonHead"
 @onready var ghost_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/R-summon/GhostHead"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"

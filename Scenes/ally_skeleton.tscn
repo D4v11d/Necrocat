@@ -459,6 +459,7 @@ radius = 30.0
 script = ExtResource("1_5534f")
 attack_damage = 30.0
 speed = 80.0
+is_ally = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

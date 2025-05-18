@@ -1,4 +1,5 @@
-class_name BossFollow extends Area2D
+class_name BossFollow
+extends Area2D
 
 const FOLLOW_DISTANCE := 40.0
 
@@ -7,39 +8,48 @@ const FOLLOW_DISTANCE := 40.0
 @onready var charge_timer = $"../ChargingTimer"
 
 var current_target: Node2D = null
-#var targets_in_chase_area: Array[Node2D] = []
 
 func handle_chasing_target(delta: float) -> void:
 	if current_target:
 		move_towards_target(current_target, delta)
 	else:
 		mob.velocity = Vector2.ZERO
+		mob.animated_sprite.play("idle")
 
 	mob.move_and_collide(mob.velocity * delta)
 
 func move_towards_target(target: Node2D, delta: float) -> void:
-
 	if mob.is_knocked_back:
 		return
-		
-	#perform special attack
+
+	# ── Special charge handling ──────────────────────────
 	if mob.is_specialing:
 		if mob.position.distance_to(mob.last_target_position) < 5:
-			mob.is_specialing = false
-			special_timer.start()
+			_end_charge()
 			return
-			
-		var direction = (mob.last_target_position - mob.position).normalized()
-		mob.velocity = (mob.special_speed) * direction
+
+		var direction := (mob.last_target_position - mob.position).normalized()
+		mob.velocity = direction * mob.special_speed
+
+		var collision := mob.move_and_collide(mob.velocity * delta)
+		if collision:
+			_end_charge()
 		return
+	# ─────────────────────────────────────────────────────
 
-	var direction = (target.position - mob.position).normalized()	
-	mob.velocity = mob.speed * direction
+	# Normal chase
+	var direction := (target.position - mob.position).normalized()
+	mob.velocity = direction * mob.speed
 
-	if direction.x > 0:
-		mob.animated_sprite.flip_h = false
-	elif direction.x < 0:
-		mob.animated_sprite.flip_h = true
+	if mob.hp > 0:
+		if abs(direction.x) > abs(direction.y):
+			mob.animated_sprite.play("move_side")
+			mob.animated_sprite.flip_h = direction.x < 0
+		else:
+			if direction.y < 0:
+				mob.animated_sprite.play("move_back")
+			else:
+				mob.animated_sprite.play("move_front")
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == self:
@@ -47,7 +57,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	if body is Player:
 		current_target = body
-		special_timer.start();
+		special_timer.start()
 
 func _on_special_attack_timer_timeout() -> void:
 	charge_timer.start()
@@ -59,3 +69,10 @@ func _on_charging_timer_timeout() -> void:
 	mob.is_specialing = true
 	mob.last_target_position = current_target.position
 	mob.animated_sprite.play("idle")
+
+func _end_charge() -> void:
+	mob.velocity = Vector2.ZERO
+	mob.is_specialing = false
+	special_timer.start()
+	if mob.hp > 0:
+		mob.animated_sprite.play("idle")

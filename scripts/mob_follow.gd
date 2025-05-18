@@ -21,6 +21,7 @@ func handle_chasing_targets(delta: float) -> void:
 				if distance_to_player > FOLLOW_DISTANCE:
 					move_towards_target(mob.player, delta)
 				else:
+					mob.animated_sprite.play("idle")
 					mob.velocity = Vector2.ZERO
 	else:
 		if current_target and current_target in targets_in_chase_area:
@@ -48,20 +49,25 @@ func find_valid_enemy_target() -> Node2D:
 	return null
 
 func move_towards_target(target: Node2D, delta: float) -> void:
-	if mob.is_spirit_slime:
+	# ── 1. Early‑out cases ─────────────────────────────────────────
+	if mob.is_spirit_slime or mob.is_knocked_back:
 		return
 
-	if mob.is_knocked_back:
-		return
+	# ── 2. Compute velocity ───────────────────────────────────────
+	var direction: Vector2 = (target.position - mob.position).normalized()
+	mob.velocity = direction * mob.speed
 
-	var direction = (target.position - mob.position).normalized()
-	
-	mob.velocity = mob.speed * direction
-
-	if direction.x > 0:
-		mob.animated_sprite.flip_h = false
-	elif direction.x < 0:
-		mob.animated_sprite.flip_h = true
+	# ── 3. Pick the animation & handle sprite flipping ────────────
+	if abs(direction.x) > abs(direction.y):
+		# Horizontal movement
+		mob.animated_sprite.play("move_side")
+		mob.animated_sprite.flip_h = direction.x < 0
+	else:
+		# Vertical movement
+		if direction.y < 0:
+			mob.animated_sprite.play("move_back")   # moving up
+		else:
+			mob.animated_sprite.play("move_front")  # moving down
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == self:

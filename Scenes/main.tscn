@@ -1,16 +1,19 @@
-[gd_scene load_steps=14 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=17 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
-[ext_resource type="PackedScene" uid="uid://oyb85fvkqynr" path="res://Scenes/skeleton.tscn" id="3_7fy2b"]
 [ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="3_36x2x"]
+[ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="3_nnliv"]
 [ext_resource type="PackedScene" uid="uid://djjf64uy1wwh5" path="res://Scenes/SlimeKingBoss/SlimeKingBoss.tscn" id="4_6iyac"]
 [ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="4_okkmp"]
-[ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="5_aeiip"]
 [ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
 [ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="6_n4050"]
+[ext_resource type="Texture2D" uid="uid://omxayiqvc38d" path="res://Art/UI/HUD/Green_Slime_Icon.png" id="7_rsn7s"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="8_5gtdi"]
+[ext_resource type="Texture2D" uid="uid://l7rls728sayn" path="res://Art/UI/HUD/Green_Skeleton_Icon.png" id="9_bekp2"]
 [ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="9_l0lmb"]
+[ext_resource type="Texture2D" uid="uid://b18rpodwxs57e" path="res://Art/UI/HUD/Green_Ghost_Icon.png" id="11_ebtrm"]
+[ext_resource type="PackedScene" uid="uid://civu54w3ol0r4" path="res://Scenes/ally_slime.tscn" id="14_f4pr4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agtqk"]
 texture = ExtResource("1_pq2s6")
@@ -291,6 +294,7 @@ texture = ExtResource("1_pq2s6")
 1:7/0 = 0
 2:7/0 = 0
 3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:7/0 = 0
 5:7/0 = 0
 6:7/0 = 0
@@ -363,7 +367,9 @@ texture = ExtResource("1_pq2s6")
 0:9/0 = 0
 1:9/0 = 0
 2:9/0 = 0
+2:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4.875, -5.0113, -5.0113, -4.875, 8, -8, 8)
 3:9/0 = 0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(5.23403, 8, 5.23403, -4.67722, -8, -5.0113, -8, -8, 8, -8, 8, 8)
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
@@ -375,7 +381,9 @@ texture = ExtResource("1_pq2s6")
 13:9/0 = 0
 14:9/0 = 0
 15:9/0 = 0
+15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4.875, -5.0113, -5.0113, -4.875, 8, -8, 8)
 16:9/0 = 0
+16:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(5.23403, 8, 5.23403, -4.67722, -8, -5.0113, -8, -8, 8, -8, 8, 8)
 17:9/0 = 0
 18:9/0 = 0
 19:9/0 = 0
@@ -396,7 +404,9 @@ texture = ExtResource("1_pq2s6")
 0:10/0 = 0
 1:10/0 = 0
 2:10/0 = 0
+2:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -5.03968, -8, -4.88219, 5.03968, 8, 4.88219, 8, 8, -8, 8)
 3:10/0 = 0
+3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 4.89994, 4.56586, 4.89994, 5.34539, -8, 8, -8, 8, 8, -8, 8)
 4:10/0 = 0
 5:10/0 = 0
 6:10/0 = 0
@@ -409,7 +419,9 @@ texture = ExtResource("1_pq2s6")
 13:10/0 = 0
 14:10/0 = 0
 15:10/0 = 0
+15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -5.03968, -8, -4.88219, 5.03968, 8, 4.88219, 8, 8, -8, 8)
 16:10/0 = 0
+16:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 4.89994, 4.56586, 4.89994, 5.34539, -8, 8, -8, 8, 8, -8, 8)
 17:10/0 = 0
 18:10/0 = 0
 19:10/0 = 0
@@ -495,9 +507,13 @@ texture = ExtResource("1_pq2s6")
 36:12/0 = 0
 37:12/0 = 0
 0:13/0 = 0
+0:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, 5, -4.625, -8, 4.625, -8, 4.14387, -6.31604, 3.875, -5.375, 8, -6, 8, 5)
 1:13/0 = 0
+1:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.625, 8, -4.625, -4.625, 8, -5, 8, 1.875, 4.625, 1.875, 4.625, 8)
 2:13/0 = 0
+2:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.125, -8, -5.125, 8, -5, 8, 1.875)
 3:13/0 = 0
+3:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.86136, 8, -4.86136, 2.2981, -8, 2.375, -8, -5.125, 4.25, -4.875, 4.23177, 8)
 4:13/0 = 0
 5:13/0 = 0
 6:13/0 = 0
@@ -529,8 +545,10 @@ texture = ExtResource("1_pq2s6")
 36:13/0 = 0
 0:14/0 = 0
 1:14/0 = 0
+1:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.625, 8, -4.625, -8, 4.625, -8, 4.25, 8)
 2:14/0 = 0
 3:14/0 = 0
+3:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.12652, 8, -4.94975, -8, 4.24264, -8, 4.23177, 8)
 4:14/0 = 0
 5:14/0 = 0
 6:14/0 = 0
@@ -563,8 +581,11 @@ texture = ExtResource("1_pq2s6")
 36:14/0 = 0
 0:15/0 = 0
 1:15/0 = 0
+1:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, 5, -4.625, -8, 4.625, -8, 4.875, -5.375, 8, -5.25, 8, 5)
 2:15/0 = 0
+2:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.25, -8, -6, 8, -5.625, 8, 5)
 3:15/0 = 0
+3:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.25, -8, -5.74524, -4.94975, -5.83363, -4.94975, -8, 4.24264, -8, 4.25, 5.25)
 4:15/0 = 0
 5:15/0 = 0
 6:15/0 = 0
@@ -1089,6 +1110,7 @@ texture = ExtResource("1_pq2s6")
 1:35/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8v1aj"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_agtqk")
 
 [node name="Main" type="Node2D"]
@@ -1121,9 +1143,8 @@ tile_set = SubResource("TileSet_8v1aj")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="SlimeKingBoss" parent="Enemies" instance=ExtResource("4_6iyac")]
-position = Vector2(-1, -86)
 
-[node name="Skeleton" parent="Enemies" instance=ExtResource("3_7fy2b")]
+[node name="SlimeEnemy" parent="Enemies" instance=ExtResource("3_nnliv")]
 
 [node name="DashSmoke" parent="." instance=ExtResource("3_36x2x")]
 visible = false
@@ -1144,16 +1165,13 @@ scale = Vector2(3, 3)
 
 [node name="Q-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
-position = Vector2(19, 26)
+position = Vector2(21.6667, 26.6667)
 texture = ExtResource("4_okkmp")
 
-[node name="Slime-blue" type="Sprite2D" parent="CanvasLayer/HUD/Q-summon"]
-visible = false
-texture_filter = 1
-position = Vector2(0.199999, -1.2)
-texture = ExtResource("5_aeiip")
-region_enabled = true
-region_rect = Rect2(0, 10.249, 15.5191, 12.2631)
+[node name="Slime" type="Sprite2D" parent="CanvasLayer/HUD/Q-summon"]
+position = Vector2(-0.333333, -3.33333)
+scale = Vector2(1.17708, 1.29427)
+texture = ExtResource("7_rsn7s")
 
 [node name="E-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
@@ -1161,10 +1179,9 @@ position = Vector2(52, 44)
 texture = ExtResource("5_mipw0")
 
 [node name="SkeletonHead" type="Sprite2D" parent="CanvasLayer/HUD/E-summon"]
-visible = false
-position = Vector2(-1, -1.66666)
-scale = Vector2(0.0335498, 0.0466666)
-texture = ExtResource("9_l0lmb")
+position = Vector2(-1.66667, -2.66667)
+scale = Vector2(0.901042, 0.848958)
+texture = ExtResource("9_bekp2")
 
 [node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
@@ -1172,10 +1189,10 @@ position = Vector2(25, 65)
 texture = ExtResource("6_n4050")
 
 [node name="GhostHead" type="Sprite2D" parent="CanvasLayer/HUD/R-summon"]
-visible = false
-position = Vector2(1.00003, -0.999985)
-scale = Vector2(0.0378788, 0.0493333)
-texture = ExtResource("9_l0lmb")
+texture_filter = 1
+position = Vector2(0.333334, 0.666669)
+scale = Vector2(1.52344, 1.28385)
+texture = ExtResource("11_ebtrm")
 
 [node name="NewSummonLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -1239,5 +1256,8 @@ scale = Vector2(11.1494, 0.283584)
 texture = ExtResource("9_l0lmb")
 
 [node name="Summons" type="Node2D" parent="."]
+
+[node name="SlimeEnemy" parent="Summons" instance=ExtResource("14_f4pr4")]
+position = Vector2(-50, 52)
 
 [connection signal="animation_finished" from="DashSmoke" to="Player" method="_on_dash_smoke_animation_finished"]

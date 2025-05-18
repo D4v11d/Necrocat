@@ -4,6 +4,7 @@ class_name Boss extends CharacterBody2D
 @export var attack_damage := 50
 @export var speed := 40
 @export var special_speed := 800
+@export var knockback := 150.0
 
 var hp := MAX_HP
 
@@ -37,7 +38,7 @@ func _ready() -> void:
 func attack_received(from_position: Vector2, damage: float) -> void:
 	if hp > 0:
 		var knockback_direction = (position - from_position).normalized()
-		velocity = knockback_direction * 150.0 # parametrize knockback or change by enemy
+		velocity = knockback_direction * knockback
 		is_knocked_back = true
 		knockback_timer.start()
 		hit_flash_anim_player.play("hit_flash")

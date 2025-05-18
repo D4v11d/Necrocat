@@ -1,16 +1,16 @@
 [gd_scene load_steps=35 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" uid="uid://d0su67l7gq85m" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="4_xy8nd"]
 [ext_resource type="Texture2D" uid="uid://ccvhh08kjmuea" path="res://Art/Mobs/test-slime/SlimeSpirit.png" id="5_4t6ok"]
 [ext_resource type="Texture2D" uid="uid://xd5uwa23lwdy" path="res://Art/Mobs/test-slime/slime-death.png" id="5_kstit"]
-[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="6_vqilo"]
+[ext_resource type="Script" uid="uid://615ln7khhy8g" path="res://scripts/mob_follow.gd" id="6_vqilo"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy/hitflash_animation_player.tscn" id="8_b5mvh"]
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy/damage_numbers_origin.tscn" id="9_xh71l"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy/hurtbox.tscn" id="10_vngdl"]
-[ext_resource type="Script" path="res://scripts/slime_jumping.gd" id="11_r23qg"]
+[ext_resource type="Script" uid="uid://bqyh2c1fqib1q" path="res://scripts/slime_jumping.gd" id="11_r23qg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true

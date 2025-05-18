@@ -1,8 +1,9 @@
 class_name Mob extends CharacterBody2D
 
-@export var MAX_HP := 100
-@export var attack_damage := 20
-@export var speed := 40
+@export var MAX_HP := 100.0
+@export var attack_damage := 20.0
+@export var speed := 40.0
+@export var knockback := 150.0
 
 var hp := MAX_HP
 
@@ -12,8 +13,6 @@ var is_emerging := false
 var is_dying := false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var chase_area: Area2D = $ChaseArea
-@onready var attack_area: Area2D = $AttackArea
 @onready var knockback_timer: Timer = $KnockbackTimer
 @onready var player: Player = $"../../Player"
 @onready var hit_flash_anim_player = $HitflashAnimationPlayer
@@ -35,8 +34,8 @@ func _ready() -> void:
 
 func attack_received(from_position: Vector2, damage: float) -> void:
 	if hp > 0:
-		var knockback_direction = (position - from_position).normalized()
-		velocity = knockback_direction * 150.0 # parametrize knockback or change by enemy
+		var knockback_direction = (global_position - from_position).normalized()
+		velocity = knockback_direction * knockback
 		is_knocked_back = true
 		knockback_timer.start()
 		hit_flash_anim_player.play("hit_flash")

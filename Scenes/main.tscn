@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=21 format=4 uid="uid://b6sq0n76eins7"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
+[ext_resource type="PackedScene" uid="uid://rlyagkq3bbrw" path="res://Scenes/ghost.tscn" id="2_jfp40"]
 [ext_resource type="PackedScene" uid="uid://oyb85fvkqynr" path="res://Scenes/skeleton.tscn" id="3_7fy2b"]
 [ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="3_36x2x"]
 [ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="3_nnliv"]
@@ -1091,6 +1092,87 @@ texture = ExtResource("1_pq2s6")
 [sub_resource type="TileSet" id="TileSet_8v1aj"]
 sources/0 = SubResource("TileSetAtlasSource_agtqk")
 
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_iojun"]
+parameter_name = "tint"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_d5syg"]
+parameter_name = "enabled"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_k5f18"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ghuuw"]
+input_name = "color"
+
+[sub_resource type="VisualShader" id="VisualShader_4qcvl"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool enabled = false;
+uniform vec4 tint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+
+void fragment() {
+// BooleanParameter:3
+	bool n_out3p0 = enabled;
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = tint;
+
+
+// Input:5
+	vec4 n_out5p0 = COLOR;
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 1.00000;
+	float n_in4p2 = 0.00001;
+	if(abs((n_out3p0 ? 1.0 : 0.0) - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out2p0.xyz);
+	}
+	else if((n_out3p0 ? 1.0 : 0.0) < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+
+}
+"
+graph_offset = Vector2(-93.9813, 392.578)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(660, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_iojun")
+nodes/fragment/2/position = Vector2(40, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_d5syg")
+nodes/fragment/3/position = Vector2(-100, 440)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_k5f18")
+nodes/fragment/4/position = Vector2(400, 460)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_ghuuw")
+nodes/fragment/5/position = Vector2(-100, 700)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 3, 4, 0, 0, 0, 5, 0, 4, 5, 5, 0, 4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ewq14"]
+resource_local_to_scene = true
+shader = SubResource("VisualShader_4qcvl")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
 [node name="Main" type="Node2D"]
 
 [node name="Map" type="Node2D" parent="."]
@@ -1102,25 +1184,22 @@ tile_set = SubResource("TileSet_8v1aj")
 
 [node name="Summons" type="Node2D" parent="."]
 
-[node name="SlimeEnemy" parent="Summons" instance=ExtResource("3_nnliv")]
-position = Vector2(-92, 6)
-is_ally = true
-
-[node name="SlimeEnemy2" parent="Summons" instance=ExtResource("3_nnliv")]
-position = Vector2(-51, 20)
-is_ally = true
-
-[node name="SlimeEnemy3" parent="Summons" instance=ExtResource("3_nnliv")]
-position = Vector2(-89, 27)
-is_ally = true
-
-[node name="SlimeEnemy4" parent="Summons" instance=ExtResource("3_nnliv")]
-position = Vector2(-54, -7)
-is_ally = true
-
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="Ghost" parent="Enemies" instance=ExtResource("2_jfp40")]
+material = SubResource("ShaderMaterial_ewq14")
+is_recruitable = true
+
 [node name="Skeleton" parent="Enemies" instance=ExtResource("3_7fy2b")]
+position = Vector2(-11, -96)
+is_recruitable = true
+
+[node name="Skeleton2" parent="Enemies" instance=ExtResource("3_7fy2b")]
+position = Vector2(-118, 65)
+
+[node name="SlimeEnemy" parent="Enemies" instance=ExtResource("3_nnliv")]
+position = Vector2(-159, 5)
+is_recruitable = true
 
 [node name="DashSmoke" parent="." instance=ExtResource("3_36x2x")]
 visible = false
@@ -1157,10 +1236,22 @@ texture_filter = 1
 position = Vector2(52, 44)
 texture = ExtResource("5_mipw0")
 
+[node name="SkeletonHead" type="Sprite2D" parent="CanvasLayer/HUD/E-summon"]
+visible = false
+position = Vector2(-1, -1.66666)
+scale = Vector2(0.0335498, 0.0466666)
+texture = ExtResource("9_l0lmb")
+
 [node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(25, 65)
 texture = ExtResource("6_n4050")
+
+[node name="GhostHead" type="Sprite2D" parent="CanvasLayer/HUD/R-summon"]
+visible = false
+position = Vector2(1.00003, -0.999985)
+scale = Vector2(0.0378788, 0.0493333)
+texture = ExtResource("9_l0lmb")
 
 [node name="NewSummonLabel" type="Label" parent="CanvasLayer"]
 visible = false

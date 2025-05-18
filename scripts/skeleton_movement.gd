@@ -19,16 +19,16 @@ func _physics_process(delta: float) -> void:
 
 	# 2. If we are still in the emerge phase, show animation once and wait.
 	if not has_emerged:
-		_play_emerge_once()
+		_play_emerge()
 		return
 
 	# 3. Past this point the mob is alive, free to move & chase.
-	if mob.hp > 0:
+	if mob.hp > 0 and not mob.is_dying:
 		chase_area.handle_chasing_targets(delta)
 
 	_handle_walk_or_idle_animation()
 
-func _play_emerge_once() -> void:
+func _play_emerge() -> void:
 	if not mob.is_emerging:
 		mob.is_emerging = true
 		mob.animated_sprite.play("emerge")
@@ -48,17 +48,17 @@ func _handle_walk_or_idle_animation() -> void:
 		var dir := vel.normalized()
 
 		# side vs up/down
-		if abs(dir.x) > abs(dir.y):
-			last_direction = Vector2.RIGHT if dir.x > 0 else Vector2.LEFT
-			mob.animated_sprite.play("walk_side")
-			mob.animated_sprite.flip_h = dir.x < 0
-		else:
+		if abs(dir.y) >= abs(dir.x):
 			if dir.y < 0:
 				last_direction = Vector2.UP
 				mob.animated_sprite.play("walk_back")
 			else:
 				last_direction = Vector2.DOWN
 				mob.animated_sprite.play("walk_front")
+		else:
+			last_direction = Vector2.RIGHT if dir.x > 0 else Vector2.LEFT
+			mob.animated_sprite.play("walk_side")
+			mob.animated_sprite.flip_h = dir.x < 0
 	else:
 		# idle
 		match last_direction:

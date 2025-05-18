@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://cbbhdm4pnu0dl"]
+
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_opmgf"]
+[ext_resource type="Texture2D" uid="uid://cfhdysn64mfy0" path="res://Art/Mobs/GreenGhost/green-fireball.png" id="2_cphac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnu6p"]
+atlas = ExtResource("2_cphac")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bhvq"]
+atlas = ExtResource("2_cphac")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xgbb"]
+atlas = ExtResource("2_cphac")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0rqm"]
+atlas = ExtResource("2_cphac")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nrsg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnu6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bhvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xgbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0rqm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2ucm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_813lw"]
+radius = 4.0
+
+[node name="Fireball" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_opmgf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7nrsg")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0463691
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k2ucm")
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_813lw")
+debug_color = Color(0.884997, 0.309767, 0.321453, 0.42)

@@ -62,9 +62,27 @@ func handle_jump(delta: float) -> void:
 	mob.position.y -= jump_offset
 
 	# End jump
+	end_jump()
+
+func end_jump():
 	if jump_progress >= JUMP_DURATION:
 		jump_progress = JUMP_COOLDOWN
 		mob.position.y = jump_target_position.y
+
+		# Avoids getting stuck in collision after jumping
+		var params := PhysicsPointQueryParameters2D.new()
+		params.position        = mob.position
+		params.collision_mask  = mob.collision_mask
+		params.exclude         = [mob]
+
+		var space_state := get_world_2d().direct_space_state
+		var collisions  := space_state.intersect_point(params, 4)   # up to 4 hits
+
+		for hit in collisions:
+			if hit.collider is Mob and hit.collider != mob:
+				mob.position += Vector2(4, 0)   # shift 4 px on X
+				break
+				
 		mob.set_collision_layer_value(1, true)
 
 func _on_attack_area_body_entered(body: Node2D) -> void:

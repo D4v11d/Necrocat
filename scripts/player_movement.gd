@@ -1,7 +1,9 @@
 class_name Player extends CharacterBody2D
 
-# Set from inspector
+# Summons
 @export var slime_summon: PackedScene 
+@export var skeleton_summon: PackedScene
+@export var ghost_summon: PackedScene
 
 # Animations
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -28,6 +30,8 @@ class_name Player extends CharacterBody2D
 
 # Canvas Layer objects
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime-blue"
+@onready var skeleton_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/E-summon/SkeletonHead"
+@onready var ghost_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/R-summon/GhostHead"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
 
 const ATTACK_POWER = 20.0
@@ -45,7 +49,12 @@ var is_moving := false
 var is_attacking := false
 
 var can_arise_mob := false
-var Q_summon_enabled := true # should be an array for Q, E and R
+
+# start these in false
+var Q_summon_enabled := true
+var R_summon_enabled := true
+var F_summon_enabled := true
+
 var is_casting_spell := false
 
 var is_knocked_back := false

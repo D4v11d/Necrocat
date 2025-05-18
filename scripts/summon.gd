@@ -7,6 +7,12 @@ class_name Summon extends Node2D
 var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []
 
+const SUMMONS := {
+	"summon_Q": {"enabled_flag": "Q_summon_enabled", "scene": "slime_summon"},
+	"summon_R": {"enabled_flag": "R_summon_enabled", "scene": "skeleton_summon"},
+	"summon_F": {"enabled_flag": "F_summon_enabled", "scene": "ghost_summon"},
+}
+
 signal delete_mob # called after arising
 
 func _physics_process(_delta: float) -> void:
@@ -14,28 +20,50 @@ func _physics_process(_delta: float) -> void:
 	
 	clear_all_summons()
 
-
 func summon_ally() -> void:
-	if Input.is_key_pressed(KEY_Q) and can_summon and player.Q_summon_enabled:
-		if player.slime_summon != null:
-			var new_ally = player.slime_summon.instantiate()
-			summoned_allies_list.append(new_ally)
-			
-			can_summon = false
-			summon_cooldown.start()
-			if new_ally:
-				new_ally.is_ally = true
-				
-				
-				
-				new_ally.position = player.position + calculate_summon_position()
-				
-				# Spawn inside Summons node
-				var summons_node = get_tree().current_scene.get_node("Summons")
-				if summons_node:
-					summons_node.add_child(new_ally)
-				else:
-					push_warning("Summons node not found!")
+	if not can_summon:
+		return
+
+	for action in SUMMONS.keys():
+		if Input.is_action_just_pressed(action):
+			var data = SUMMONS[action]
+
+			# Is that particular summon enabled on the player?
+			if not player.get(data.enabled_flag):
+				return
+
+			var packed: PackedScene = player.get(data.scene)
+			if packed == null:
+				return
+
+			var ally: Mob = packed.instantiate()
+			_process_new_ally(ally)       # shared follow‑up
+			break                         # stop after we handled one tap
+
+
+const MAX_SUMMONS := 10
+
+func _process_new_ally(ally: Node2D) -> void:
+	# ‑‑‑ enforce the limit ‑‑‑
+	if summoned_allies_list.size() >= MAX_SUMMONS:
+		var summon = summoned_allies_list.pop_front()
+		if is_instance_valid(summon):
+			summon.is_dying = true
+			summon.handle_death()
+
+	# ‑‑‑ normal spawn flow ‑‑‑
+	summoned_allies_list.append(ally)
+	can_summon = false
+	summon_cooldown.start()
+
+	ally.is_ally = true
+	ally.position = player.position + calculate_summon_position()
+
+	var summons_node := get_tree().current_scene.get_node("Summons")
+	if summons_node:
+		summons_node.add_child(ally)
+	else:
+		push_warning("Summons node not found!")
 
 func calculate_summon_position() -> Vector2:
 	var spawn_offset = get_spawn_position_offset()
@@ -68,18 +96,40 @@ func _on_summon_cooldown_timeout() -> void:
 func clear_all_summons() -> void:
 	if Input.is_action_pressed("delete_summons"):
 		for summon in summoned_allies_list:
+			summon.is_dying = true
 			summoned_allies_list.erase(summon)
-			summon.queue_free()
+			summon.handle_death()
+
+# Which summon to unlock next, in order
+const ARISE_ORDER := [
+	{ "flag": "Q_summon_enabled", "sprite": "slime_summon_sprite" },
+	{ "flag": "R_summon_enabled", "sprite": "skeleton_summon_sprite" },
+	{ "flag": "F_summon_enabled", "sprite": "ghost_summon_sprite" },
+]
 
 func handle_arise_mob() -> void:
-	if Input.is_action_just_pressed("arise"):
-		play_cast_animation()
-		casting_timer.start()
-		player.is_casting_spell = true
-		player.Q_summon_enabled = true
-		player.slime_summon_sprite.visible = true
-		emit_signal("delete_mob")
-		player.e_key_animation.visible = false
+	if not Input.is_action_just_pressed("arise"):
+		return
+
+	_unlock_next_summon()
+	_after_arise()  # shared follow‑up
+
+
+func _unlock_next_summon() -> void:
+	for data in ARISE_ORDER:
+		if not player.get(data.flag):
+			# enable this summon and reveal its sprite
+			player.set(data.flag, true)
+			player.get(data.sprite).visible = true
+			return             # stop after the first disabled one
+
+
+func _after_arise() -> void:
+	play_cast_animation()
+	casting_timer.start()
+	player.is_casting_spell = true
+	emit_signal("delete_mob")
+	player.e_key_animation.visible = false
 
 func play_cast_animation() -> void:
 	if player.last_direction == Vector2.UP:

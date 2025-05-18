@@ -1,7 +1,7 @@
 [gd_scene load_steps=76 format=3 uid="uid://oyb85fvkqynr"]
 
 [ext_resource type="Texture2D" uid="uid://brfkouqpspvs7" path="res://Art/Mobs/Skeleton/skel-death.png" id="1_2tf5s"]
-[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_2y41n"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_2y41n"]
 [ext_resource type="Texture2D" uid="uid://b8rxfac27i2jl" path="res://Art/Mobs/Skeleton/skel-emerge.png" id="2_1h3xo"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_kq67c"]
 [ext_resource type="Texture2D" uid="uid://b2b686qf8d1i0" path="res://Art/Mobs/Skeleton/skel-idle-back.png" id="3_jxe2l"]
@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://ckamhj2neq28q" path="res://Art/Mobs/Skeleton/skel-run-front.png" id="8_m5f8l"]
 [ext_resource type="Texture2D" uid="uid://p6u7vcm41gjw" path="res://Art/Mobs/Skeleton/skel-run-side.png" id="9_m3oek"]
 [ext_resource type="Script" path="res://scripts/mob_follow.gd" id="10_43kt5"]
-[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy/hurtbox.tscn" id="13_42d2q"]
-[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy/hitflash_animation_player.tscn" id="13_ib6us"]
+[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="13_42d2q"]
+[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="13_ib6us"]
 [ext_resource type="Script" path="res://scripts/skeleton_movement.gd" id="16_jf5iu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jtu33"]
@@ -378,7 +378,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"spirit",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -509,17 +509,15 @@ radius = 30.0
 
 [node name="Skeleton" type="CharacterBody2D"]
 script = ExtResource("1_2y41n")
-MAX_HP = 150
-attack_damage = 30
-speed = 80
-is_recruitable = true
+attack_damage = 30.0
+speed = 80.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_jtu33")
 sprite_frames = SubResource("SpriteFrames_l1w28")
-animation = &"idle_side"
-autoplay = "idle_front"
+animation = &"emerge"
+autoplay = "emerge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -543,8 +541,6 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_bjy6j")
 debug_color = Color(0.884472, 0.304921, 0.355866, 0.42)
 
-[node name="AttackArea" type="Area2D" parent="."]
-
 [node name="AriseArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AriseArea"]
@@ -559,8 +555,6 @@ position = Vector2(0, -4)
 wait_time = 0.1
 one_shot = true
 
-[node name="HitflashAnimationPlayer" parent="." instance=ExtResource("13_ib6us")]
-
 [node name="DeathTimer" type="Timer" parent="."]
 
 [node name="SkeletonMovement" type="Node2D" parent="."]
@@ -569,6 +563,11 @@ script = ExtResource("16_jf5iu")
 [node name="EmergeTimer" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
+
+[node name="HitflashAnimationPlayer" parent="." instance=ExtResource("13_ib6us")]
+
+[node name="AttackArea" type="Area2D" parent="."]
+visible = false
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]

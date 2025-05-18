@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfuocx05ru83w"]
+
+[ext_resource type="Texture2D" uid="uid://cefkfb4vkxnuw" path="res://Art/Mobs/Ghost/fireball.png" id="1_b4wkl"]
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_tnc05"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp1jo"]
+atlas = ExtResource("1_b4wkl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yygpc"]
+atlas = ExtResource("1_b4wkl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ryy3"]
+atlas = ExtResource("1_b4wkl")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iycc3"]
+atlas = ExtResource("1_b4wkl")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nrsg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp1jo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yygpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ryy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iycc3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2ucm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_813lw"]
+radius = 4.0
+
+[node name="Fireball" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_tnc05")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7nrsg")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.935704
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k2ucm")
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -1.33333)
+shape = SubResource("CircleShape2D_813lw")
+debug_color = Color(0.884997, 0.309767, 0.321453, 0.42)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

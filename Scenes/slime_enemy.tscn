@@ -1,15 +1,15 @@
 [gd_scene load_steps=35 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_1ubh8"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_1ubh8"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="1_gbwud"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="4_xy8nd"]
 [ext_resource type="Texture2D" uid="uid://ccvhh08kjmuea" path="res://Art/Mobs/test-slime/SlimeSpirit.png" id="5_4t6ok"]
 [ext_resource type="Texture2D" uid="uid://xd5uwa23lwdy" path="res://Art/Mobs/test-slime/slime-death.png" id="5_kstit"]
-[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="6_vqilo"]
-[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy/hitflash_animation_player.tscn" id="8_b5mvh"]
-[ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy/damage_numbers_origin.tscn" id="9_xh71l"]
-[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy/hurtbox.tscn" id="10_vngdl"]
+[ext_resource type="PackedScene" uid="uid://brnl0n4nwe6es" path="res://Scenes/enemy_common/chase_area.tscn" id="7_fkhub"]
+[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="8_b5mvh"]
+[ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="9_xh71l"]
+[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="10_vngdl"]
 [ext_resource type="Script" path="res://scripts/slime_jumping.gd" id="11_r23qg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
@@ -166,8 +166,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ywmc"]
 radius = 4.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a7b7j"]
-radius = 82.0549
+[sub_resource type="CircleShape2D" id="CircleShape2D_vuiq4"]
+radius = 94.0213
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vopo4"]
 radius = 38.0526
@@ -192,11 +192,10 @@ autoplay = "idle"
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_4ywmc")
 
-[node name="ChaseArea" type="Area2D" parent="."]
-script = ExtResource("6_vqilo")
+[node name="ChaseArea" parent="." instance=ExtResource("7_fkhub")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
-shape = SubResource("CircleShape2D_a7b7j")
+shape = SubResource("CircleShape2D_vuiq4")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
@@ -230,7 +229,5 @@ debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
 [node name="Jumping" type="Node2D" parent="."]
 script = ExtResource("11_r23qg")
 
-[connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
-[connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="Jumping" method="_on_attack_area_body_entered"]
 [connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]

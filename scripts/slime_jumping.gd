@@ -13,12 +13,19 @@ var jump_target_position: Vector2
 var jump_direction: Vector2
 var jump_distance: float
 
+var has_emerged = false
+
 @onready var chase_area: MobFollow = $"../ChaseArea"
 @onready var mob: Mob = $".."
+@onready var emerge_timer: Timer = $"../EmergeTimer"
 
 func _physics_process(delta: float) -> void:
 	if mob.is_knocked_back:
 		mob.move_and_collide(mob.velocity * delta)
+		return
+	
+	if mob.is_ally and not has_emerged:
+		_play_emerge()
 		return
 		
 	if jump_progress < 0:
@@ -34,8 +41,19 @@ func _physics_process(delta: float) -> void:
 	if jump_progress > 0:
 		handle_jump(delta)
 	else:
-		if mob.hp > 0:
+		if mob.hp > 0 and not mob.is_dying:
 			chase_area.handle_chasing_targets(delta)
+
+func _play_emerge() -> void:
+	if not mob.is_emerging:
+		mob.is_emerging = true
+		mob.animated_sprite.play("emerge")
+		emerge_timer.start()          # length = same as “emerge” anim
+	# While the timer runs we just keep returning from _physics_process
+
+func _on_emerge_timer_timeout() -> void:
+	mob.is_emerging = false
+	has_emerged     = true
 
 func start_jump(target_position: Vector2) -> void:	
 	jump_progress = 0.001  # Start jump

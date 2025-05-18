@@ -14,6 +14,7 @@ class_name Player extends CharacterBody2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var vertical_hitbox: Area2D = $VerticalAttackHitbox
 @onready var horizontal_hitbox: Area2D = $HorizontalAttackHitbox
+@onready var hurtbox: PlayerHurtbox = $HurtBox
 
 # Funcionality:
 @onready var summon_component: Summon = $Summon
@@ -179,6 +180,8 @@ func _on_attack_timer_timeout() -> void:
 	play_idle_animation()
 	
 func _on_hurt_box_damage_taken(amount: Variant, source: Node2D) -> void:
+	hurtbox.hp -= amount
+	hurtbox.healthbar._set_health(hurtbox.hp)
 	DamageNumbers.display_text(str(amount), damage_numbers_origin.global_position, "#F00")
 	damage_animation_player.play("damage_cooldown")
 	

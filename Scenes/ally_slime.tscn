@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://civu54w3ol0r4"]
+[gd_scene load_steps=74 format=3 uid="uid://civu54w3ol0r4"]
 
 [ext_resource type="Script" path="res://scripts/mob.gd" id="1_sct8u"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_8uokx"]
@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://clpeugwsymifa" path="res://Art/Mobs/GreenSlime/green-slime-idle.png" id="5_n62f2"]
 [ext_resource type="Texture2D" uid="uid://3hwy0k07rrng" path="res://Art/Mobs/Slime/slime-spirit.png" id="6_e7kt1"]
 [ext_resource type="PackedScene" uid="uid://brnl0n4nwe6es" path="res://Scenes/enemy_common/chase_area.tscn" id="7_atma5"]
+[ext_resource type="Texture2D" uid="uid://bfvd2e2dle31o" path="res://Art/Mobs/GreenSlime/green-slime-run-back.png" id="7_yroea"]
+[ext_resource type="Texture2D" uid="uid://wencrkdsbead" path="res://Art/Mobs/GreenSlime/green-slime-run-front.png" id="8_8ufbm"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="8_wke3s"]
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="9_g7i3o"]
+[ext_resource type="Texture2D" uid="uid://b518enk8n627a" path="res://Art/Mobs/GreenSlime/green-slime-run-right.png" id="9_r48kg"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="10_a6wr8"]
 [ext_resource type="Script" path="res://scripts/slime_jumping.gd" id="11_c7sr5"]
 
@@ -127,6 +130,78 @@ region = Rect2(96, 0, 32, 32)
 atlas = ExtResource("5_n62f2")
 region = Rect2(128, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6efp6"]
+atlas = ExtResource("7_yroea")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei6nc"]
+atlas = ExtResource("7_yroea")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot7r1"]
+atlas = ExtResource("7_yroea")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqfgn"]
+atlas = ExtResource("7_yroea")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hgax"]
+atlas = ExtResource("7_yroea")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el1v7"]
+atlas = ExtResource("7_yroea")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nv4u"]
+atlas = ExtResource("8_8ufbm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtbgs"]
+atlas = ExtResource("8_8ufbm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhiqs"]
+atlas = ExtResource("8_8ufbm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijj3v"]
+atlas = ExtResource("8_8ufbm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt8tf"]
+atlas = ExtResource("8_8ufbm")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bwdx"]
+atlas = ExtResource("8_8ufbm")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4djmp"]
+atlas = ExtResource("9_r48kg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l65c"]
+atlas = ExtResource("9_r48kg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v07xq"]
+atlas = ExtResource("9_r48kg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34man"]
+atlas = ExtResource("9_r48kg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qrjb"]
+atlas = ExtResource("9_r48kg")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4ng5"]
+atlas = ExtResource("9_r48kg")
+region = Rect2(160, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvwap"]
 atlas = ExtResource("6_e7kt1")
 region = Rect2(0, 0, 32, 32)
@@ -240,7 +315,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"emerge",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -260,6 +335,75 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6efp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei6nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot7r1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqfgn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hgax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el1v7")
+}],
+"loop": true,
+"name": &"move_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nv4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtbgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhiqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijj3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt8tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bwdx")
+}],
+"loop": true,
+"name": &"move_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4djmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l65c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v07xq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34man")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qrjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4ng5")
+}],
+"loop": true,
+"name": &"move_side",
 "speed": 5.0
 }, {
 "frames": [{
@@ -302,6 +446,8 @@ radius = 24.1868
 radius = 6.0
 
 [node name="AllySlime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_sct8u")
 is_ally = true
 
@@ -309,12 +455,11 @@ is_ally = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_ltp7a")
 sprite_frames = SubResource("SpriteFrames_hto71")
-animation = &"attack"
+animation = &"move_side"
 autoplay = "idle"
-frame_progress = 0.868881
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_4ywmc")
 
 [node name="ChaseArea" parent="." instance=ExtResource("7_atma5")]
@@ -354,5 +499,9 @@ debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
 [node name="Jumping" type="Node2D" parent="."]
 script = ExtResource("11_c7sr5")
 
+[node name="EmergeTimer" type="Timer" parent="."]
+wait_time = 0.4
+
 [connection signal="body_entered" from="AttackArea" to="Jumping" method="_on_attack_area_body_entered"]
 [connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]
+[connection signal="timeout" from="EmergeTimer" to="Jumping" method="_on_emerge_timer_timeout"]

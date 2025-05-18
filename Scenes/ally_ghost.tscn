@@ -397,18 +397,21 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yg148"]
-radius = 4.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpl7f"]
+radius = 6.0
+height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1y0t7"]
-radius = 6.0
-height = 22.0
+radius = 8.0
+height = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bjca"]
 radius = 28.0
 
 [node name="AllyGhost" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_atpsr")
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("2_eq8px")
 speed = 30.0
 is_ally = true
@@ -417,17 +420,19 @@ is_ally = true
 texture_filter = 1
 scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_4fc8a")
-animation = &"emerge"
+animation = &"idle_front"
 autoplay = "emerge"
 
+[node name="Marker2D" type="Marker2D" parent="AnimatedSprite2D"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("CircleShape2D_yg148")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_vpl7f")
 
 [node name="Hurtbox" parent="." instance=ExtResource("8_klssn")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 6)
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_1y0t7")
 debug_color = Color(0.89651, 0.294343, 0.312939, 0.42)
 

@@ -56,4 +56,3 @@ func _play_emerge() -> void:
 func _on_emerge_timer_timeout() -> void:
 	mob.is_emerging = false
 	has_emerged     = true
-	has_emerged = true

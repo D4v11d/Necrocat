@@ -72,9 +72,6 @@ func _fire_fireball(target: Node2D) -> void:
 	var dir = (target.global_position - fireball.global_position).normalized()
 	fireball.velocity = dir * fireball_speed
 
-	# Add to scene
-	get_parent().add_child(fireball)
-
 	# Auto‑delete timer
 	var del_timer := Timer.new()
 	del_timer.wait_time = fireball_lifetime

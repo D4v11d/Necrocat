@@ -397,6 +397,7 @@ radius = 24.1868
 radius = 6.0
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_1ubh8")
@@ -405,7 +406,7 @@ script = ExtResource("1_1ubh8")
 texture_filter = 1
 material = SubResource("ShaderMaterial_ltp7a")
 sprite_frames = SubResource("SpriteFrames_hto71")
-animation = &"move_back"
+animation = &"move_side"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -448,6 +449,8 @@ debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
 
 [node name="Jumping" type="Node2D" parent="."]
 script = ExtResource("11_r23qg")
+
+[node name="EmergeTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="AttackArea" to="Jumping" method="_on_attack_area_body_entered"]
 [connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]

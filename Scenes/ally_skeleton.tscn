@@ -323,11 +323,6 @@ animations = [{
 "name": &"idle_side",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
-"name": &"spirit",
-"speed": 6.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_85wyn")
@@ -348,7 +343,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_pgy2w")
 }],
 "loop": true,
-"name": &"walk_back",
+"name": &"move_back",
 "speed": 8.0
 }, {
 "frames": [{
@@ -371,7 +366,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_aygeb")
 }],
 "loop": true,
-"name": &"walk_front",
+"name": &"move_front",
 "speed": 8.0
 }, {
 "frames": [{
@@ -394,8 +389,13 @@ animations = [{
 "texture": SubResource("AtlasTexture_o3w12")
 }],
 "loop": true,
-"name": &"walk_side",
+"name": &"move_side",
 "speed": 8.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"spirit",
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gdgq5"]
@@ -467,7 +467,7 @@ is_ally = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_jtu33")
 sprite_frames = SubResource("SpriteFrames_l1w28")
-animation = &"emerge"
+animation = &"move_side"
 autoplay = "emerge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

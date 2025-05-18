@@ -51,13 +51,13 @@ func _handle_walk_or_idle_animation() -> void:
 		if abs(dir.y) >= abs(dir.x):
 			if dir.y < 0:
 				last_direction = Vector2.UP
-				mob.animated_sprite.play("walk_back")
+				mob.animated_sprite.play("move_back")
 			else:
 				last_direction = Vector2.DOWN
-				mob.animated_sprite.play("walk_front")
+				mob.animated_sprite.play("move_front")
 		else:
 			last_direction = Vector2.RIGHT if dir.x > 0 else Vector2.LEFT
-			mob.animated_sprite.play("walk_side")
+			mob.animated_sprite.play("move_side")
 			mob.animated_sprite.flip_h = dir.x < 0
 	else:
 		# idle

@@ -921,7 +921,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 6
+collision_mask = 2
 script = ExtResource("1_bnl8f")
 slime_summon = ExtResource("2_0cqgt")
 skeleton_summon = ExtResource("3_bo6vi")

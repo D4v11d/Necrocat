@@ -330,6 +330,7 @@ visible = false
 [node name="FireballShooting" type="Node2D" parent="."]
 script = ExtResource("8_wb4s8")
 fireball_scene = ExtResource("10_qug56")
+shoot_range = 300.0
 
 [node name="HitflashAnimationPlayer" parent="." instance=ExtResource("10_shl08")]
 

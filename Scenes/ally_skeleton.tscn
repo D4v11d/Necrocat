@@ -456,6 +456,8 @@ height = 26.0
 radius = 30.0
 
 [node name="AllySkeleton" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_5534f")
 attack_damage = 30.0
 speed = 80.0

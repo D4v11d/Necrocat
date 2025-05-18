@@ -1,4 +1,4 @@
-extends Area2D
+class_name PlayerHurtbox extends Area2D
 
 signal damage_taken(amount, source)  # Define your custom signal
 
@@ -42,9 +42,6 @@ func _on_DamageCooldown_timeout():
 	$DamageCooldown.start(damage_cooldown)
 	
 func take_damage(enemy):
-	hp -= enemy.attack_damage
-	print("HP: ", hp, "/", MAX_HP)
-	healthbar._set_health(hp)
 	emit_signal("damage_taken", enemy.attack_damage, enemy)
 
 func _on_body_entered(body: Node2D) -> void:

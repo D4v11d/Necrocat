@@ -44,7 +44,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_813lw"]
 radius = 4.0
 
-[node name="Fireball" type="CharacterBody2D"]
+[node name="GreenFireball" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_opmgf")
 
@@ -53,7 +53,7 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7nrsg")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.278563
+frame_progress = 0.100016
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_k2ucm")
@@ -65,3 +65,5 @@ disabled = true
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_813lw")
 debug_color = Color(0.884997, 0.309767, 0.321453, 0.42)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

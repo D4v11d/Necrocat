@@ -490,7 +490,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_vq43c")
 }],
 "loop": true,
-"name": &"move_right",
+"name": &"move_side",
 "speed": 5.0
 }, {
 "frames": [{
@@ -518,6 +518,8 @@ animations = [{
 }]
 
 [node name="SlimeKingBoss" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_rb686")
 knockback = 50.0
 
@@ -572,11 +574,10 @@ visible = false
 script = ExtResource("11_pm3xo")
 
 [node name="SpecialAttackTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="ChargingTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -620,7 +621,7 @@ material = SubResource("ShaderMaterial_wfusc")
 position = Vector2(1, 15)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_5i07i")
-animation = &"move_right"
+animation = &"move_side"
 autoplay = "idle"
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]

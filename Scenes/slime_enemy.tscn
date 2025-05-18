@@ -397,18 +397,19 @@ radius = 24.1868
 radius = 6.0
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_1ubh8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_ltp7a")
 sprite_frames = SubResource("SpriteFrames_hto71")
-animation = &"move_side"
+animation = &"move_back"
 autoplay = "idle"
-frame_progress = 0.930943
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_4ywmc")
 
 [node name="ChaseArea" parent="." instance=ExtResource("7_fkhub")]

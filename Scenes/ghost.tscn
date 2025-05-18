@@ -270,18 +270,20 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yg148"]
-radius = 4.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_enkji"]
+radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1y0t7"]
-radius = 6.0
-height = 22.0
+radius = 8.0
+height = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bjca"]
 radius = 28.0
 
 [node name="Ghost" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_atpsr")
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_x86yn")
 speed = 30.0
 
@@ -292,14 +294,16 @@ sprite_frames = SubResource("SpriteFrames_4fc8a")
 animation = &"idle_back"
 autoplay = "idle_front"
 
+[node name="Marker2D" type="Marker2D" parent="AnimatedSprite2D"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("CircleShape2D_yg148")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_enkji")
 
 [node name="Hurtbox" parent="." instance=ExtResource("7_u5u27")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 6)
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_1y0t7")
 debug_color = Color(0.89651, 0.294343, 0.312939, 0.42)
 

@@ -15,6 +15,7 @@ var can_take_damage := true
 func _ready() -> void:
 	set_collision_mask_value(2, false)
 	hp = mob.MAX_HP
+	healthbar.max_value = mob.MAX_HP
 	healthbar.call_deferred("init_health", hp)
 
 func add_attacker(body: Node2D):
@@ -32,11 +33,7 @@ func remove_attacker(body: Node2D):
 func take_damage(enemy):
 	if enemy == mob:
 		return  # Don't damage yourself
-	#hp -= enemy.attack_damage
-	#if hp > 0:
-		#healthbar._set_health(hp)
-		#print(healthbar.health)
-	print("Boss HP: ", hp, "/", mob.MAX_HP)
+
 	emit_signal("damage_taken", enemy.attack_damage, enemy)
 
 func _on_body_entered(body: Node2D) -> void:

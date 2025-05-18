@@ -10,8 +10,12 @@ var damage_cooldown := DAMAGE_COOLDOWN  # seconds between damage ticks
 var enemies_in_hurtbox := []
 var can_take_damage := true
 
+@onready var healthbar: HealthBar = $"../CanvasLayer/Healthbar"
+
 func _ready() -> void:
 	set_collision_mask_value(2, false)
+	healthbar.max_value = MAX_HP
+	healthbar.call_deferred("init_health", hp)
 
 func add_attacker(body: Node2D):
 	if can_take_damage:
@@ -40,6 +44,7 @@ func _on_DamageCooldown_timeout():
 func take_damage(enemy):
 	hp -= enemy.attack_damage
 	print("HP: ", hp, "/", MAX_HP)
+	healthbar._set_health(hp)
 	emit_signal("damage_taken", enemy.attack_damage, enemy)
 
 func _on_body_entered(body: Node2D) -> void:

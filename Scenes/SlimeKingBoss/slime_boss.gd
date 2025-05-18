@@ -42,8 +42,8 @@ func attack_received(from_position: Vector2, damage: float) -> void:
 		knockback_timer.start()
 		hit_flash_anim_player.play("hit_flash")
 	
-	hp -= damage
-	healthbar._set_health(hp) 
+		hp -= damage
+		healthbar._set_health(hp) 
 	
 	if hp <= 0:
 		handle_death()
@@ -65,3 +65,5 @@ func _on_hurtbox_damage_taken(amount: Variant, source: Variant) -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "death":
 		queue_free()
+		if healthbar:
+			healthbar.queue_free()

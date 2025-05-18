@@ -165,11 +165,11 @@ func play_idle_animation() -> void:
 
 # there's no friendly fire to or from summons
 func _on_vertical_attack_hitbox_body_entered(body: Node2D) -> void:
-	if body is Mob and not body.is_ally and vertical_hitbox.visible:
+	if (body is Mob or body is Boss) and not body.is_ally and vertical_hitbox.visible:
 		body.attack_received(global_position, ATTACK_POWER)
 
 func _on_horizontal_attack_hitbox_body_entered(body: Node2D) -> void:
-	if body is Mob and not body.is_ally and horizontal_hitbox.visible:
+	if (body is Mob or body is Boss) and not body.is_ally and horizontal_hitbox.visible:
 		body.attack_received(global_position, ATTACK_POWER)
 
 func _on_attack_timer_timeout() -> void:

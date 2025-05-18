@@ -1,6 +1,6 @@
 class_name Boss extends CharacterBody2D
 
-@export var MAX_HP := 300
+@export var MAX_HP := 1000
 @export var attack_damage := 50
 @export var speed := 40
 @export var special_speed := 800
@@ -21,6 +21,7 @@ var last_target_position: Vector2
 @onready var hit_flash_anim_player = $HitflashAnimationPlayer
 @onready var damage_numbers_origin = $DamageNumbersOrigin
 @onready var arise_area: Area2D = $AriseArea
+@onready var healthbar: HealthBar = $CanvasLayer/Healthbar
 
 @export var is_ally := false
 @export var is_recruitable := false
@@ -42,6 +43,8 @@ func attack_received(from_position: Vector2, damage: float) -> void:
 		hit_flash_anim_player.play("hit_flash")
 	
 	hp -= damage
+	healthbar._set_health(hp) 
+	
 	if hp <= 0:
 		handle_death()
 	DamageNumbers.display_text(str(damage), damage_numbers_origin.global_position)

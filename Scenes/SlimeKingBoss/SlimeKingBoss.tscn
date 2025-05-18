@@ -1,17 +1,18 @@
-[gd_scene load_steps=31 format=3 uid="uid://djjf64uy1wwh5"]
+[gd_scene load_steps=32 format=3 uid="uid://djjf64uy1wwh5"]
 
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="1_i7mka"]
-[ext_resource type="Script" uid="uid://ceax025bx2qoq" path="res://Scenes/SlimeKingBoss/slime_boss.gd" id="1_rb686"]
+[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/slime_boss.gd" id="1_rb686"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="2_rb686"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="3_pm3xo"]
 [ext_resource type="Texture2D" uid="uid://xd5uwa23lwdy" path="res://Art/Mobs/test-slime/slime-death.png" id="4_fjmkv"]
-[ext_resource type="Script" uid="uid://catk67hu6tvbl" path="res://Scenes/SlimeKingBoss/boss_follow.gd" id="5_i7mka"]
-[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy/hitflash_animation_player.tscn" id="6_1o4jx"]
-[ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy/damage_numbers_origin.tscn" id="7_fxidt"]
-[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy/hurtbox.tscn" id="8_4f8qf"]
-[ext_resource type="Script" uid="uid://dt1txnawjw1a7" path="res://Scenes/SlimeKingBoss/boss_hurtbox.gd" id="10_pm3xo"]
-[ext_resource type="Script" uid="uid://j324fgbu7lfg" path="res://Scenes/SlimeKingBoss/boss_jumping.gd" id="11_pm3xo"]
+[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/boss_follow.gd" id="5_i7mka"]
+[ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="6_1o4jx"]
+[ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="7_fxidt"]
+[ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="8_4f8qf"]
+[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/boss_hurtbox.gd" id="10_pm3xo"]
+[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/boss_jumping.gd" id="11_pm3xo"]
 [ext_resource type="PackedScene" uid="uid://b2lamxk4smu3f" path="res://Scenes/Healthbar/healthbar.tscn" id="12_fjmkv"]
+[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="13_kojxx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cce5e"]
 resource_local_to_scene = true
@@ -140,8 +141,9 @@ radius = 283.002
 [sub_resource type="CircleShape2D" id="CircleShape2D_qjnde"]
 radius = 50.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2b54r"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_opsed"]
+radius = 29.0
+height = 58.0
 
 [node name="SlimeKingBoss" type="CharacterBody2D"]
 script = ExtResource("1_rb686")
@@ -184,12 +186,11 @@ one_shot = true
 visible = false
 
 [node name="Hurtbox" parent="." instance=ExtResource("8_4f8qf")]
-visible = false
 script = ExtResource("10_pm3xo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 6)
-shape = SubResource("CircleShape2D_2b54r")
+position = Vector2(0, 20)
+shape = SubResource("CapsuleShape2D_opsed")
 debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
 
 [node name="Jumping" type="Node2D" parent="."]
@@ -212,21 +213,35 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -34.0
-offset_right = 120.0
-offset_bottom = -30.0
+offset_left = -222.0
+offset_top = -47.0
+offset_right = 232.0
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0
+max_value = 1000.0
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 461.0
-offset_top = 585.0
-offset_right = 546.0
-offset_bottom = 610.0
-text = "King Slime"
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -92.0
+offset_right = 43.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("13_kojxx")
+theme_override_font_sizes/font_size = 64
+text = "Slime King"
+
+[node name="AriseArea" type="Area2D" parent="."]
+visible = false
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
+[connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]
 [connection signal="timeout" from="SpecialAttackTimer" to="ChaseArea" method="_on_special_attack_timer_timeout"]
 [connection signal="timeout" from="ChargingTimer" to="ChaseArea" method="_on_charging_timer_timeout"]

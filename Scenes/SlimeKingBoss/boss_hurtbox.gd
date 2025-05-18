@@ -32,9 +32,10 @@ func remove_attacker(body: Node2D):
 func take_damage(enemy):
 	if enemy == mob:
 		return  # Don't damage yourself
-	hp -= enemy.attack_damage
-	healthbar.health = hp
-	print(healthbar.health)
+	#hp -= enemy.attack_damage
+	#if hp > 0:
+		#healthbar._set_health(hp)
+		#print(healthbar.health)
 	print("Boss HP: ", hp, "/", mob.MAX_HP)
 	emit_signal("damage_taken", enemy.attack_damage, enemy)
 

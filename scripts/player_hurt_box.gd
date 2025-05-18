@@ -3,7 +3,7 @@ extends Area2D
 signal damage_taken(amount, source)  # Define your custom signal
 
 const MAX_HP:= 200
-const DAMAGE_COOLDOWN:= 1.0
+const DAMAGE_COOLDOWN:= 0.5
 var hp:= MAX_HP
 
 var damage_cooldown := DAMAGE_COOLDOWN  # seconds between damage ticks

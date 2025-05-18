@@ -1,4 +1,4 @@
-extends ProgressBar
+class_name HealthBar extends ProgressBar
 
 @onready var timer = $Timer
 @onready var damage_bar = $DamageBar

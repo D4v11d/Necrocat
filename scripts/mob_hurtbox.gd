@@ -30,15 +30,14 @@ func remove_attacker(body: Node2D):
 func take_damage(enemy):
 	if enemy == mob:
 		return  # Don't damage yourself
-	hp -= enemy.attack_damage
-	print("Mob HP: ", hp, "/", mob.MAX_HP)
+
 	emit_signal("damage_taken", enemy.attack_damage, enemy)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == self:
 		return
 		
-	if body is Mob:
+	if body is Mob or body is Boss:
 		if body.hp > 0 and ((body.is_ally and not mob.is_ally) or (not body.is_ally and mob.is_ally)):
 			add_attacker(body)
 

@@ -3,7 +3,7 @@ class_name Boss extends CharacterBody2D
 @export var MAX_HP := 1000
 @export var attack_damage := 50
 @export var speed := 40
-@export var special_speed := 800
+@export var special_dash_speed := 800
 @export var knockback := 150.0
 
 var hp := MAX_HP
@@ -11,7 +11,7 @@ var hp := MAX_HP
 var is_knocked_back := false
 var is_dying := false
 var is_charging := false
-var is_specialing := false
+var special_attack := "none"
 var last_target_position: Vector2
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D

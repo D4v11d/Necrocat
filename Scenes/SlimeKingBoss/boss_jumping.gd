@@ -2,7 +2,7 @@ class_name BossJumping extends Node2D
 
 const JUMP_COOLDOWN := -1.5
 #const JUMP_DISTANCE := 30.0  # Distance to target when jump occurs
-const JUMP_HEIGHT := 20.0    # How high the jump goes
+const JUMP_HEIGHT := 40.0    # How high the jump goes
 const JUMP_DURATION := 0.4    # How long the jump takes (seconds)
 
 var jump_progress := 0.0      # Tracks current jump state
@@ -13,8 +13,13 @@ var jump_target_position: Vector2
 var jump_direction: Vector2
 var jump_distance: float
 
+const SPECIAL_JUMP_MAX := 3
+var special_jump_count := SPECIAL_JUMP_MAX
+
 @onready var chase_area: BossFollow = $"../ChaseArea"
 @onready var mob: Boss = $".."
+@onready var special_attack_timer: Timer = $"../SpecialAttackTimer"
+@onready var special_jump_timer: Timer = $"../SpecialJumpTimer"
 
 func _physics_process(delta: float) -> void:
 	if mob.is_charging:
@@ -69,6 +74,15 @@ func handle_jump(delta: float) -> void:
 		jump_progress = JUMP_COOLDOWN
 		mob.position.y = jump_target_position.y
 		mob.set_collision_layer_value(1, true)
+		
+		special_jump_count -= 1
+		if special_jump_count == 0:
+			mob.special_attack = "none"
+			special_attack_timer.start()
+			special_jump_count = SPECIAL_JUMP_MAX
+		else:
+			special_jump_timer.start()
+		
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	var target = chase_area.current_target

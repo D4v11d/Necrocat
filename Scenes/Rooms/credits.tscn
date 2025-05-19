@@ -42,6 +42,7 @@ text = "Programming:"
 
 [node name="Programmers" type="Label" parent="Node2D/Programming by"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 19.0
 offset_top = 25.0
 offset_right = 316.0
@@ -64,6 +65,7 @@ text = "Art:
 
 [node name="Felipe" type="Label" parent="Node2D/Art By"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 24.0
 offset_top = 31.0
 offset_right = 321.0

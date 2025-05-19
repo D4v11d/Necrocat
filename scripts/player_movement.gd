@@ -31,8 +31,8 @@ class_name Player extends CharacterBody2D
 
 # Canvas Layer objects
 @onready var slime_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/Q-summon/Slime"
-@onready var skeleton_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/E-summon/SkeletonHead"
-@onready var ghost_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/R-summon/GhostHead"
+@onready var skeleton_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/R-summon/SkeletonHead"
+@onready var ghost_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/F-summon/GhostHead"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
 
 #Player MP
@@ -61,9 +61,9 @@ var is_attacking := false
 var can_arise_mob := false
 
 # start these in false
-var Q_summon_enabled := true
-var R_summon_enabled := true
-var F_summon_enabled := true
+var Q_summon_enabled := false
+var R_summon_enabled := false
+var F_summon_enabled := false
 
 var is_casting_spell := false
 

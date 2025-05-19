@@ -22,28 +22,31 @@ position = Vector2(21.6667, 26.6667)
 texture = ExtResource("1_6bs72")
 
 [node name="Slime" type="Sprite2D" parent="HUD/Q-summon"]
+visible = false
 position = Vector2(-0.333333, -3.33333)
 scale = Vector2(1.17708, 1.29427)
 texture = ExtResource("2_eey4g")
 
-[node name="E-summon" type="Sprite2D" parent="HUD"]
+[node name="R-summon" type="Sprite2D" parent="HUD"]
 texture_filter = 1
-position = Vector2(52, 44)
-texture = ExtResource("3_ed84s")
+position = Vector2(52.3333, 46.6667)
+texture = ExtResource("5_y4mgj")
 
-[node name="SkeletonHead" type="Sprite2D" parent="HUD/E-summon"]
-position = Vector2(-1.66667, -2.66667)
+[node name="SkeletonHead" type="Sprite2D" parent="HUD/R-summon"]
+visible = false
+position = Vector2(1, -1)
 scale = Vector2(0.901042, 0.848958)
 texture = ExtResource("4_je0hh")
 
-[node name="R-summon" type="Sprite2D" parent="HUD"]
+[node name="F-summon" type="Sprite2D" parent="HUD"]
 texture_filter = 1
-position = Vector2(25, 65)
-texture = ExtResource("5_y4mgj")
+position = Vector2(30.6667, 69.6667)
+texture = ExtResource("3_ed84s")
 
-[node name="GhostHead" type="Sprite2D" parent="HUD/R-summon"]
+[node name="GhostHead" type="Sprite2D" parent="HUD/F-summon"]
+visible = false
 texture_filter = 1
-position = Vector2(0.333334, 0.666669)
+position = Vector2(-2, -0.666672)
 scale = Vector2(1.52344, 1.28385)
 texture = ExtResource("6_d6s8e")
 

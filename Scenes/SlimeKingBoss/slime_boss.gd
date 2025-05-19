@@ -37,7 +37,6 @@ func _ready() -> void:
 	
 	# Connect signals automatically
 	knockback_timer.timeout.connect(_on_knockback_timer_timeout)
-	death_timer.timeout.connect(_on_death_timer_timeout)
 
 func attack_received(source: Variant, damage: float) -> void:
 		

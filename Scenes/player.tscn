@@ -1,13 +1,13 @@
-[gd_scene load_steps=143 format=3 uid="uid://ljn1arg6ompw"]
+[gd_scene load_steps=146 format=3 uid="uid://ljn1arg6ompw"]
 
-[ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_bnl8f"]
+[ext_resource type="Script" uid="uid://b8aeteh3n0qih" path="res://scripts/player_movement.gd" id="1_bnl8f"]
 [ext_resource type="PackedScene" uid="uid://civu54w3ol0r4" path="res://Scenes/ally_slime.tscn" id="2_0cqgt"]
 [ext_resource type="Texture2D" uid="uid://jvoxpdxxtsum" path="res://Art/UI/Keys/E.png" id="2_1il5t"]
 [ext_resource type="Texture2D" uid="uid://dxgep23lfi4i" path="res://Art/Characters/cat_idle_back.png" id="3_8sjai"]
 [ext_resource type="PackedScene" uid="uid://cukgkt777fmtf" path="res://Scenes/ally_skeleton.tscn" id="3_bo6vi"]
 [ext_resource type="Texture2D" uid="uid://cjrxqrulwpxq7" path="res://Art/Characters/cat_idle_front.png" id="3_ppoih"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="3_pym4b"]
-[ext_resource type="Script" path="res://scripts/summon.gd" id="3_srn2t"]
+[ext_resource type="Script" uid="uid://dgar4w41re2eh" path="res://scripts/summon.gd" id="3_srn2t"]
 [ext_resource type="Texture2D" uid="uid://c6sirvg57tign" path="res://Art/Characters/cat_attack_back.png" id="4_cibhi"]
 [ext_resource type="PackedScene" uid="uid://dl662n6m7d6na" path="res://Scenes/ally_ghost.tscn" id="4_fwqpu"]
 [ext_resource type="Texture2D" uid="uid://cmd0fbbmp47eu" path="res://Art/Characters/cat_attack_front.png" id="5_3ykmt"]
@@ -20,8 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://bmsfj0qbosf4e" path="res://Art/Characters/cat_cast_front.png" id="9_lcmex"]
 [ext_resource type="Texture2D" uid="uid://ckonytssvioat" path="res://Art/Characters/Cat_Shadow.png" id="10_c7ibx"]
 [ext_resource type="Texture2D" uid="uid://nwk0jpg77i4b" path="res://Art/Characters/cat_cast_side.png" id="10_sk6l2"]
-[ext_resource type="Script" path="res://scripts/player_hurt_box.gd" id="12_7dp3o"]
+[ext_resource type="Script" uid="uid://cajm6fwk2ik5q" path="res://scripts/player_hurt_box.gd" id="12_7dp3o"]
 [ext_resource type="PackedScene" uid="uid://b2lamxk4smu3f" path="res://Scenes/Healthbar/healthbar.tscn" id="22_6vdd1"]
+[ext_resource type="AudioStream" uid="uid://vgafrl2q80dk" path="res://sound/arise.wav" id="23_bi64h"]
+[ext_resource type="AudioStream" uid="uid://cue6i44xuhdrk" path="res://sound/sword-swing.wav" id="24_2ijsl"]
+[ext_resource type="AudioStream" uid="uid://bo4jo8xibe61i" path="res://sound/dash.wav" id="25_p1odr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ju7s"]
 atlas = ExtResource("2_1il5t")
@@ -916,8 +919,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h4iuc"]
 _data = {
-"RESET": SubResource("Animation_7dp3o"),
-"damage_cooldown": SubResource("Animation_ukyrk")
+&"RESET": SubResource("Animation_7dp3o"),
+&"damage_cooldown": SubResource("Animation_ukyrk")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -996,7 +999,7 @@ position = Vector2(0, -16)
 
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_h4iuc")
+&"": SubResource("AnimationLibrary_h4iuc")
 }
 
 [node name="Timers" type="Node2D" parent="."]
@@ -1038,6 +1041,17 @@ max_value = 200.0
 tint_under = Color(0.699719, 0.78378, 1, 1)
 tint_over = Color(0.156503, 0.163225, 1, 1)
 tint_progress = Color(0.156863, 0.164706, 1, 1)
+
+[node name="SoundEffects" type="Node2D" parent="."]
+
+[node name="AriseStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("23_bi64h")
+
+[node name="SwordStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("24_2ijsl")
+
+[node name="DashStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("25_p1odr")
 
 [connection signal="body_entered" from="VerticalAttackHitbox" to="." method="_on_vertical_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="HorizontalAttackHitbox" to="." method="_on_horizontal_attack_hitbox_body_entered"]

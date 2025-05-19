@@ -1,16 +1,16 @@
-[gd_scene load_steps=85 format=3 uid="uid://djjf64uy1wwh5"]
+[gd_scene load_steps=88 format=3 uid="uid://djjf64uy1wwh5"]
 
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="1_i7mka"]
-[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/slime_boss.gd" id="1_rb686"]
+[ext_resource type="Script" uid="uid://ceax025bx2qoq" path="res://Scenes/SlimeKingBoss/slime_boss.gd" id="1_rb686"]
 [ext_resource type="Texture2D" uid="uid://cimvymvaqct7p" path="res://Art/Mobs/test-slime/slime-blue.png" id="2_rb686"]
 [ext_resource type="Texture2D" uid="uid://bldu00w55v5rq" path="res://Art/Mobs/test-slime/DeadSlimeStatic.png" id="3_pm3xo"]
 [ext_resource type="Texture2D" uid="uid://xd5uwa23lwdy" path="res://Art/Mobs/test-slime/slime-death.png" id="4_fjmkv"]
-[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/boss_follow.gd" id="5_i7mka"]
+[ext_resource type="Script" uid="uid://catk67hu6tvbl" path="res://Scenes/SlimeKingBoss/boss_follow.gd" id="5_i7mka"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="6_1o4jx"]
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="7_fxidt"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="8_4f8qf"]
-[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/boss_hurtbox.gd" id="10_pm3xo"]
-[ext_resource type="Script" path="res://Scenes/SlimeKingBoss/boss_jumping.gd" id="11_pm3xo"]
+[ext_resource type="Script" uid="uid://dt1txnawjw1a7" path="res://Scenes/SlimeKingBoss/boss_hurtbox.gd" id="10_pm3xo"]
+[ext_resource type="Script" uid="uid://j324fgbu7lfg" path="res://Scenes/SlimeKingBoss/boss_jumping.gd" id="11_pm3xo"]
 [ext_resource type="PackedScene" uid="uid://b2lamxk4smu3f" path="res://Scenes/Healthbar/healthbar.tscn" id="12_fjmkv"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="13_kojxx"]
 [ext_resource type="Texture2D" uid="uid://daa51fvrsjvfo" path="res://Art/Mobs/Slime/slime-attack.png" id="14_3oqo6"]
@@ -20,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://7atw6prrolah" path="res://Art/Mobs/Slime/slime-run-back.png" id="17_vromo"]
 [ext_resource type="Texture2D" uid="uid://dol3j2c68eayy" path="res://Art/Mobs/Slime/slime-run-front.png" id="18_nvplu"]
 [ext_resource type="Texture2D" uid="uid://by5aam0ctpyw7" path="res://Art/Mobs/Slime/slime-run-right.png" id="19_bdcnd"]
+[ext_resource type="AudioStream" uid="uid://bcmtxxyssfmla" path="res://sound/slime_hit.wav" id="21_o7nou"]
+[ext_resource type="AudioStream" uid="uid://dip6lmsinmecb" path="res://sound/slime-king-drop.wav" id="22_qjnde"]
+[ext_resource type="AudioStream" uid="uid://ccw5sygyfveo6" path="res://sound/slime-king-dash.wav" id="23_5kwxn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cce5e"]
 resource_local_to_scene = true
@@ -614,9 +617,6 @@ theme_override_fonts/font = ExtResource("13_kojxx")
 theme_override_font_sizes/font_size = 64
 text = "Slime King"
 
-[node name="AriseArea" type="Area2D" parent="."]
-visible = false
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_wfusc")
@@ -630,12 +630,21 @@ autoplay = "idle"
 wait_time = 0.3
 one_shot = true
 
-[node name="DeathTimer" type="Timer" parent="."]
-wait_time = 0.1
+[node name="SoundEffects" type="Node2D" parent="."]
+
+[node name="HitStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("21_o7nou")
+
+[node name="DropStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("22_qjnde")
+
+[node name="DashStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("23_5kwxn")
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]
 [connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]
 [connection signal="timeout" from="SpecialAttackTimer" to="ChaseArea" method="_on_special_attack_timer_timeout"]
 [connection signal="timeout" from="ChargingTimer" to="ChaseArea" method="_on_charging_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="SpecialJumpTimer" to="ChaseArea" method="_on_special_jump_timer_timeout"]

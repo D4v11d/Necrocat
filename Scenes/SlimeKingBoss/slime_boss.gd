@@ -26,7 +26,7 @@ var last_target_position: Vector2
 @onready var damage_numbers_origin = $DamageNumbersOrigin
 @onready var arise_area: Area2D = $AriseArea
 @onready var healthbar: HealthBar = $CanvasLayer/Healthbar
-@onready var death_timer: Timer = $DeathTimer
+@onready var hit_stream_player: AudioStreamPlayer2D = $SoundEffects/HitStreamPlayer
 
 @export var is_ally := false
 @export var is_recruitable := false
@@ -49,12 +49,15 @@ func attack_received(source: Variant, damage: float) -> void:
 		hit_flash_anim_player.play("hit_flash")
 	
 		hp -= damage
-		healthbar._set_health(hp) 
+		healthbar._set_health(hp)
+		if source is Player:
+			hit_stream_player.play()
 	
 	if hp <= 0:
 		handle_death()
 		if source is Player:
 			source.increase_mp(mp_death_gain)
+			
 	DamageNumbers.display_text(str(damage), damage_numbers_origin.global_position)
 	
 

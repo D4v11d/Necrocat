@@ -950,7 +950,7 @@ texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_4s2oa")
 animation = &"idle_back"
-autoplay = "idle_front"
+autoplay = "idle_back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -985,6 +985,7 @@ shape = SubResource("CircleShape2D_6t5aa")
 debug_color = Color(0.816312, 0.386557, 0.342323, 0.42)
 
 [node name="DamageCooldown" type="Timer" parent="HurtBox"]
+one_shot = true
 
 [node name="CatShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.372549)
@@ -1029,12 +1030,14 @@ scale = Vector2(1, 0.839999)
 max_value = 200.0
 
 [node name="MPBar" parent="CanvasLayer" instance=ExtResource("22_6vdd1")]
+y_sort_enabled = true
 offset_left = 228.0
 offset_top = 122.0
 offset_right = 540.0
 offset_bottom = 142.0
 scale = Vector2(1, 0.839999)
-max_value = 200.0
+max_value = 150.0
+value = 150.0
 tint_under = Color(0.699719, 0.78378, 1, 1)
 tint_over = Color(0.156503, 0.163225, 1, 1)
 tint_progress = Color(0.156863, 0.164706, 1, 1)

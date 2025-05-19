@@ -73,7 +73,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body == self:
 		return
 
-	if body is Player or body is Mob:
+	if body is Player or body is Mob or body is Boss:
 		targets_in_chase_area.append(body)
 		if mob.is_ally:
 			if _is_enemy(body):
@@ -90,4 +90,4 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _is_enemy(body: Node2D) -> bool:
-	return body is Mob and not body.is_ally
+	return (body is Mob or body is Boss) and not body.is_ally

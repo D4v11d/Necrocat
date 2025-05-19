@@ -26,6 +26,7 @@ var last_target_position: Vector2
 @onready var damage_numbers_origin = $DamageNumbersOrigin
 @onready var arise_area: Area2D = $AriseArea
 @onready var healthbar: HealthBar = $CanvasLayer/Healthbar
+@onready var death_timer: Timer = $DeathTimer
 
 @export var is_ally := false
 @export var is_recruitable := false
@@ -36,11 +37,9 @@ func _ready() -> void:
 	
 	# Connect signals automatically
 	knockback_timer.timeout.connect(_on_knockback_timer_timeout)
-	animated_sprite.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
+	death_timer.timeout.connect(_on_death_timer_timeout)
 
 func attack_received(source: Variant, damage: float) -> void:
-	if is_dead:
-		return
 		
 	if hp > 0:
 		var knockback_direction = (position - source.position).normalized()
@@ -69,11 +68,10 @@ func handle_death() -> void:
 	animated_sprite.play("death")
 
 func _on_hurtbox_damage_taken(amount: Variant, source: Variant) -> void:
-	attack_received(source.position, amount)
+	attack_received(source, amount)
 	
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.animation == "death":
+func _on_death_timer_timeout() -> void:
 		queue_free()
 		if healthbar:
 			healthbar.queue_free()

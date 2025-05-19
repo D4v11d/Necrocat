@@ -29,8 +29,9 @@ func play_tween_animation(label: Label, y_offset := 24, duration := 0.4) -> void
 	await tween.finished
 
 func animate_label(label: Label, text: String, color: String = "#FFF"):
-	label.visible = true
-	label.text = text
-	label.z_index = 5
-	await play_tween_animation(label, 20, 2)
-	label.visible = false
+	if label:
+		label.visible = true
+		label.text = text
+		label.z_index = 5
+		await play_tween_animation(label, 20, 2)
+		label.visible = false

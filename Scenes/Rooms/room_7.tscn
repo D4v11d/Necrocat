@@ -1,20 +1,20 @@
-[gd_scene load_steps=21 format=4 uid="uid://b6sq0n76eins7"]
+[gd_scene load_steps=21 format=4 uid="uid://eow08mync7qq"]
 
-[ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_pq2s6"]
-[ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="2_gaflk"]
-[ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="3_36x2x"]
-[ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="4_okkmp"]
-[ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="5_mipw0"]
-[ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="6_n4050"]
-[ext_resource type="Texture2D" uid="uid://omxayiqvc38d" path="res://Art/UI/HUD/Green_Slime_Icon.png" id="7_rsn7s"]
-[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="8_5gtdi"]
-[ext_resource type="Texture2D" uid="uid://l7rls728sayn" path="res://Art/UI/HUD/Green_Skeleton_Icon.png" id="9_bekp2"]
-[ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="9_l0lmb"]
-[ext_resource type="Texture2D" uid="uid://b18rpodwxs57e" path="res://Art/UI/HUD/Green_Ghost_Icon.png" id="11_ebtrm"]
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="13_h6kc0"]
+[ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_a1mi7"]
+[ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="2_ald36"]
+[ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="3_vhxkb"]
+[ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="4_wd67u"]
+[ext_resource type="Texture2D" uid="uid://omxayiqvc38d" path="res://Art/UI/HUD/Green_Slime_Icon.png" id="5_gs76h"]
+[ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="6_5ww2c"]
+[ext_resource type="Texture2D" uid="uid://l7rls728sayn" path="res://Art/UI/HUD/Green_Skeleton_Icon.png" id="7_y3rdo"]
+[ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="8_brrjk"]
+[ext_resource type="Texture2D" uid="uid://b18rpodwxs57e" path="res://Art/UI/HUD/Green_Ghost_Icon.png" id="9_rsv6t"]
+[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="10_klj3f"]
+[ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="11_uc5o2"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="12_b166k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agtqk"]
-texture = ExtResource("1_pq2s6")
+texture = ExtResource("1_a1mi7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1112,7 +1112,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_agtqk")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3eoii"]
-texture = ExtResource("1_pq2s6")
+texture = ExtResource("1_a1mi7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2191,7 +2191,7 @@ texture = ExtResource("1_pq2s6")
 sources/0 = SubResource("TileSetAtlasSource_3eoii")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7el3"]
-texture = ExtResource("1_pq2s6")
+texture = ExtResource("1_a1mi7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -3291,19 +3291,18 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 8
 sources/0 = SubResource("TileSetAtlasSource_i7el3")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_armh5"]
-size = Vector2(50, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kvlm"]
+size = Vector2(50, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_727tt"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikwg0"]
+size = Vector2(51, 20)
 
-[node name="Main" type="Node2D"]
+[node name="Room7" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Map" type="Node2D" parent="."]
-y_sort_enabled = true
 
 [node name="Room0" type="Node2D" parent="Map"]
-y_sort_enabled = true
 
 [node name="Ground" type="TileMapLayer" parent="Map/Room0"]
 z_index = -1
@@ -3314,25 +3313,22 @@ tile_set = SubResource("TileSet_8v1aj")
 [node name="GroundDecor" type="TileMapLayer" parent="Map/Room0"]
 z_index = -1
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD2/wMAAAACAAwAAAD2/wIAAAACAAwAAAD2/wEAAAACAAwAAAD3/wAAAAACAAwAAAD4/wAAAAACAAwAAAD5/wAAAAACAAwAAAD6/wEAAAACAAwAAAD6/wIAAAACAAwAAAD6/wMAAAACAAwAAAD5/wQAAAACAAwAAAD4/wQAAAACAAwAAAD3/wQAAAACAAwAAADu/wEAAAADAAsAAADx//z/AAADAAsAAADs//f/AAADAAsAAAD+//b/AAADAAsAAAAFAPv/AAADAAsAAAACAAQAAAADAAsAAADy/wQAAAADAAwAAADr//3/AAADAAwAAADy//f/AAADAAwAAAAGAPb/AAACAAwAAAAFAAEAAAACAAwAAAAAAPv/AAADAAwAAADr/wQAAAAAAAgAAAAEAPj/AAABAAgAAAD+/wQAAAABAAgAAAD3//b/AAABAAQAAAD4//b/AAABAAQAAAD5//b/AAABAAQAAAD3//f/AAABAAQAAAD4//f/AAABAAQAAAD5//f/AAABAAQAAAD3//j/AAABAAQAAAD3//n/AAABAAQAAAD3//r/AAABAAQAAAD3//v/AAABAAQAAAD4//v/AAABAAQAAAD3//z/AAABAAQAAAD3//3/AAABAAQAAAD4//j/AAABAAQAAAD4//n/AAABAAQAAAD4//r/AAABAAQAAAD4//z/AAABAAQAAAD4//3/AAABAAQAAAD5//j/AAABAAQAAAD5//n/AAABAAQAAAD5//r/AAABAAQAAAD5//v/AAABAAQAAAD5//z/AAABAAQAAAD5//3/AAABAAQAAAD2//b/AAAAAAQAAAD2//f/AAAAAAQAAAD2//j/AAAAAAQAAAD2//n/AAAAAAQAAAD2//r/AAAAAAQAAAD2//v/AAAAAAQAAAD2//z/AAAAAAQAAAD2//3/AAAAAAQAAAD6//b/AAACAAQAAAD6//f/AAACAAQAAAD6//j/AAACAAQAAAD6//n/AAACAAQAAAD6//r/AAACAAQAAAD6//v/AAACAAQAAAD6//z/AAACAAQAAAD6//3/AAACAAQAAAD3//7/AAABAAUAAAD4//7/AAABAAUAAAD5//7/AAABAAUAAAD2//7/AAAAAAUAAAD6//7/AAACAAUAAAD3//X/AAABAAQAAAD4//X/AAABAAQAAAD5//X/AAABAAQAAAA=")
+tile_map_data = PackedByteArray("AADu/wEAAAADAAsAAADx//z/AAAAAAQAAADs//f/AAADAAsAAAD+//b/AAADAAsAAAAFAPv/AAADAAsAAAACAAQAAAADAAsAAADy/wQAAAADAAwAAADr//3/AAADAAwAAADy//f/AAADAAwAAAAGAPb/AAACAAwAAAAFAAEAAAACAAwAAAAAAPv/AAADAAwAAADr/wQAAAAAAAgAAAAEAPj/AAABAAgAAAD+/wQAAAABAAgAAAD3//b/AAABAAQAAAD4//b/AAABAAQAAAD5//b/AAABAAQAAAD3//f/AAABAAQAAAD4//f/AAABAAQAAAD5//f/AAABAAQAAAD3//j/AAABAAQAAAD3//n/AAABAAQAAAD3//r/AAABAAQAAAD3//v/AAABAAQAAAD4//v/AAABAAQAAAD3//z/AAABAAQAAAD3//3/AAABAAQAAAD4//j/AAABAAQAAAD4//n/AAABAAQAAAD4//r/AAABAAQAAAD4//z/AAABAAQAAAD4//3/AAABAAQAAAD5//j/AAABAAQAAAD5//n/AAABAAQAAAD5//r/AAABAAQAAAD5//v/AAABAAQAAAD5//z/AAABAAQAAAD5//3/AAABAAQAAAD2//b/AAAAAAQAAAD2//f/AAAAAAQAAAD2//j/AAABAAcAAAD2//n/AAABAAQAAAD2//r/AAABAAQAAAD2//v/AAABAAQAAAD2//z/AAABAAQAAAD2//3/AAABAAQAAAD6//b/AAACAAQAAAD6//f/AAACAAQAAAD6//j/AAAAAAcAAAD6//n/AAABAAQAAAD6//r/AAABAAQAAAD6//v/AAABAAQAAAD6//z/AAABAAQAAAD6//3/AAABAAQAAAD3//7/AAABAAQAAAD4//7/AAABAAQAAAD5//7/AAABAAQAAAD2//7/AAABAAQAAAD6//7/AAABAAQAAAD3//X/AAABAAQAAAD4//X/AAABAAQAAAD5//X/AAABAAQAAAD5////AAABAAQAAAD4////AAABAAQAAAD3////AAABAAQAAAD3/wAAAAABAAQAAAD4/wAAAAABAAQAAAD5/wAAAAABAAQAAAD5/wEAAAABAAQAAAD4/wEAAAABAAQAAAD3/wEAAAABAAQAAAD3/wIAAAABAAQAAAD4/wIAAAABAAQAAAD5/wIAAAABAAQAAAD5/wMAAAABAAQAAAD4/wMAAAABAAQAAAD3/wMAAAABAAQAAAD3/wQAAAABAAQAAAD4/wQAAAABAAQAAAD5/wQAAAABAAQAAAD1//n/AAABAAQAAAD0//n/AAABAAQAAADz//n/AAABAAQAAADy//n/AAABAAQAAADy//r/AAABAAQAAADy//v/AAABAAQAAADy//z/AAABAAQAAADy//3/AAABAAQAAADy//7/AAABAAQAAADy////AAABAAQAAADy/wAAAAABAAQAAADy/wEAAAABAAQAAADz/wEAAAABAAQAAAD0/wAAAAABAAQAAAD1/wAAAAABAAQAAAD2/wAAAAABAAQAAAD2/wEAAAABAAQAAAD1/wEAAAABAAQAAAD0/wEAAAABAAQAAAD1////AAABAAQAAAD1//7/AAABAAQAAAD1//3/AAABAAQAAAD2////AAABAAQAAADz/wAAAAABAAQAAADz////AAABAAQAAAD0////AAABAAQAAAD0//7/AAABAAQAAAD1//z/AAABAAQAAAD1//v/AAABAAQAAAD1//r/AAABAAQAAAD0//r/AAABAAQAAADz//r/AAABAAQAAADz//v/AAABAAQAAAD0//v/AAABAAQAAAD0//z/AAABAAQAAAD0//3/AAABAAQAAADz//7/AAABAAQAAADz//3/AAABAAQAAADz//z/AAABAAQAAAD7//n/AAABAAQAAAD8//n/AAABAAQAAAD9//n/AAABAAQAAAD9//r/AAABAAQAAAD9//v/AAABAAQAAAD9//z/AAABAAQAAAD9//3/AAABAAQAAAD9//7/AAABAAQAAAD9////AAABAAQAAAD9/wAAAAABAAQAAAD9/wEAAAABAAQAAAD8/wEAAAABAAQAAAD7/wEAAAABAAQAAAD6/wEAAAABAAQAAAD6/wAAAAABAAQAAAD7/wAAAAABAAQAAAD8/wAAAAABAAQAAAD8////AAABAAQAAAD8//7/AAABAAQAAAD8//3/AAABAAQAAAD8//z/AAABAAQAAAD8//v/AAABAAQAAAD8//r/AAABAAQAAAD7//r/AAABAAQAAAD7//v/AAABAAQAAAD7//z/AAABAAQAAAD7//3/AAABAAQAAAD7//7/AAABAAQAAAD7////AAABAAQAAAD6////AAABAAQAAAD+//n/AAABAAQAAAD+//r/AAABAAQAAAD+//v/AAABAAQAAAD+//z/AAABAAQAAAD+//3/AAABAAQAAAD+//7/AAABAAQAAAD+////AAABAAQAAAD+/wAAAAABAAQAAAD+/wEAAAABAAQAAAD2/wIAAAABAAYAAAD1/wIAAAABAAUAAAD0/wIAAAABAAUAAADz/wIAAAABAAUAAADy/wIAAAABAAUAAADx/wEAAAAAAAQAAADx/wAAAAAAAAQAAADx////AAAAAAQAAADx//7/AAAAAAQAAADx//3/AAAAAAQAAADx//v/AAAAAAQAAADx//r/AAAAAAQAAADx//n/AAAAAAQAAADy//j/AAABAAMAAADz//j/AAABAAMAAAD0//j/AAABAAMAAAD1//j/AAABAAMAAADx/wIAAAAAAAUAAADx//j/AAAAAAMAAAD7//j/AAABAAMAAAD8//j/AAABAAMAAAD9//j/AAABAAMAAAD+//j/AAABAAMAAAD///n/AAACAAQAAAD///r/AAACAAQAAAD///v/AAACAAQAAAD///z/AAACAAQAAAD///3/AAACAAQAAAD///7/AAACAAQAAAD/////AAACAAQAAAD//wAAAAACAAQAAAD//wEAAAACAAQAAAD6/wIAAAAAAAYAAAD7/wIAAAABAAUAAAD8/wIAAAABAAUAAAD9/wIAAAABAAUAAAD+/wIAAAABAAUAAAD//wIAAAACAAUAAAD///j/AAACAAMAAAD2/wMAAAAAAAQAAAD2/wQAAAAAAAQAAAD6/wMAAAACAAQAAAD6/wQAAAACAAQAAAA=")
 tile_set = SubResource("TileSet_rdxx7")
 
 [node name="Collisions" type="TileMapLayer" parent="Map/Room0"]
-y_sort_enabled = true
 texture_filter = 1
-tile_map_data = PackedByteArray("AADq//b/AAABAA4AAADq//f/AAABAA4AAADq//j/AAABAA4AAADq//n/AAABAA4AAADq//r/AAABAA4AAADq//v/AAABAA4AAADq//z/AAABAA4AAADq//3/AAABAA4AAADq//7/AAABAA4AAADq////AAABAA4AAADq/wAAAAABAA4AAADq/wEAAAABAA4AAADq/wIAAAABAA4AAADq/wMAAAABAA4AAADq/wQAAAABAA4AAADq/wUAAAABAA8AAADr/wUAAAACAA8AAADs/wUAAAACAA8AAADt/wUAAAACAA8AAADu/wUAAAACAA8AAADv/wUAAAACAA8AAADw/wUAAAACAA8AAADx/wUAAAACAA8AAADy/wUAAAACAA8AAADz/wUAAAACAA8AAAD0/wUAAAACAA8AAAD1/wUAAAACAA8AAAD2/wUAAAACAA8AAAD3/wUAAAACAA8AAAD4/wUAAAACAA8AAAD5/wUAAAACAA8AAAD6/wUAAAACAA8AAAD7/wUAAAACAA8AAAD8/wUAAAACAA8AAAD9/wUAAAACAA8AAAD+/wUAAAACAA8AAAD//wUAAAACAA8AAAAAAAUAAAACAA8AAAABAAUAAAACAA8AAAACAAUAAAACAA8AAAADAAUAAAACAA8AAAAEAAUAAAACAA8AAAAFAAUAAAACAA8AAAAGAAUAAAACAA8AAAAHAAUAAAADAA8AAAAHAPb/AAADAA4AAAAHAPf/AAADAA4AAAAHAPj/AAADAA4AAAAHAPn/AAADAA4AAAAHAPr/AAADAA4AAAAHAPv/AAADAA4AAAAHAPz/AAADAA4AAAAHAP3/AAADAA4AAAAHAP7/AAADAA4AAAAHAP//AAADAA4AAAAHAAAAAAADAA4AAAAHAAEAAAADAA4AAAAHAAIAAAADAA4AAAAHAAMAAAADAA4AAAAHAAQAAAADAA4AAAAHAPX/AAADAA0AAAD8//X/AAACAA0AAAD9//X/AAACAA0AAAD+//X/AAACAA0AAAD///X/AAACAA0AAAAAAPX/AAACAA0AAAABAPX/AAACAA0AAAACAPX/AAACAA0AAAADAPX/AAACAA0AAAAEAPX/AAACAA0AAAAFAPX/AAACAA0AAAAGAPX/AAACAA0AAADq//X/AAABAA0AAADr//X/AAACAA0AAADs//X/AAACAA0AAADt//X/AAACAA0AAADu//X/AAACAA0AAADv//X/AAACAA0AAADw//X/AAACAA0AAADx//X/AAACAA0AAADy//X/AAACAA0AAADz//X/AAACAA0AAAD0//X/AAACAA0AAAD1//X/AAACAA0AAAD2//X/AAABABAAAAD6//X/AAAAABAAAAD7//X/AAACAA0AAAA=")
+tile_map_data = PackedByteArray("AADq//b/AAABAA4AAADq//f/AAABAA4AAADq//j/AAABAA4AAADq//n/AAABAA4AAADq//r/AAABAA4AAADq//v/AAABAA4AAADq//z/AAABAA4AAADq//3/AAABAA4AAADq//7/AAABAA4AAADq////AAABAA4AAADq/wAAAAABAA4AAADq/wEAAAABAA4AAADq/wIAAAABAA4AAADq/wMAAAABAA4AAADq/wQAAAABAA4AAADq/wUAAAABAA8AAADr/wUAAAACAA8AAADs/wUAAAACAA8AAADt/wUAAAACAA8AAADu/wUAAAACAA8AAADv/wUAAAACAA8AAADw/wUAAAACAA8AAADx/wUAAAACAA8AAADy/wUAAAACAA8AAADz/wUAAAACAA8AAAD0/wUAAAACAA8AAAD1/wUAAAACAA8AAAD2/wUAAAACAA8AAAD6/wUAAAACAA8AAAD7/wUAAAACAA8AAAD8/wUAAAACAA8AAAD9/wUAAAACAA8AAAD+/wUAAAACAA8AAAD//wUAAAACAA8AAAAAAAUAAAACAA8AAAABAAUAAAACAA8AAAACAAUAAAACAA8AAAADAAUAAAACAA8AAAAEAAUAAAACAA8AAAAFAAUAAAACAA8AAAAGAAUAAAACAA8AAAAHAAUAAAADAA8AAAAHAPb/AAADAA4AAAAHAPf/AAADAA4AAAAHAPj/AAADAA4AAAAHAPn/AAADAA4AAAAHAPr/AAADAA4AAAAHAPv/AAADAA4AAAAHAPz/AAADAA4AAAAHAP3/AAADAA4AAAAHAP7/AAADAA4AAAAHAP//AAADAA4AAAAHAAAAAAADAA4AAAAHAAEAAAADAA4AAAAHAAIAAAADAA4AAAAHAAMAAAADAA4AAAAHAAQAAAADAA4AAAAHAPX/AAADAA0AAAD8//X/AAACAA0AAAD9//X/AAACAA0AAAD+//X/AAACAA0AAAD///X/AAACAA0AAAAAAPX/AAACAA0AAAABAPX/AAACAA0AAAACAPX/AAACAA0AAAADAPX/AAACAA0AAAAEAPX/AAACAA0AAAAFAPX/AAACAA0AAAAGAPX/AAACAA0AAADq//X/AAABAA0AAADr//X/AAACAA0AAADs//X/AAACAA0AAADt//X/AAACAA0AAADu//X/AAACAA0AAADv//X/AAACAA0AAADw//X/AAACAA0AAADx//X/AAACAA0AAADy//X/AAACAA0AAADz//X/AAACAA0AAAD0//X/AAACAA0AAAD1//X/AAACAA0AAAD2//X/AAABABAAAAD6//X/AAAAABAAAAD7//X/AAACAA0AAAD5/wUAAAACAA8AAAD4/wUAAAACAA8AAAD3/wUAAAACAA8AAAA=")
 tile_set = SubResource("TileSet_7rb8s")
 
 [node name="Enemies" type="Node2D" parent="."]
-y_sort_enabled = true
 
-[node name="DashSmoke" parent="." instance=ExtResource("3_36x2x")]
+[node name="DashSmoke" parent="." instance=ExtResource("2_ald36")]
 visible = false
 position = Vector2(43, -41)
 
-[node name="Player" parent="." instance=ExtResource("2_gaflk")]
-y_sort_enabled = true
-position = Vector2(-122, 36)
+[node name="Player" parent="." instance=ExtResource("3_vhxkb")]
+position = Vector2(-119, 34)
 collision_layer = 9
 collision_mask = 10
 
@@ -3353,33 +3349,33 @@ scale = Vector2(3, 3)
 [node name="Q-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(21.6667, 26.6667)
-texture = ExtResource("4_okkmp")
+texture = ExtResource("4_wd67u")
 
 [node name="Slime" type="Sprite2D" parent="CanvasLayer/HUD/Q-summon"]
 position = Vector2(-0.333333, -3.33333)
 scale = Vector2(1.17708, 1.29427)
-texture = ExtResource("7_rsn7s")
+texture = ExtResource("5_gs76h")
 
 [node name="E-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(52, 44)
-texture = ExtResource("5_mipw0")
+texture = ExtResource("6_5ww2c")
 
 [node name="SkeletonHead" type="Sprite2D" parent="CanvasLayer/HUD/E-summon"]
 position = Vector2(-1.66667, -2.66667)
 scale = Vector2(0.901042, 0.848958)
-texture = ExtResource("9_bekp2")
+texture = ExtResource("7_y3rdo")
 
 [node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
 position = Vector2(25, 65)
-texture = ExtResource("6_n4050")
+texture = ExtResource("8_brrjk")
 
 [node name="GhostHead" type="Sprite2D" parent="CanvasLayer/HUD/R-summon"]
 texture_filter = 1
 position = Vector2(0.333334, 0.666669)
 scale = Vector2(1.52344, 1.28385)
-texture = ExtResource("11_ebtrm")
+texture = ExtResource("9_rsv6t")
 
 [node name="NewSummonLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -3397,7 +3393,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.343396, 0.147218, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_5gtdi")
+theme_override_fonts/font = ExtResource("10_klj3f")
 theme_override_font_sizes/font_size = 48
 text = "New Summon Arised"
 
@@ -3421,7 +3417,7 @@ size_flags_horizontal = 3
 [node name="Black" type="Sprite2D" parent="CanvasLayer/ScreenTop"]
 position = Vector2(-37, 26.5)
 scale = Vector2(10.2013, 0.244)
-texture = ExtResource("9_l0lmb")
+texture = ExtResource("11_uc5o2")
 
 [node name="ScreenBottom" type="BoxContainer" parent="CanvasLayer"]
 visible = false
@@ -3440,44 +3436,35 @@ size_flags_horizontal = 3
 [node name="Black2" type="Sprite2D" parent="CanvasLayer/ScreenBottom"]
 position = Vector2(-102, 25.4481)
 scale = Vector2(11.1494, 0.283584)
-texture = ExtResource("9_l0lmb")
+texture = ExtResource("11_uc5o2")
 
 [node name="Summons" type="Node2D" parent="."]
-y_sort_enabled = true
 
 [node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("13_h6kc0")
-next_room = "res://Scenes/Rooms/room_2.tscn"
+script = ExtResource("12_b166k")
+next_room = "res://Scenes/Rooms/room_8.tscn"
 
 [node name="MoveToNextRoom" type="Area2D" parent="."]
+position = Vector2(-120, -173)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToNextRoom"]
-position = Vector2(-120, -171)
-shape = SubResource("RectangleShape2D_armh5")
+shape = SubResource("RectangleShape2D_3kvlm")
 
 [node name="Block" type="StaticBody2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="Block"]
-visible = false
+y_sort_enabled = true
+position = Vector2(0, 8)
+collision_layer = 15
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
-visible = false
-position = Vector2(-162, -189)
-shape = SubResource("RectangleShape2D_727tt")
-disabled = true
+position = Vector2(-119.5, -166)
+shape = SubResource("RectangleShape2D_ikwg0")
 
-[node name="Move" type="Label" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Block"]
 texture_filter = 1
-offset_left = -1.0
-offset_top = -157.0
-offset_right = 105.0
-offset_bottom = -82.0
-theme_override_fonts/font = ExtResource("8_5gtdi")
-theme_override_font_sizes/font_size = 32
-text = "Move with
-W, A, S, D"
+position = Vector2(-119, -165)
+texture = ExtResource("1_a1mi7")
+region_enabled = true
+region_rect = Rect2(326.922, 423.614, 38.7514, 17.8224)
 
 [connection signal="animation_finished" from="DashSmoke" to="Player" method="_on_dash_smoke_animation_finished"]

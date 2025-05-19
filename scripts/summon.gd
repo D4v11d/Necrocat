@@ -147,8 +147,9 @@ func play_cast_animation() -> void:
 		player.animated_sprite_2d.flip_h = player.last_direction == Vector2.LEFT
 
 func show_arise_message() -> void:
-	var label = player.new_summon_label
-	DamageNumbers.animate_label(label, "New Summon Arised")
+	pass
+	#var label = player.new_summon_label
+	#DamageNumbers.animate_label(label, "New Summon Arised")
 
 func summon_killed(summon: Mob) -> void:
 	summoned_allies_list.erase(summon)

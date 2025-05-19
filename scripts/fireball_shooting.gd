@@ -43,9 +43,9 @@ func _get_enemy_target() -> Node2D:
 		return current_target
 
 	# 2. Otherwise search the Enemies container for the first valid hostile
-	var enemies_root = $"/root/Main/Enemies"
+	var enemies_root = $"../../../Enemies"
 	for child in enemies_root.get_children():
-		if child is Mob and not child.is_ally and not child.is_dying:
+		if child is Mob or child is Boss and not child.is_ally and not child.is_dying:
 			current_target = child
 			return current_target
 

@@ -38,7 +38,7 @@ class_name Player extends CharacterBody2D
 #Player MP
 @onready var mp_bar: HealthBar = $CanvasLayer/MPBar
 const MAX_MP := 100
-var mp := 0
+var mp := 100
 
 const ATTACK_POWER = 20.0
 const NORMAL_SPEED = 100.0
@@ -66,7 +66,7 @@ var is_casting_spell := false
 var is_knocked_back := false
 
 func _ready() -> void:
-	animated_sprite_2d.play("idle_front")
+	animated_sprite_2d.play("idle_back")
 	vertical_hitbox.set_deferred("monitoring", false)
 	horizontal_hitbox.set_deferred("monitoring", false)
 	mp_bar.init_health(MAX_MP)
@@ -207,6 +207,9 @@ func _on_hurt_box_damage_taken(amount: Variant, source: Node2D) -> void:
 		velocity = knockback_direction * 100.0 # parametrize knockback or change by enemy
 		is_knocked_back = true
 		knockback_timer.start(0.2)
+	
+	if hurtbox.hp <= 0:
+		get_tree().reload_current_scene()
 
 func _on_knockback_timer_timeout() -> void:
 	is_knocked_back = false

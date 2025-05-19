@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://3wh7ojs7l70n"]
+
+[ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="1_6bs72"]
+[ext_resource type="Texture2D" uid="uid://omxayiqvc38d" path="res://Art/UI/HUD/Green_Slime_Icon.png" id="2_eey4g"]
+[ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="3_ed84s"]
+[ext_resource type="Texture2D" uid="uid://l7rls728sayn" path="res://Art/UI/HUD/Green_Skeleton_Icon.png" id="4_je0hh"]
+[ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="5_y4mgj"]
+[ext_resource type="Texture2D" uid="uid://b18rpodwxs57e" path="res://Art/UI/HUD/Green_Ghost_Icon.png" id="6_d6s8e"]
+[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="7_y2ebc"]
+[ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="8_pk8xy"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="HUD" type="BoxContainer" parent="."]
+offset_right = 89.0
+offset_bottom = 98.0
+scale = Vector2(3, 3)
+
+[node name="Q-summon" type="Sprite2D" parent="HUD"]
+texture_filter = 1
+position = Vector2(21.6667, 26.6667)
+texture = ExtResource("1_6bs72")
+
+[node name="Slime" type="Sprite2D" parent="HUD/Q-summon"]
+position = Vector2(-0.333333, -3.33333)
+scale = Vector2(1.17708, 1.29427)
+texture = ExtResource("2_eey4g")
+
+[node name="E-summon" type="Sprite2D" parent="HUD"]
+texture_filter = 1
+position = Vector2(52, 44)
+texture = ExtResource("3_ed84s")
+
+[node name="SkeletonHead" type="Sprite2D" parent="HUD/E-summon"]
+position = Vector2(-1.66667, -2.66667)
+scale = Vector2(0.901042, 0.848958)
+texture = ExtResource("4_je0hh")
+
+[node name="R-summon" type="Sprite2D" parent="HUD"]
+texture_filter = 1
+position = Vector2(25, 65)
+texture = ExtResource("5_y4mgj")
+
+[node name="GhostHead" type="Sprite2D" parent="HUD/R-summon"]
+texture_filter = 1
+position = Vector2(0.333334, 0.666669)
+scale = Vector2(1.52344, 1.28385)
+texture = ExtResource("6_d6s8e")
+
+[node name="NewSummonLabel" type="Label" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -103.0
+offset_right = 147.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.343396, 0.147218, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_y2ebc")
+theme_override_font_sizes/font_size = 48
+text = "New Summon Arised"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScreenTop" type="BoxContainer" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="Black" type="Sprite2D" parent="ScreenTop"]
+position = Vector2(-37, 26.5)
+scale = Vector2(10.2013, 0.244)
+texture = ExtResource("8_pk8xy")
+
+[node name="ScreenBottom" type="BoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Black2" type="Sprite2D" parent="ScreenBottom"]
+position = Vector2(-102, 25.4481)
+scale = Vector2(11.1494, 0.283584)
+texture = ExtResource("8_pk8xy")

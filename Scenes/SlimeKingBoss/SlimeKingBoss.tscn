@@ -518,9 +518,11 @@ animations = [{
 }]
 
 [node name="SlimeKingBoss" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 10
 collision_mask = 13
 script = ExtResource("1_rb686")
+MAX_HP = 750
 knockback = 50.0
 
 [node name="NotAnimation" type="AnimatedSprite2D" parent="."]
@@ -627,6 +629,9 @@ autoplay = "idle"
 [node name="SpecialJumpTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.1
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]

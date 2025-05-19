@@ -205,6 +205,7 @@ func _on_attack_timer_timeout() -> void:
 func _on_hurt_box_damage_taken(amount: Variant, source: Node2D) -> void:
 	hurtbox.hp -= amount
 	hurtbox.healthbar._set_health(hurtbox.hp)
+	hurtbox.play_hurt_sound()
 	DamageNumbers.display_text(str(amount), damage_numbers_origin.global_position, "#F00")
 	damage_animation_player.play("damage_cooldown")
 	

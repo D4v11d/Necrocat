@@ -4,6 +4,8 @@ class_name Mob extends CharacterBody2D
 @export var attack_damage := 20.0
 @export var speed := 40.0
 @export var knockback := 150.0
+@export var mp_hit_gain := 1
+@export var mp_death_gain := 20
 
 var hp := MAX_HP
 
@@ -11,6 +13,7 @@ var is_knocked_back := false
 var is_spirit_slime := false
 var is_emerging := false
 var is_dying := false
+var is_dead := false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var knockback_timer: Timer = $KnockbackTimer
@@ -32,9 +35,13 @@ func _ready() -> void:
 	arise_area.body_exited.connect(_on_arise_area_body_exited)
 	animated_sprite.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
 
-func attack_received(from_position: Vector2, damage: float) -> void:
+func attack_received(source: Variant, damage: float) -> void:
+	#avoid interaction while dying
+	if is_dead:
+		return
+	
 	if hp > 0:
-		var knockback_direction = (global_position - from_position).normalized()
+		var knockback_direction = (global_position - source.position).normalized()
 		velocity = knockback_direction * knockback
 		is_knocked_back = true
 		knockback_timer.start()
@@ -44,15 +51,17 @@ func attack_received(from_position: Vector2, damage: float) -> void:
 		hp -= damage
 		if hp <= 0:
 			handle_death()
+			if source is Player:
+				source.increase_mp(mp_death_gain)
 		DamageNumbers.display_text(str(damage), damage_numbers_origin.global_position)
 	
-
 func _on_knockback_timer_timeout() -> void:
 	is_knocked_back = false
 	velocity = Vector2.ZERO
 
 
 func handle_death() -> void:
+	is_dead = true
 	animated_sprite.play("death")
 
 func _on_arise_area_body_entered(body: Node2D) -> void:
@@ -70,7 +79,7 @@ func delete_spirit_mob() -> void:
 		queue_free()
 
 func _on_hurtbox_damage_taken(amount: Variant, source: Variant) -> void:
-	attack_received(source.position, amount)
+	attack_received(source, amount)
 	
 
 func _on_animated_sprite_2d_animation_finished() -> void:

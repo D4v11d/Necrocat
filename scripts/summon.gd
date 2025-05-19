@@ -8,9 +8,9 @@ var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []
 
 const SUMMONS := {
-	"summon_Q": {"enabled_flag": "Q_summon_enabled", "scene": "slime_summon"},
-	"summon_R": {"enabled_flag": "R_summon_enabled", "scene": "skeleton_summon"},
-	"summon_F": {"enabled_flag": "F_summon_enabled", "scene": "ghost_summon"},
+	"summon_Q": {"enabled_flag": "Q_summon_enabled", "scene": "slime_summon", "cost": 20},
+	"summon_R": {"enabled_flag": "R_summon_enabled", "scene": "skeleton_summon", "cost": 25},
+	"summon_F": {"enabled_flag": "F_summon_enabled", "scene": "ghost_summon", "cost": 30},
 }
 
 signal delete_mob # called after arising
@@ -31,6 +31,12 @@ func summon_ally() -> void:
 			# Is that particular summon enabled on the player?
 			if not player.get(data.enabled_flag):
 				return
+				
+			if data.cost > player.mp:
+				DamageNumbers.display_text("Not enough MP", player.position)
+				return
+			else:
+				player.increase_mp(data.cost * -1)
 
 			var packed: PackedScene = player.get(data.scene)
 			if packed == null:

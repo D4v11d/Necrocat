@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://lmjc58xts8qa"
+path="res://.godot/imported/slime-king-drop(watery alternative).wav-9d49fcb2d7fbd591cf686aac3d4747e8.sample"
+
+[deps]
+
+source_file="res://sound/slime-king-drop(watery alternative).wav"
+dest_files=["res://.godot/imported/slime-king-drop(watery alternative).wav-9d49fcb2d7fbd591cf686aac3d4747e8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

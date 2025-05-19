@@ -21,6 +21,7 @@ var is_dead := false
 @onready var hit_flash_anim_player = $HitflashAnimationPlayer
 @onready var damage_numbers_origin = $DamageNumbersOrigin
 @onready var arise_area: Area2D = $AriseArea
+@onready var hit_stream_player: AudioStreamPlayer2D = $SoundEffects/HitStreamPlayer
 
 @export var is_ally := false
 @export var is_recruitable := false
@@ -46,6 +47,8 @@ func attack_received(source: Variant, damage: float) -> void:
 		is_knocked_back = true
 		knockback_timer.start()
 		hit_flash_anim_player.play("hit_flash")
+		if source is Player:
+			hit_stream_player.play()
 	
 	if not is_spirit_slime:
 		hp -= damage

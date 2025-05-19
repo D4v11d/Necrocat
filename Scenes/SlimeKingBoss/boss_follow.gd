@@ -7,6 +7,7 @@ const FOLLOW_DISTANCE := 40.0
 @onready var special_timer = $"../SpecialAttackTimer"
 @onready var charge_timer = $"../ChargingTimer"
 @onready var jumping: BossJumping = $"../Jumping"
+@onready var dash_stream_player: AudioStreamPlayer2D = $"../SoundEffects/DashStreamPlayer"
 
 var current_target: Node2D = null
 
@@ -79,6 +80,8 @@ func _on_charging_timer_timeout() -> void:
 	
 	if mob.special_attack == "jump":
 		jumping.start_jump(current_target.position)
+	else:
+		dash_stream_player.play()
 		
 	mob.animated_sprite.play("idle")
 

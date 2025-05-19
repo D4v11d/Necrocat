@@ -4,6 +4,8 @@ class_name Summon extends Node2D
 @onready var player: Player = $".."
 @onready var casting_timer: Timer = $"../Timers/CastingTimer"
 
+@onready var arise_stream_player: AudioStreamPlayer2D = $"../SoundEffects/AriseStreamPlayer"
+
 var can_summon := true # reset after cooldown
 var summoned_allies_list: Array[Mob] = []
 
@@ -131,6 +133,7 @@ func _unlock_next_summon() -> void:
 
 
 func _after_arise() -> void:
+	arise_stream_player.play()
 	play_cast_animation()
 	casting_timer.start()
 	player.is_casting_spell = true

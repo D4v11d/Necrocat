@@ -1,6 +1,6 @@
-[gd_scene load_steps=67 format=3 uid="uid://cgk5ekyx2oijf"]
+[gd_scene load_steps=68 format=3 uid="uid://cgk5ekyx2oijf"]
 
-[ext_resource type="Script" path="res://scripts/mob.gd" id="1_1ubh8"]
+[ext_resource type="Script" uid="uid://bccdpvasddc2w" path="res://scripts/mob.gd" id="1_1ubh8"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_ssmms"]
 [ext_resource type="Texture2D" uid="uid://daa51fvrsjvfo" path="res://Art/Mobs/Slime/slime-attack.png" id="3_4yg2v"]
 [ext_resource type="Texture2D" uid="uid://c5yot8afguvt" path="res://Art/Mobs/Slime/slime-death.png" id="3_30cmb"]
@@ -14,7 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://by5aam0ctpyw7" path="res://Art/Mobs/Slime/slime-run-right.png" id="9_hdm0i"]
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="9_xh71l"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="10_vngdl"]
-[ext_resource type="Script" path="res://scripts/slime_jumping.gd" id="11_r23qg"]
+[ext_resource type="Script" uid="uid://bqyh2c1fqib1q" path="res://scripts/slime_jumping.gd" id="11_r23qg"]
+[ext_resource type="AudioStream" uid="uid://bcmtxxyssfmla" path="res://sound/slime_hit.wav" id="16_x3djr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true
@@ -451,6 +452,11 @@ debug_color = Color(0.909583, 0.271589, 0.324396, 0.42)
 script = ExtResource("11_r23qg")
 
 [node name="EmergeTimer" type="Timer" parent="."]
+
+[node name="SoundEffects" type="Node2D" parent="."]
+
+[node name="HitStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("16_x3djr")
 
 [connection signal="body_entered" from="AttackArea" to="Jumping" method="_on_attack_area_body_entered"]
 [connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]

@@ -20,6 +20,7 @@ var special_jump_count := SPECIAL_JUMP_MAX
 @onready var mob: Boss = $".."
 @onready var special_attack_timer: Timer = $"../SpecialAttackTimer"
 @onready var special_jump_timer: Timer = $"../SpecialJumpTimer"
+@onready var drop_stream_player: AudioStreamPlayer2D = $"../SoundEffects/DropStreamPlayer"
 
 func _physics_process(delta: float) -> void:
 	if mob.is_charging:
@@ -71,6 +72,7 @@ func handle_jump(delta: float) -> void:
 
 	# End jump
 	if jump_progress >= JUMP_DURATION:
+		drop_stream_player.play()
 		jump_progress = JUMP_COOLDOWN
 		mob.position.y = jump_target_position.y
 		mob.set_collision_layer_value(1, true)

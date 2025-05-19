@@ -40,6 +40,10 @@ class_name Player extends CharacterBody2D
 const MAX_MP := 100
 var mp := 0
 
+# Sound Effects
+@onready var sword_stream_player: AudioStreamPlayer2D = $SoundEffects/SwordStreamPlayer
+@onready var dash_stream_player: AudioStreamPlayer2D = $SoundEffects/DashStreamPlayer
+
 const ATTACK_POWER = 20.0
 const NORMAL_SPEED = 100.0
 const DASH_SPEED = 400.0
@@ -84,6 +88,7 @@ func _physics_process(delta: float) -> void:
 		summon_component.handle_arise_mob()
 		
 	if Input.is_action_just_pressed("dash") and can_dash :
+		dash_stream_player.play()
 		can_dash = false
 		dash_cooldown.start()
 		dash_smoke.visible = true
@@ -125,6 +130,7 @@ func handle_move(delta: float) -> void:
 
 func handle_attack() -> void:
 	if Input.is_action_just_pressed("attack"):
+		sword_stream_player.play()
 		is_attacking = true
 
 		if last_direction == Vector2.UP:

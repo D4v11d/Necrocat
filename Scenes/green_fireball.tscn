@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cbbhdm4pnu0dl"]
 
-[ext_resource type="Script" uid="uid://ddag52b14b0ml" path="res://scripts/fireball.gd" id="1_opmgf"]
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="1_opmgf"]
 [ext_resource type="Texture2D" uid="uid://cfhdysn64mfy0" path="res://Art/Mobs/GreenGhost/green-fireball.png" id="2_cphac"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lnu6p"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=76 format=3 uid="uid://oyb85fvkqynr"]
 
 [ext_resource type="Texture2D" uid="uid://brfkouqpspvs7" path="res://Art/Mobs/Skeleton/skel-death.png" id="1_2tf5s"]
-[ext_resource type="Script" uid="uid://bccdpvasddc2w" path="res://scripts/mob.gd" id="1_2y41n"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_2y41n"]
 [ext_resource type="Texture2D" uid="uid://b8rxfac27i2jl" path="res://Art/Mobs/Skeleton/skel-emerge.png" id="2_1h3xo"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_kq67c"]
 [ext_resource type="Texture2D" uid="uid://b2b686qf8d1i0" path="res://Art/Mobs/Skeleton/skel-idle-back.png" id="3_jxe2l"]
@@ -11,10 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://tcw2rijd0qih" path="res://Art/Mobs/Skeleton/skel-run-back.png" id="7_gtul1"]
 [ext_resource type="Texture2D" uid="uid://ckamhj2neq28q" path="res://Art/Mobs/Skeleton/skel-run-front.png" id="8_m5f8l"]
 [ext_resource type="Texture2D" uid="uid://p6u7vcm41gjw" path="res://Art/Mobs/Skeleton/skel-run-side.png" id="9_m3oek"]
-[ext_resource type="Script" uid="uid://615ln7khhy8g" path="res://scripts/mob_follow.gd" id="10_43kt5"]
+[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="10_43kt5"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="13_42d2q"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="13_ib6us"]
-[ext_resource type="Script" uid="uid://20m4i2sgfc6y" path="res://scripts/skeleton_movement.gd" id="16_jf5iu"]
+[ext_resource type="Script" path="res://scripts/skeleton_movement.gd" id="16_jf5iu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jtu33"]
 resource_local_to_scene = true

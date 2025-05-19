@@ -1,6 +1,6 @@
 [gd_scene load_steps=74 format=3 uid="uid://civu54w3ol0r4"]
 
-[ext_resource type="Script" uid="uid://bccdpvasddc2w" path="res://scripts/mob.gd" id="1_sct8u"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_sct8u"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_8uokx"]
 [ext_resource type="Texture2D" uid="uid://4e43ff0ig1yu" path="res://Art/Mobs/GreenSlime/green-slime-death.png" id="3_avvis"]
 [ext_resource type="Texture2D" uid="uid://b5w61gk542fvk" path="res://Art/Mobs/GreenSlime/green-slime-attack.png" id="3_bg8tb"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="9_g7i3o"]
 [ext_resource type="Texture2D" uid="uid://b518enk8n627a" path="res://Art/Mobs/GreenSlime/green-slime-run-right.png" id="9_r48kg"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="10_a6wr8"]
-[ext_resource type="Script" uid="uid://bqyh2c1fqib1q" path="res://scripts/slime_jumping.gd" id="11_c7sr5"]
+[ext_resource type="Script" path="res://scripts/slime_jumping.gd" id="11_c7sr5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltp7a"]
 resource_local_to_scene = true

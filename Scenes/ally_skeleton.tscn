@@ -1,6 +1,6 @@
 [gd_scene load_steps=69 format=3 uid="uid://cukgkt777fmtf"]
 
-[ext_resource type="Script" uid="uid://bccdpvasddc2w" path="res://scripts/mob.gd" id="1_5534f"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_5534f"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_qiqkx"]
 [ext_resource type="Texture2D" uid="uid://cnd2jla2no6in" path="res://Art/Mobs/GreenSkeleton/green-skel-death.png" id="3_bfb7n"]
 [ext_resource type="Texture2D" uid="uid://bb1c640x2m4kr" path="res://Art/Mobs/GreenSkeleton/green-skel-emerge.png" id="3_g0g4u"]
@@ -10,9 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cgko5yiqisw7f" path="res://Art/Mobs/GreenSkeleton/green-skel-run-back.png" id="7_4s2sw"]
 [ext_resource type="Texture2D" uid="uid://byun8ke80ve25" path="res://Art/Mobs/GreenSkeleton/green-skel-run-front.png" id="8_t3f0h"]
 [ext_resource type="Texture2D" uid="uid://c0pgq8ulj32nm" path="res://Art/Mobs/GreenSkeleton/green-skel-run-side.png" id="9_02dk3"]
-[ext_resource type="Script" uid="uid://615ln7khhy8g" path="res://scripts/mob_follow.gd" id="12_p6f2x"]
+[ext_resource type="Script" path="res://scripts/mob_follow.gd" id="12_p6f2x"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="13_s4x4v"]
-[ext_resource type="Script" uid="uid://20m4i2sgfc6y" path="res://scripts/skeleton_movement.gd" id="14_e11sp"]
+[ext_resource type="Script" path="res://scripts/skeleton_movement.gd" id="14_e11sp"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="15_sosy5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jtu33"]

@@ -1,18 +1,18 @@
 [gd_scene load_steps=50 format=3 uid="uid://rlyagkq3bbrw"]
 
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="1_85jna"]
-[ext_resource type="Script" uid="uid://bccdpvasddc2w" path="res://scripts/mob.gd" id="1_x86yn"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_x86yn"]
 [ext_resource type="Texture2D" uid="uid://dvnghduusqmm2" path="res://Art/Mobs/Ghost/ghost_death.png" id="2_butr5"]
 [ext_resource type="Texture2D" uid="uid://cum4j2jfrb0tl" path="res://Art/Mobs/Ghost/idle_back.png" id="3_3hs6p"]
 [ext_resource type="Texture2D" uid="uid://1ujv1rbsvqpo" path="res://Art/Mobs/Ghost/idle_front.png" id="4_rsko7"]
 [ext_resource type="Texture2D" uid="uid://bjg3n2o1ete1y" path="res://Art/Mobs/Ghost/idle_side.png" id="5_8wb0s"]
 [ext_resource type="Texture2D" uid="uid://bbwjslj4fifn6" path="res://Art/Mobs/Ghost/ghost_spirit.png" id="6_uq4iw"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="7_u5u27"]
-[ext_resource type="Script" uid="uid://dk38kkw5y1n2h" path="res://scripts/fireball_shooting.gd" id="8_wb4s8"]
+[ext_resource type="Script" path="res://scripts/fireball_shooting.gd" id="8_wb4s8"]
 [ext_resource type="PackedScene" uid="uid://dfuocx05ru83w" path="res://Scenes/fireball.tscn" id="10_qug56"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="10_shl08"]
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="11_vus45"]
-[ext_resource type="Script" uid="uid://cf4vc1gva1400" path="res://scripts/ghost_movement.gd" id="13_yk2mf"]
+[ext_resource type="Script" path="res://scripts/ghost_movement.gd" id="13_yk2mf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_atpsr"]
 resource_local_to_scene = true

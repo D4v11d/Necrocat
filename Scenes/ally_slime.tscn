@@ -447,8 +447,8 @@ radius = 6.0
 
 [node name="AllySlime" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
-collision_layer = 4
-collision_mask = 2
+collision_layer = 12
+collision_mask = 10
 script = ExtResource("1_sct8u")
 is_ally = true
 

@@ -410,8 +410,8 @@ radius = 28.0
 
 [node name="AllyGhost" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_atpsr")
-collision_layer = 4
-collision_mask = 2
+collision_layer = 12
+collision_mask = 10
 script = ExtResource("2_eq8px")
 speed = 30.0
 is_ally = true

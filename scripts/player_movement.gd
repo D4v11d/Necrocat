@@ -35,6 +35,11 @@ class_name Player extends CharacterBody2D
 @onready var ghost_summon_sprite: Sprite2D = $"../CanvasLayer/HUD/R-summon/GhostHead"
 @onready var new_summon_label: Label = $"../CanvasLayer/NewSummonLabel"
 
+#Player MP
+@onready var mp_bar: HealthBar = $CanvasLayer/MPBar
+const MAX_MP := 100
+var mp := 0
+
 const ATTACK_POWER = 20.0
 const NORMAL_SPEED = 100.0
 const DASH_SPEED = 400.0
@@ -64,6 +69,8 @@ func _ready() -> void:
 	animated_sprite_2d.play("idle_front")
 	vertical_hitbox.set_deferred("monitoring", false)
 	horizontal_hitbox.set_deferred("monitoring", false)
+	mp_bar.init_health(MAX_MP)
+	mp_bar._set_health(mp)
 
 func _physics_process(delta: float) -> void:
 	if is_attacking or is_casting_spell:
@@ -164,14 +171,24 @@ func play_idle_animation() -> void:
 		animated_sprite_2d.play("idle_side")
 		animated_sprite_2d.flip_h = last_direction == Vector2.LEFT
 
+func increase_mp(value):
+	mp += value
+	if mp > MAX_MP:
+		mp = MAX_MP
+	mp_bar._set_health(mp)
+
 # there's no friendly fire to or from summons
 func _on_vertical_attack_hitbox_body_entered(body: Node2D) -> void:
 	if (body is Mob or body is Boss) and not body.is_ally and vertical_hitbox.visible:
-		body.attack_received(global_position, ATTACK_POWER)
+		body.attack_received(self, ATTACK_POWER)
+		if not body.is_dead:
+			increase_mp(body.mp_hit_gain)
 
 func _on_horizontal_attack_hitbox_body_entered(body: Node2D) -> void:
 	if (body is Mob or body is Boss) and not body.is_ally and horizontal_hitbox.visible:
-		body.attack_received(global_position, ATTACK_POWER)
+		body.attack_received(self, ATTACK_POWER)
+		if not body.is_dead:
+			increase_mp(body.mp_hit_gain)
 
 func _on_attack_timer_timeout() -> void:
 	vertical_hitbox.set_deferred("monitoring", false)

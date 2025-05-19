@@ -1,7 +1,7 @@
 [gd_scene load_steps=69 format=3 uid="uid://dl662n6m7d6na"]
 
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="1_nnkiq"]
-[ext_resource type="Script" path="res://scripts/mob.gd" id="2_eq8px"]
+[ext_resource type="Script" uid="uid://bccdpvasddc2w" path="res://scripts/mob.gd" id="2_eq8px"]
 [ext_resource type="Texture2D" uid="uid://353mg2p6j3ed" path="res://Art/Mobs/GreenGhost/green-ghost-death.png" id="3_owfxm"]
 [ext_resource type="Texture2D" uid="uid://df3n0pmb0ckaa" path="res://Art/Mobs/GreenGhost/green-ghost-idle-back.png" id="4_agen5"]
 [ext_resource type="Texture2D" uid="uid://cc34cvqpg3puh" path="res://Art/Mobs/GreenGhost/green-ghost-emerge.png" id="4_bqlbr"]
@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bbwjslj4fifn6" path="res://Art/Mobs/Ghost/ghost_spirit.png" id="7_eptmv"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="8_klssn"]
 [ext_resource type="PackedScene" uid="uid://b3ioorn7pclbg" path="res://Scenes/enemy_common/damage_numbers_origin.tscn" id="9_p4kv1"]
-[ext_resource type="Script" path="res://scripts/ghost_movement.gd" id="10_xjwuw"]
-[ext_resource type="Script" path="res://scripts/fireball_shooting.gd" id="11_4u2kd"]
+[ext_resource type="Script" uid="uid://cf4vc1gva1400" path="res://scripts/ghost_movement.gd" id="10_xjwuw"]
+[ext_resource type="Script" uid="uid://dk38kkw5y1n2h" path="res://scripts/fireball_shooting.gd" id="11_4u2kd"]
 [ext_resource type="PackedScene" uid="uid://cbbhdm4pnu0dl" path="res://Scenes/green_fireball.tscn" id="12_fxewp"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="13_8kjah"]
 

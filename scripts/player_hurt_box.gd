@@ -11,11 +11,16 @@ var enemies_in_hurtbox := []
 var can_take_damage := true
 
 @onready var healthbar: HealthBar = $"../CanvasLayer/Healthbar"
+@onready var cat_hurt_stream_player_1: AudioStreamPlayer2D = $"../SoundEffects/CatHurtStreamPlayer1"
+@onready var cat_hurt_stream_player_2: AudioStreamPlayer2D = $"../SoundEffects/CatHurtStreamPlayer2"
+@onready var cat_hurt_stream_player_3: AudioStreamPlayer2D = $"../SoundEffects/CatHurtStreamPlayer3"
+@onready var boring_hurt_stream_player: AudioStreamPlayer2D = $"../SoundEffects/BoringHurtStreamPlayer"
 
 func _ready() -> void:
 	set_collision_mask_value(2, false)
 	healthbar.max_value = MAX_HP
 	healthbar.call_deferred("init_health", hp)
+	randomize()
 
 func add_attacker(body: Node2D):
 	if can_take_damage:
@@ -36,10 +41,21 @@ func _on_DamageCooldown_timeout():
 	
 	for enemy in enemies_in_hurtbox:
 		take_damage(enemy)
-		
+	
 	can_take_damage = false
 	# Restart timer
 	$DamageCooldown.start(damage_cooldown)
+	
+func play_hurt_sound():
+	var options = [
+		cat_hurt_stream_player_1, 
+		cat_hurt_stream_player_2,
+		cat_hurt_stream_player_3
+	]
+	var stream_player = options[randi() % options.size()]
+	stream_player.play()
+	#if not boring_hurt_stream_player.playing:
+		#boring_hurt_stream_player.play()
 	
 func take_damage(enemy):
 	emit_signal("damage_taken", enemy.attack_damage, enemy)

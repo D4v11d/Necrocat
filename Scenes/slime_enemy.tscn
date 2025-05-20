@@ -392,15 +392,16 @@ radius = 94.0213
 radius = 38.0526
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xx0lc"]
-radius = 24.1868
+radius = 12.7061
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1injq"]
 radius = 6.0
 
 [node name="SlimeEnemy" type="CharacterBody2D"]
+y_sort_enabled = true
 scale = Vector2(1.5, 1.5)
 collision_layer = 10
-collision_mask = 13
+collision_mask = 15
 script = ExtResource("1_1ubh8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

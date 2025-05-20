@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://tbqkmgi8k4gt"]
+
+[ext_resource type="AudioStream" uid="uid://cnf5o3jsu1tas" path="res://sound/music/Marauders.wav" id="1_xyms6"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_xyms6")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi26wcj7jenxm"]
+[gd_scene load_steps=7 format=3 uid="uid://bi26wcj7jenxm"]
 
 [ext_resource type="Script" path="res://scripts/start_screen.gd" id="1_y2xn4"]
 [ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="2_jc4v2"]
 [ext_resource type="Texture2D" uid="uid://cn1f4shakd0gs" path="res://Art/UI/GUI.png" id="2_jeu41"]
 [ext_resource type="Texture2D" uid="uid://dimrwi47sk4c8" path="res://Art/630x500.png" id="2_v2i4n"]
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="3_6qwi1"]
+[ext_resource type="AudioStream" uid="uid://bvyrvro5xgwcf" path="res://sound/music/Poison (2).wav" id="6_bb0xh"]
 
 [node name="StartScreen" type="Node2D"]
 script = ExtResource("1_y2xn4")
@@ -43,5 +44,9 @@ theme_override_fonts/font = ExtResource("3_6qwi1")
 theme_override_font_sizes/font_size = 64
 keep_pressed_outside = true
 text = "Start"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_bb0xh")
+autoplay = true
 
 [connection signal="pressed" from="Background/Start/Button" to="." method="_on_button_pressed"]

@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://clgqqob2f27me"]
+[gd_scene load_steps=6 format=3 uid="uid://clgqqob2f27me"]
 
-[ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="1_m72tr"]
-[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="2_27yov"]
+[ext_resource type="Texture2D" uid="uid://imwe7q7ie3g" path="res://Art/Credits.jpeg" id="1_41x7v"]
+[ext_resource type="AudioStream" uid="uid://bvyrvro5xgwcf" path="res://sound/music/Poison (2).wav" id="2_pn84j"]
+[ext_resource type="Texture2D" uid="uid://cn1f4shakd0gs" path="res://Art/UI/GUI.png" id="3_iqrtx"]
+[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="4_bdyq4"]
+[ext_resource type="Script" path="res://scripts/play_again.gd" id="5_o2crx"]
 
 [node name="Credits" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-119, -40.5)
-scale = Vector2(1.77273, 1.324)
-texture = ExtResource("1_m72tr")
+position = Vector2(-110, -33.5)
+scale = Vector2(0.3075, 0.316667)
+texture = ExtResource("1_41x7v")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -17,60 +20,40 @@ limit_top = -170
 limit_right = 129
 limit_bottom = 94
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(11, -11)
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pn84j")
+autoplay = true
 
-[node name="Thanks" type="Label" parent="Node2D"]
+[node name="Reset" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 22.0
+offset_top = 35.0
+offset_right = 22.0
+offset_bottom = 35.0
+grow_horizontal = 0
+
+[node name="Gui" type="Sprite2D" parent="Reset"]
 texture_filter = 1
-offset_left = -98.0
-offset_top = -30.0
-offset_right = 199.0
-offset_bottom = 8.0
-theme_override_fonts/font = ExtResource("2_27yov")
-theme_override_font_sizes/font_size = 32
-text = "Thanks for playing!"
+position = Vector2(-134.5, 31)
+scale = Vector2(1.57778, 2.46154)
+texture = ExtResource("3_iqrtx")
+region_enabled = true
+region_rect = Rect2(145.08, 81.6194, 45.8891, 13.3809)
 
-[node name="Programming by" type="Label" parent="Node2D"]
-texture_filter = 1
-offset_left = -340.0
-offset_top = -119.0
-offset_right = -43.0
-offset_bottom = -58.0
-theme_override_fonts/font = ExtResource("2_27yov")
-theme_override_font_sizes/font_size = 32
-text = "Programming:"
-
-[node name="Programmers" type="Label" parent="Node2D/Programming by"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 19.0
-offset_top = 25.0
-offset_right = 316.0
-offset_bottom = 80.0
-theme_override_fonts/font = ExtResource("2_27yov")
-theme_override_font_sizes/font_size = 32
-text = "David Jiménez
-Luis Jiménez"
-
-[node name="Art By" type="Label" parent="Node2D"]
-texture_filter = 1
-offset_left = -345.0
-offset_top = -23.0
-offset_right = -48.0
-offset_bottom = 15.0
-theme_override_fonts/font = ExtResource("2_27yov")
-theme_override_font_sizes/font_size = 32
-text = "Art:
-"
-
-[node name="Felipe" type="Label" parent="Node2D/Art By"]
+[node name="Button" type="Button" parent="Reset"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 24.0
-offset_top = 31.0
-offset_right = 321.0
-offset_bottom = 86.0
-theme_override_fonts/font = ExtResource("2_27yov")
-theme_override_font_sizes/font_size = 32
-text = "Felipe Acuña
-(Harconen)"
+offset_left = -168.0
+offset_top = 17.0
+offset_right = -101.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("4_bdyq4")
+theme_override_font_sizes/font_size = 16
+keep_pressed_outside = true
+text = "Play again?"
+script = ExtResource("5_o2crx")
+
+[connection signal="pressed" from="Reset/Button" to="Reset/Button" method="_on_pressed"]

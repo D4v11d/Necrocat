@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dr6kcxmeq2c2"]
+[gd_scene load_steps=25 format=4 uid="uid://dr6kcxmeq2c2"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_dl2cx"]
 [ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="2_s6812"]
@@ -12,6 +12,10 @@
 [ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="10_2gohh"]
 [ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="11_tvjv3"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="12_mrr6j"]
+[ext_resource type="PackedScene" uid="uid://djjf64uy1wwh5" path="res://Scenes/SlimeKingBoss/SlimeKingBoss.tscn" id="13_y1cym"]
+[ext_resource type="AudioStream" uid="uid://dfm4eumhr20b1" path="res://sound/music/Clash_of_Arcane_Titans_Loop.wav" id="14_4nyg3"]
+[ext_resource type="Texture2D" uid="uid://cn1f4shakd0gs" path="res://Art/UI/GUI.png" id="14_pplrd"]
+[ext_resource type="Script" path="res://scripts/audio_stream_player_2d.gd" id="15_xp4qm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agtqk"]
 texture = ExtResource("1_dl2cx")
@@ -3295,14 +3299,16 @@ sources/0 = SubResource("TileSetAtlasSource_i7el3")
 size = Vector2(50, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2re7j"]
-size = Vector2(51, 20)
+size = Vector2(73, 20)
 
 [node name="Room8" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Room0" type="Node2D" parent="Map"]
+y_sort_enabled = true
 
 [node name="Ground" type="TileMapLayer" parent="Map/Room0"]
 z_index = -1
@@ -3317,11 +3323,16 @@ tile_map_data = PackedByteArray("AADu/wEAAAADAAsAAADx//z/AAAAAAQAAADs//f/AAADAAs
 tile_set = SubResource("TileSet_rdxx7")
 
 [node name="Collisions" type="TileMapLayer" parent="Map/Room0"]
+z_index = -1
 texture_filter = 1
 tile_map_data = PackedByteArray("AADq//b/AAABAA4AAADq//f/AAABAA4AAADq//j/AAABAA4AAADq//n/AAABAA4AAADq//r/AAABAA4AAADq//v/AAABAA4AAADq//z/AAABAA4AAADq//3/AAABAA4AAADq//7/AAABAA4AAADq////AAABAA4AAADq/wAAAAABAA4AAADq/wEAAAABAA4AAADq/wIAAAABAA4AAADq/wMAAAABAA4AAADq/wQAAAABAA4AAADq/wUAAAABAA8AAADr/wUAAAACAA8AAADs/wUAAAACAA8AAADt/wUAAAACAA8AAADu/wUAAAACAA8AAADv/wUAAAACAA8AAADw/wUAAAACAA8AAADx/wUAAAACAA8AAADy/wUAAAACAA8AAADz/wUAAAACAA8AAAD0/wUAAAACAA8AAAD1/wUAAAACAA8AAAD2/wUAAAACAA8AAAD6/wUAAAACAA8AAAD7/wUAAAACAA8AAAD8/wUAAAACAA8AAAD9/wUAAAACAA8AAAD+/wUAAAACAA8AAAD//wUAAAACAA8AAAAAAAUAAAACAA8AAAABAAUAAAACAA8AAAACAAUAAAACAA8AAAADAAUAAAACAA8AAAAEAAUAAAACAA8AAAAFAAUAAAACAA8AAAAGAAUAAAACAA8AAAAHAAUAAAADAA8AAAAHAPb/AAADAA4AAAAHAPf/AAADAA4AAAAHAPj/AAADAA4AAAAHAPn/AAADAA4AAAAHAPr/AAADAA4AAAAHAPv/AAADAA4AAAAHAPz/AAADAA4AAAAHAP3/AAADAA4AAAAHAP7/AAADAA4AAAAHAP//AAADAA4AAAAHAAAAAAADAA4AAAAHAAEAAAADAA4AAAAHAAIAAAADAA4AAAAHAAMAAAADAA4AAAAHAAQAAAADAA4AAAAHAPX/AAADAA0AAAD8//X/AAACAA0AAAD9//X/AAACAA0AAAD+//X/AAACAA0AAAD///X/AAACAA0AAAAAAPX/AAACAA0AAAABAPX/AAACAA0AAAACAPX/AAACAA0AAAADAPX/AAACAA0AAAAEAPX/AAACAA0AAAAFAPX/AAACAA0AAAAGAPX/AAACAA0AAADq//X/AAABAA0AAADr//X/AAACAA0AAADs//X/AAACAA0AAADt//X/AAACAA0AAADu//X/AAACAA0AAADv//X/AAACAA0AAADw//X/AAACAA0AAADx//X/AAACAA0AAADy//X/AAACAA0AAADz//X/AAACAA0AAAD0//X/AAACAA0AAAD1//X/AAACAA0AAAD2//X/AAABABAAAAD6//X/AAAAABAAAAD7//X/AAACAA0AAAD5/wUAAAACAA8AAAD4/wUAAAACAA8AAAD3/wUAAAACAA8AAAA=")
 tile_set = SubResource("TileSet_7rb8s")
 
 [node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="SlimeKingBoss" parent="Enemies" instance=ExtResource("13_y1cym")]
+position = Vector2(-121, -118)
 
 [node name="DashSmoke" parent="." instance=ExtResource("2_s6812")]
 visible = false
@@ -3330,7 +3341,9 @@ position = Vector2(43, -41)
 [node name="Player" parent="." instance=ExtResource("3_v7cks")]
 position = Vector2(-119, 34)
 collision_layer = 9
-collision_mask = 10
+Q_summon_enabled = true
+R_summon_enabled = true
+F_summon_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -3338,6 +3351,38 @@ limit_left = -350
 limit_top = -170
 limit_right = 129
 limit_bottom = 94
+
+[node name="Summons" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("12_mrr6j")
+next_room = "res://Scenes/Rooms/credits.tscn"
+
+[node name="MoveToNextRoom" type="Area2D" parent="."]
+position = Vector2(-120, -173)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToNextRoom"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_3kvlm")
+
+[node name="Block" type="StaticBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 8)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
+position = Vector2(-118.5, -166)
+shape = SubResource("RectangleShape2D_2re7j")
+
+[node name="Sprite2D" type="Sprite2D" parent="Block"]
+texture_filter = 1
+position = Vector2(-118.5, -165)
+scale = Vector2(1.81579, 1)
+texture = ExtResource("1_dl2cx")
+region_enabled = true
+region_rect = Rect2(326.922, 423.614, 38.7514, 17.8224)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -3356,24 +3401,24 @@ position = Vector2(-0.333333, -3.33333)
 scale = Vector2(1.17708, 1.29427)
 texture = ExtResource("5_xirix")
 
-[node name="E-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
+[node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
-position = Vector2(52, 44)
-texture = ExtResource("6_v4pn8")
+position = Vector2(47.6667, 45)
+texture = ExtResource("8_pvetm")
 
-[node name="SkeletonHead" type="Sprite2D" parent="CanvasLayer/HUD/E-summon"]
-position = Vector2(-1.66667, -2.66667)
+[node name="SkeletonHead" type="Sprite2D" parent="CanvasLayer/HUD/R-summon"]
+position = Vector2(0.333335, -1.33333)
 scale = Vector2(0.901042, 0.848958)
 texture = ExtResource("7_1gjrh")
 
-[node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
+[node name="F-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture_filter = 1
-position = Vector2(25, 65)
-texture = ExtResource("8_pvetm")
+position = Vector2(25, 64.3333)
+texture = ExtResource("6_v4pn8")
 
-[node name="GhostHead" type="Sprite2D" parent="CanvasLayer/HUD/R-summon"]
+[node name="GhostHead" type="Sprite2D" parent="CanvasLayer/HUD/F-summon"]
 texture_filter = 1
-position = Vector2(0.333334, 0.666669)
+position = Vector2(-2.33333, -0.333333)
 scale = Vector2(1.52344, 1.28385)
 texture = ExtResource("9_4oo7s")
 
@@ -3438,33 +3483,38 @@ position = Vector2(-102, 25.4481)
 scale = Vector2(11.1494, 0.283584)
 texture = ExtResource("11_tvjv3")
 
-[node name="Summons" type="Node2D" parent="."]
+[node name="Reset" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_top = 51.0
+offset_right = -78.0
+offset_bottom = 51.0
+grow_horizontal = 0
 
-[node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("12_mrr6j")
-next_room = "res://Scenes/Rooms/credits.tscn"
-
-[node name="MoveToNextRoom" type="Area2D" parent="."]
-position = Vector2(-120, -173)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToNextRoom"]
-shape = SubResource("RectangleShape2D_3kvlm")
-
-[node name="Block" type="StaticBody2D" parent="."]
-y_sort_enabled = true
-position = Vector2(0, 8)
-collision_layer = 15
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
-position = Vector2(-119.5, -166)
-shape = SubResource("RectangleShape2D_2re7j")
-
-[node name="Sprite2D" type="Sprite2D" parent="Block"]
+[node name="Gui" type="Sprite2D" parent="CanvasLayer/Reset"]
 texture_filter = 1
-position = Vector2(-119, -165)
-texture = ExtResource("1_dl2cx")
+position = Vector2(-100.816, 56.1067)
+scale = Vector2(3.65264, 6.6318)
+texture = ExtResource("14_pplrd")
 region_enabled = true
-region_rect = Rect2(326.922, 423.614, 38.7514, 17.8224)
+region_rect = Rect2(145.08, 81.6194, 45.8891, 13.3809)
+
+[node name="Button" type="Button" parent="CanvasLayer/Reset"]
+layout_mode = 0
+offset_left = -181.981
+offset_top = 15.5327
+offset_right = -22.9806
+offset_bottom = 83.5327
+theme_override_fonts/font = ExtResource("10_2gohh")
+theme_override_font_sizes/font_size = 64
+keep_pressed_outside = true
+text = "Reset"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_4nyg3")
+script = ExtResource("15_xp4qm")
 
 [connection signal="animation_finished" from="DashSmoke" to="Player" method="_on_dash_smoke_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://cukgkt777fmtf"]
+[gd_scene load_steps=70 format=3 uid="uid://cukgkt777fmtf"]
 
 [ext_resource type="Script" path="res://scripts/mob.gd" id="1_5534f"]
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="2_qiqkx"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/mob_follow.gd" id="12_p6f2x"]
 [ext_resource type="PackedScene" uid="uid://bta06xs8obxpk" path="res://Scenes/enemy_common/hurtbox.tscn" id="13_s4x4v"]
 [ext_resource type="Script" path="res://scripts/skeleton_movement.gd" id="14_e11sp"]
+[ext_resource type="AudioStream" uid="uid://c5gi3lpht285s" path="res://sound/skeleton-hit.wav" id="15_hsst2"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="15_sosy5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jtu33"]
@@ -77,26 +78,6 @@ region = Rect2(160, 0, 32, 32)
 atlas = ExtResource("3_g0g4u")
 region = Rect2(192, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tu7o1"]
-atlas = ExtResource("4_c8jk8")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hsuip"]
-atlas = ExtResource("4_c8jk8")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqov2"]
-atlas = ExtResource("4_c8jk8")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fh0ap"]
-atlas = ExtResource("4_c8jk8")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xgpfa"]
-atlas = ExtResource("4_c8jk8")
-region = Rect2(128, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_bygcj"]
 atlas = ExtResource("5_io1ri")
 region = Rect2(0, 0, 32, 32)
@@ -115,6 +96,26 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ifso"]
 atlas = ExtResource("5_io1ri")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu7o1"]
+atlas = ExtResource("4_c8jk8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsuip"]
+atlas = ExtResource("4_c8jk8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqov2"]
+atlas = ExtResource("4_c8jk8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh0ap"]
+atlas = ExtResource("4_c8jk8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgpfa"]
+atlas = ExtResource("4_c8jk8")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8r21"]
@@ -262,6 +263,26 @@ animations = [{
 "loop": false,
 "name": &"emerge",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bygcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwp5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq3e8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_734ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ifso")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -456,9 +477,11 @@ height = 26.0
 radius = 30.0
 
 [node name="AllySkeleton" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 12
 collision_mask = 10
 script = ExtResource("1_5534f")
+MAX_HP = 200.0
 attack_damage = 30.0
 speed = 80.0
 is_ally = true
@@ -467,7 +490,7 @@ is_ally = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_jtu33")
 sprite_frames = SubResource("SpriteFrames_l1w28")
-animation = &"move_side"
+animation = &"idle"
 autoplay = "emerge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -519,6 +542,11 @@ one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false
+
+[node name="SoundEffects" type="Node2D" parent="."]
+
+[node name="HitStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("15_hsst2")
 
 [connection signal="body_entered" from="ChaseArea" to="ChaseArea" method="_on_body_entered"]
 [connection signal="body_exited" from="ChaseArea" to="ChaseArea" method="_on_body_exited"]

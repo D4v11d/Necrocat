@@ -1,6 +1,6 @@
 class_name Boss extends CharacterBody2D
 
-@export var MAX_HP := 1000
+@export var MAX_HP := 2000
 @export var attack_damage := 50
 @export var speed := 40
 @export var special_dash_speed := 800
@@ -27,6 +27,7 @@ var last_target_position: Vector2
 @onready var arise_area: Area2D = $AriseArea
 @onready var healthbar: HealthBar = $CanvasLayer/Healthbar
 @onready var hit_stream_player: AudioStreamPlayer2D = $SoundEffects/HitStreamPlayer
+@onready var audio_stream_player: AudioStreamPlayer2D = $"../../AudioStreamPlayer2D"
 
 @export var is_ally := false
 @export var is_recruitable := false
@@ -37,6 +38,7 @@ func _ready() -> void:
 	
 	# Connect signals automatically
 	knockback_timer.timeout.connect(_on_knockback_timer_timeout)
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func attack_received(source: Variant, damage: float) -> void:
 		
@@ -71,9 +73,16 @@ func handle_death() -> void:
 
 func _on_hurtbox_damage_taken(amount: Variant, source: Variant) -> void:
 	attack_received(source, amount)
-	
 
-func _on_death_timer_timeout() -> void:
+func _on_animation_finished():
+	if animated_sprite.animation == "death":
 		queue_free()
 		if healthbar:
 			healthbar.queue_free()
+		_fade_out_music()
+
+func _fade_out_music():
+	if audio_stream_player:
+		var tween = get_tree().create_tween()
+		tween.tween_property(audio_stream_player, "volume_db", -80, 2.0) # Baja el volumen a -80 dB en 2 segundos
+		tween.tween_callback(Callable(audio_stream_player, "stop"))

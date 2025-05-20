@@ -20,7 +20,7 @@ var current_target : Node2D = null
 # ───────────────────────────────────────────────────────────
 
 func _physics_process(delta: float) -> void:
-	if mob.is_dying or mob.is_knocked_back:
+	if mob.is_dying or mob.is_knocked_back or mob.hp <= 0:
 		return                                        # don't shoot in these states
 
 	shoot_cooldown -= delta

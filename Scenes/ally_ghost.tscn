@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dl662n6m7d6na"]
+[gd_scene load_steps=70 format=3 uid="uid://dl662n6m7d6na"]
 
 [ext_resource type="Shader" uid="uid://coty8t1yprldg" path="res://common/shaders/hit_flash.tres" id="1_nnkiq"]
 [ext_resource type="Script" path="res://scripts/mob.gd" id="2_eq8px"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/fireball_shooting.gd" id="11_4u2kd"]
 [ext_resource type="PackedScene" uid="uid://cbbhdm4pnu0dl" path="res://Scenes/green_fireball.tscn" id="12_fxewp"]
 [ext_resource type="PackedScene" uid="uid://vved47r3t0bv" path="res://Scenes/enemy_common/hitflash_animation_player.tscn" id="13_8kjah"]
+[ext_resource type="AudioStream" uid="uid://dhf5ty6knejj" path="res://sound/ghost-hit.wav" id="15_e2xme"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_atpsr"]
 resource_local_to_scene = true
@@ -409,10 +410,13 @@ height = 34.0
 radius = 28.0
 
 [node name="AllyGhost" type="CharacterBody2D"]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_atpsr")
 collision_layer = 12
 collision_mask = 10
 script = ExtResource("2_eq8px")
+MAX_HP = 350.0
+attack_damage = 35.0
 speed = 30.0
 is_ally = true
 
@@ -466,6 +470,11 @@ shoot_range = 300.0
 [node name="EmergeTimer" type="Timer" parent="."]
 wait_time = 1.4
 one_shot = true
+
+[node name="SoundEffects" type="Node2D" parent="."]
+
+[node name="HitStreamPlayer" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("15_e2xme")
 
 [connection signal="damage_taken" from="Hurtbox" to="." method="_on_hurtbox_damage_taken"]
 [connection signal="timeout" from="EmergeTimer" to="GhostMovement" method="_on_emerge_timer_timeout"]

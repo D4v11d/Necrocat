@@ -1,6 +1,6 @@
 class_name Fireball extends CharacterBody2D
 
-var attack_damage := 20
+var attack_damage := 35
 var is_ally       := false
 
 func _physics_process(delta: float) -> void:

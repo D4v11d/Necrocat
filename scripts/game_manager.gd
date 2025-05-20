@@ -6,9 +6,12 @@ extends Node2D
 @onready var move_to_next_room: Area2D   = $"../MoveToNextRoom"
 @onready var block:          StaticBody2D = $"../Block"
 @onready var enemies:        Node2D       = $"../Enemies"
+@onready var button: Button = $"../CanvasLayer/Reset/Button"
 
 func _ready() -> void:
 	move_to_next_room.body_entered.connect(_on_move_to_next_room_body_entered)
+	if is_instance_valid(button):
+		button.pressed.connect(_on_reset_button_pressed)
 
 func _physics_process(_delta: float) -> void:
 	# If the Enemies node has no children, remove the blocker once
@@ -21,3 +24,6 @@ func _on_move_to_next_room_body_entered(body: Node2D) -> void:
 		return
 
 	get_tree().change_scene_to_file(next_room)
+
+func _on_reset_button_pressed():
+	get_tree().reload_current_scene()

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvyrvro5xgwcf"
+path="res://.godot/imported/Poison (2).wav-257fa4ab882d23573446e661ecda0e7a.sample"
+
+[deps]
+
+source_file="res://sound/music/Poison (2).wav"
+dest_files=["res://.godot/imported/Poison (2).wav-257fa4ab882d23573446e661ecda0e7a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -61,9 +61,9 @@ var is_attacking := false
 var can_arise_mob := false
 
 # start these in false
-var Q_summon_enabled := false
-var R_summon_enabled := false
-var F_summon_enabled := false
+@export var Q_summon_enabled := false
+@export var R_summon_enabled := false
+@export var F_summon_enabled := false
 
 var is_casting_spell := false
 

@@ -2,7 +2,7 @@ class_name PlayerHurtbox extends Area2D
 
 signal damage_taken(amount, source)  # Define your custom signal
 
-const MAX_HP:= 350
+const MAX_HP:= 300
 const DAMAGE_COOLDOWN:= 0.5
 var hp:= MAX_HP
 

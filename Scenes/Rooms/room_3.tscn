@@ -1,11 +1,19 @@
-[gd_scene load_steps=15 format=4 uid="uid://cdfmedfwato5s"]
+[gd_scene load_steps=23 format=4 uid="uid://cdfmedfwato5s"]
 
 [ext_resource type="Texture2D" uid="uid://cqlim8qkkkhbx" path="res://Art/Tilemaps/Overworld.png" id="1_21ev2"]
 [ext_resource type="PackedScene" uid="uid://cgk5ekyx2oijf" path="res://Scenes/slime_enemy.tscn" id="2_30viv"]
 [ext_resource type="PackedScene" uid="uid://dphcelpad7edg" path="res://Scenes/dash_smoke.tscn" id="2_ellpw"]
 [ext_resource type="PackedScene" uid="uid://ljn1arg6ompw" path="res://Scenes/player.tscn" id="3_yn1l4"]
-[ext_resource type="PackedScene" uid="uid://3wh7ojs7l70n" path="res://Scenes/canvas_layer.tscn" id="5_7mblu"]
+[ext_resource type="Texture2D" uid="uid://v65dpl7n118y" path="res://Art/UI/HUD/Q-summon.png" id="6_jqlm6"]
+[ext_resource type="Texture2D" uid="uid://omxayiqvc38d" path="res://Art/UI/HUD/Green_Slime_Icon.png" id="7_y5w5q"]
+[ext_resource type="Texture2D" uid="uid://cyqgbnyb0lq7g" path="res://Art/UI/HUD/E-Summon.png" id="8_uxcqi"]
+[ext_resource type="Texture2D" uid="uid://l7rls728sayn" path="res://Art/UI/HUD/Green_Skeleton_Icon.png" id="9_tc3by"]
+[ext_resource type="Texture2D" uid="uid://cqvd8bjkenntk" path="res://Art/UI/HUD/R-summon.png" id="10_6sndi"]
+[ext_resource type="Texture2D" uid="uid://b18rpodwxs57e" path="res://Art/UI/HUD/Green_Ghost_Icon.png" id="11_oeyp4"]
+[ext_resource type="FontFile" uid="uid://brlm1ejcuaejx" path="res://Art/Font/m5x7.ttf" id="12_3aa25"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="12_4gy8s"]
+[ext_resource type="Texture2D" uid="uid://byqmj2xjlchrh" path="res://Art/black.png" id="13_d6w0q"]
+[ext_resource type="Texture2D" uid="uid://cn1f4shakd0gs" path="res://Art/UI/GUI.png" id="14_x7yem"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agtqk"]
 texture = ExtResource("1_21ev2")
@@ -3307,34 +3315,34 @@ tile_set = SubResource("TileSet_8v1aj")
 [node name="GroundDecor" type="TileMapLayer" parent="Map/Room0"]
 z_index = -1
 texture_filter = 1
-tile_map_data = PackedByteArray("AADu/wEAAAADAAsAAADx//z/AAAAAAQAAADs//f/AAADAAsAAAD+//b/AAADAAsAAAAFAPv/AAADAAsAAAACAAQAAAADAAsAAADy/wQAAAADAAwAAADr//3/AAADAAwAAADy//f/AAADAAwAAAAGAPb/AAACAAwAAAAFAAEAAAACAAwAAAAAAPv/AAADAAwAAADr/wQAAAAAAAgAAAAEAPj/AAABAAgAAAD+/wQAAAABAAgAAAD3//b/AAABAAQAAAD4//b/AAABAAQAAAD5//b/AAABAAQAAAD3//f/AAABAAQAAAD4//f/AAABAAQAAAD5//f/AAABAAQAAAD3//j/AAABAAQAAAD3//n/AAABAAQAAAD3//r/AAABAAQAAAD3//v/AAABAAQAAAD4//v/AAABAAQAAAD3//z/AAABAAQAAAD3//3/AAABAAQAAAD4//j/AAABAAQAAAD4//n/AAABAAQAAAD4//r/AAABAAQAAAD4//z/AAABAAQAAAD4//3/AAABAAQAAAD5//j/AAABAAQAAAD5//n/AAABAAQAAAD5//r/AAABAAQAAAD5//v/AAABAAQAAAD5//z/AAABAAQAAAD5//3/AAABAAQAAAD2//b/AAAAAAQAAAD2//f/AAAAAAQAAAD2//j/AAABAAcAAAD2//n/AAABAAQAAAD2//r/AAABAAQAAAD2//v/AAABAAQAAAD2//z/AAABAAQAAAD2//3/AAABAAQAAAD6//b/AAACAAQAAAD6//f/AAACAAQAAAD6//j/AAAAAAcAAAD6//n/AAABAAQAAAD6//r/AAABAAQAAAD6//v/AAABAAQAAAD6//z/AAABAAQAAAD6//3/AAABAAQAAAD3//7/AAABAAQAAAD4//7/AAABAAQAAAD5//7/AAABAAQAAAD2//7/AAABAAQAAAD6//7/AAABAAQAAAD3//X/AAABAAQAAAD4//X/AAABAAQAAAD5//X/AAABAAQAAAD5////AAABAAQAAAD4////AAABAAQAAAD3////AAABAAQAAAD3/wAAAAABAAQAAAD4/wAAAAABAAQAAAD5/wAAAAABAAQAAAD5/wEAAAABAAQAAAD4/wEAAAABAAQAAAD3/wEAAAABAAQAAAD3/wIAAAABAAQAAAD4/wIAAAABAAQAAAD5/wIAAAABAAQAAAD5/wMAAAABAAQAAAD4/wMAAAABAAQAAAD3/wMAAAABAAQAAAD3/wQAAAABAAQAAAD4/wQAAAABAAQAAAD5/wQAAAABAAQAAAD1//n/AAABAAQAAAD0//n/AAABAAQAAADz//n/AAABAAQAAADy//n/AAABAAQAAADy//r/AAABAAQAAADy//v/AAABAAQAAADy//z/AAABAAQAAADy//3/AAABAAQAAADy//7/AAABAAQAAADy////AAABAAQAAADy/wAAAAABAAQAAADy/wEAAAABAAQAAADz/wEAAAABAAQAAAD0/wAAAAABAAQAAAD1/wAAAAABAAQAAAD2/wAAAAABAAQAAAD2/wEAAAABAAQAAAD1/wEAAAABAAQAAAD0/wEAAAABAAQAAAD1////AAABAAQAAAD1//7/AAABAAQAAAD1//3/AAABAAQAAAD2////AAABAAQAAADz/wAAAAABAAQAAADz////AAABAAQAAAD0////AAABAAQAAAD0//7/AAABAAQAAAD1//z/AAABAAQAAAD1//v/AAABAAQAAAD1//r/AAABAAQAAAD0//r/AAABAAQAAADz//r/AAABAAQAAADz//v/AAABAAQAAAD0//v/AAABAAQAAAD0//z/AAABAAQAAAD0//3/AAABAAQAAADz//7/AAABAAQAAADz//3/AAABAAQAAADz//z/AAABAAQAAAD7//n/AAABAAQAAAD8//n/AAABAAQAAAD9//n/AAABAAQAAAD9//r/AAABAAQAAAD9//v/AAABAAQAAAD9//z/AAABAAQAAAD9//3/AAABAAQAAAD9//7/AAABAAQAAAD9////AAABAAQAAAD9/wAAAAABAAQAAAD9/wEAAAABAAQAAAD8/wEAAAABAAQAAAD7/wEAAAABAAQAAAD6/wEAAAABAAQAAAD6/wAAAAABAAQAAAD7/wAAAAABAAQAAAD8/wAAAAABAAQAAAD8////AAABAAQAAAD8//7/AAABAAQAAAD8//3/AAABAAQAAAD8//z/AAABAAQAAAD8//v/AAABAAQAAAD8//r/AAABAAQAAAD7//r/AAABAAQAAAD7//v/AAABAAQAAAD7//z/AAABAAQAAAD7//3/AAABAAQAAAD7//7/AAABAAQAAAD7////AAABAAQAAAD6////AAABAAQAAAD+//n/AAABAAQAAAD+//r/AAABAAQAAAD+//v/AAABAAQAAAD+//z/AAABAAQAAAD+//3/AAABAAQAAAD+//7/AAABAAQAAAD+////AAABAAQAAAD+/wAAAAABAAQAAAD+/wEAAAABAAQAAAD2/wIAAAABAAYAAAD1/wIAAAABAAUAAAD0/wIAAAABAAUAAADz/wIAAAABAAUAAADy/wIAAAABAAUAAADx/wEAAAAAAAQAAADx/wAAAAAAAAQAAADx////AAAAAAQAAADx//7/AAAAAAQAAADx//3/AAAAAAQAAADx//v/AAAAAAQAAADx//r/AAAAAAQAAADx//n/AAAAAAQAAADy//j/AAABAAMAAADz//j/AAABAAMAAAD0//j/AAABAAMAAAD1//j/AAABAAMAAADx/wIAAAAAAAUAAADx//j/AAAAAAMAAAD7//j/AAABAAMAAAD8//j/AAABAAMAAAD9//j/AAABAAMAAAD+//j/AAABAAMAAAD///n/AAACAAQAAAD///r/AAACAAQAAAD///v/AAACAAQAAAD///z/AAACAAQAAAD///3/AAACAAQAAAD///7/AAACAAQAAAD/////AAACAAQAAAD//wAAAAACAAQAAAD//wEAAAACAAQAAAD6/wIAAAAAAAYAAAD7/wIAAAABAAUAAAD8/wIAAAABAAUAAAD9/wIAAAABAAUAAAD+/wIAAAABAAUAAAD//wIAAAACAAUAAAD///j/AAACAAMAAAD2/wMAAAAAAAQAAAD2/wQAAAAAAAQAAAD6/wMAAAACAAQAAAD6/wQAAAACAAQAAAA=")
+tile_map_data = PackedByteArray("AADx//z/AAAAAAQAAADs//f/AAADAAsAAAD+//b/AAADAAsAAAAFAPv/AAADAAsAAADr//3/AAADAAwAAADy//f/AAADAAwAAAAGAPb/AAACAAwAAAAAAPv/AAADAAwAAAAEAPj/AAABAAgAAAD3//b/AAABAAQAAAD4//b/AAABAAQAAAD5//b/AAABAAQAAAD3//f/AAABAAQAAAD4//f/AAABAAQAAAD5//f/AAABAAQAAAD3//j/AAABAAQAAAD3//n/AAABAAQAAAD3//r/AAABAAQAAAD3//v/AAABAAQAAAD4//v/AAABAAQAAAD3//z/AAABAAQAAAD3//3/AAABAAQAAAD4//j/AAABAAQAAAD4//n/AAABAAQAAAD4//r/AAABAAQAAAD4//z/AAABAAQAAAD4//3/AAABAAQAAAD5//j/AAABAAQAAAD5//n/AAABAAQAAAD5//r/AAABAAQAAAD5//v/AAABAAQAAAD5//z/AAABAAQAAAD5//3/AAABAAQAAAD2//b/AAAAAAQAAAD2//f/AAAAAAQAAAD2//j/AAABAAcAAAD2//n/AAABAAQAAAD2//r/AAABAAQAAAD2//v/AAABAAQAAAD2//z/AAABAAQAAAD2//3/AAABAAQAAAD6//b/AAACAAQAAAD6//f/AAACAAQAAAD6//j/AAAAAAcAAAD6//n/AAABAAQAAAD6//r/AAABAAQAAAD6//v/AAABAAQAAAD6//z/AAABAAQAAAD6//3/AAABAAQAAAD3//7/AAABAAQAAAD4//7/AAABAAQAAAD5//7/AAABAAQAAAD2//7/AAABAAQAAAD6//7/AAABAAQAAAD3//X/AAABAAQAAAD4//X/AAABAAQAAAD5//X/AAABAAQAAAD5////AAABAAQAAAD4////AAABAAQAAAD3////AAABAAQAAAD3/wAAAAABAAQAAAD4/wAAAAABAAQAAAD5/wAAAAABAAQAAAD5/wEAAAABAAQAAAD4/wEAAAABAAQAAAD3/wEAAAABAAQAAAD3/wIAAAABAAQAAAD4/wIAAAABAAQAAAD5/wIAAAABAAQAAAD5/wMAAAABAAQAAAD4/wMAAAABAAQAAAD3/wMAAAABAAQAAAD3/wQAAAABAAQAAAD4/wQAAAABAAQAAAD5/wQAAAABAAQAAAD1//n/AAABAAQAAAD0//n/AAABAAQAAADz//n/AAABAAQAAADy//n/AAABAAQAAADy//r/AAABAAQAAADy//v/AAABAAQAAADy//z/AAABAAQAAADy//3/AAABAAQAAADy//7/AAABAAQAAADy////AAABAAQAAADy/wAAAAABAAQAAADy/wEAAAABAAQAAADz/wEAAAABAAQAAAD0/wAAAAABAAQAAAD1/wAAAAABAAQAAAD2/wAAAAABAAQAAAD2/wEAAAABAAQAAAD1/wEAAAABAAQAAAD0/wEAAAABAAQAAAD1////AAABAAQAAAD1//7/AAABAAQAAAD1//3/AAABAAQAAAD2////AAABAAQAAADz/wAAAAABAAQAAADz////AAABAAQAAAD0////AAABAAQAAAD0//7/AAABAAQAAAD1//z/AAABAAQAAAD1//v/AAABAAQAAAD1//r/AAABAAQAAAD0//r/AAABAAQAAADz//r/AAABAAQAAADz//v/AAABAAQAAAD0//v/AAABAAQAAAD0//z/AAABAAQAAAD0//3/AAABAAQAAADz//7/AAABAAQAAADz//3/AAABAAQAAADz//z/AAABAAQAAAD7//n/AAABAAQAAAD8//n/AAABAAQAAAD9//n/AAABAAQAAAD9//r/AAABAAQAAAD9//v/AAABAAQAAAD9//z/AAABAAQAAAD9//3/AAABAAQAAAD9//7/AAABAAQAAAD9////AAABAAQAAAD9/wAAAAABAAQAAAD9/wEAAAABAAQAAAD8/wEAAAABAAQAAAD7/wEAAAABAAQAAAD6/wEAAAABAAQAAAD6/wAAAAABAAQAAAD7/wAAAAABAAQAAAD8/wAAAAABAAQAAAD8////AAABAAQAAAD8//7/AAABAAQAAAD8//3/AAABAAQAAAD8//z/AAABAAQAAAD8//v/AAABAAQAAAD8//r/AAABAAQAAAD7//r/AAABAAQAAAD7//v/AAABAAQAAAD7//z/AAABAAQAAAD7//3/AAABAAQAAAD7//7/AAABAAQAAAD7////AAABAAQAAAD6////AAABAAQAAAD+//n/AAABAAQAAAD+//r/AAABAAQAAAD+//v/AAABAAQAAAD+//z/AAABAAQAAAD+//3/AAABAAQAAAD+//7/AAABAAQAAAD+////AAABAAQAAAD+/wAAAAABAAQAAAD+/wEAAAABAAQAAAD2/wIAAAABAAYAAAD1/wIAAAABAAUAAAD0/wIAAAABAAUAAADz/wIAAAABAAUAAADy/wIAAAABAAUAAADx/wEAAAAAAAQAAADx/wAAAAAAAAQAAADx////AAAAAAQAAADx//7/AAAAAAQAAADx//3/AAAAAAQAAADx//v/AAAAAAQAAADx//r/AAAAAAQAAADx//n/AAAAAAQAAADy//j/AAABAAMAAADz//j/AAABAAMAAAD0//j/AAABAAMAAAD1//j/AAABAAMAAADx/wIAAAAAAAUAAADx//j/AAAAAAMAAAD7//j/AAABAAMAAAD8//j/AAABAAMAAAD9//j/AAABAAMAAAD+//j/AAABAAMAAAD///n/AAACAAQAAAD///r/AAACAAQAAAD///v/AAACAAQAAAD///z/AAACAAQAAAD///3/AAACAAQAAAD///7/AAACAAQAAAD/////AAACAAQAAAD//wAAAAACAAQAAAD//wEAAAACAAQAAAD6/wIAAAAAAAYAAAD7/wIAAAABAAUAAAD8/wIAAAABAAUAAAD9/wIAAAABAAUAAAD+/wIAAAABAAUAAAD//wIAAAACAAUAAAD///j/AAACAAMAAAD2/wMAAAAAAAQAAAD2/wQAAAAAAAQAAAD6/wMAAAACAAQAAAD6/wQAAAACAAQAAAAEAAAAAAAAAAgAAADu//7/AAAAAAgAAADv//r/AAAAAAgAAAA=")
 tile_set = SubResource("TileSet_rdxx7")
 
 [node name="Collisions" type="TileMapLayer" parent="Map/Room0"]
 texture_filter = 1
-tile_map_data = PackedByteArray("AADq//b/AAABAA4AAADq//f/AAABAA4AAADq//j/AAABAA4AAADq//n/AAABAA4AAADq//r/AAABAA4AAADq//v/AAABAA4AAADq//z/AAABAA4AAADq//3/AAABAA4AAADq//7/AAABAA4AAADq////AAABAA4AAADq/wAAAAABAA4AAADq/wEAAAABAA4AAADq/wIAAAABAA4AAADq/wMAAAABAA4AAADq/wQAAAABAA4AAADq/wUAAAABAA8AAADr/wUAAAACAA8AAADs/wUAAAACAA8AAADt/wUAAAACAA8AAADu/wUAAAACAA8AAADv/wUAAAACAA8AAADw/wUAAAACAA8AAADx/wUAAAACAA8AAADy/wUAAAACAA8AAADz/wUAAAACAA8AAAD0/wUAAAACAA8AAAD1/wUAAAACAA8AAAD2/wUAAAACAA8AAAD6/wUAAAACAA8AAAD7/wUAAAACAA8AAAD8/wUAAAACAA8AAAD9/wUAAAACAA8AAAD+/wUAAAACAA8AAAD//wUAAAACAA8AAAAAAAUAAAACAA8AAAABAAUAAAACAA8AAAACAAUAAAACAA8AAAADAAUAAAACAA8AAAAEAAUAAAACAA8AAAAFAAUAAAACAA8AAAAGAAUAAAACAA8AAAAHAAUAAAADAA8AAAAHAPb/AAADAA4AAAAHAPf/AAADAA4AAAAHAPj/AAADAA4AAAAHAPn/AAADAA4AAAAHAPr/AAADAA4AAAAHAPv/AAADAA4AAAAHAPz/AAADAA4AAAAHAP3/AAADAA4AAAAHAP7/AAADAA4AAAAHAP//AAADAA4AAAAHAAAAAAADAA4AAAAHAAEAAAADAA4AAAAHAAIAAAADAA4AAAAHAAMAAAADAA4AAAAHAAQAAAADAA4AAAAHAPX/AAADAA0AAAD8//X/AAACAA0AAAD9//X/AAACAA0AAAD+//X/AAACAA0AAAD///X/AAACAA0AAAAAAPX/AAACAA0AAAABAPX/AAACAA0AAAACAPX/AAACAA0AAAADAPX/AAACAA0AAAAEAPX/AAACAA0AAAAFAPX/AAACAA0AAAAGAPX/AAACAA0AAADq//X/AAABAA0AAADr//X/AAACAA0AAADs//X/AAACAA0AAADt//X/AAACAA0AAADu//X/AAACAA0AAADv//X/AAACAA0AAADw//X/AAACAA0AAADx//X/AAACAA0AAADy//X/AAACAA0AAADz//X/AAACAA0AAAD0//X/AAACAA0AAAD1//X/AAACAA0AAAD2//X/AAABABAAAAD6//X/AAAAABAAAAD7//X/AAACAA0AAAD5/wUAAAACAA8AAAD4/wUAAAACAA8AAAD3/wUAAAACAA8AAAA=")
+tile_map_data = PackedByteArray("AADq//b/AAABAA4AAADq//f/AAABAA4AAADq//j/AAABAA4AAADq//n/AAABAA4AAADq//r/AAABAA4AAADq//v/AAABAA4AAADq//z/AAABAA4AAADq//3/AAABAA4AAADq//7/AAABAA4AAADq////AAABAA4AAADq/wAAAAABAA4AAADq/wEAAAABAA4AAADq/wIAAAABAA4AAADq/wMAAAABAA4AAADq/wQAAAABAA4AAADq/wUAAAABAA8AAADr/wUAAAACAA8AAADs/wUAAAACAA8AAADt/wUAAAACAA8AAADu/wUAAAACAA8AAADv/wUAAAACAA8AAADw/wUAAAACAA8AAADx/wUAAAACAA8AAADy/wUAAAACAA8AAADz/wUAAAACAA8AAAD0/wUAAAACAA8AAAD1/wUAAAACAA8AAAD2/wUAAAACAA8AAAD6/wUAAAACAA8AAAD7/wUAAAACAA8AAAD8/wUAAAACAA8AAAD9/wUAAAACAA8AAAD+/wUAAAACAA8AAAD//wUAAAACAA8AAAAAAAUAAAACAA8AAAABAAUAAAACAA8AAAACAAUAAAACAA8AAAADAAUAAAACAA8AAAAEAAUAAAACAA8AAAAFAAUAAAACAA8AAAAGAAUAAAACAA8AAAAHAAUAAAADAA8AAAAHAPb/AAADAA4AAAAHAPf/AAADAA4AAAAHAPj/AAADAA4AAAAHAPn/AAADAA4AAAAHAPr/AAADAA4AAAAHAPv/AAADAA4AAAAHAPz/AAADAA4AAAAHAP3/AAADAA4AAAAHAP7/AAADAA4AAAAHAP//AAADAA4AAAAHAAAAAAADAA4AAAAHAAEAAAADAA4AAAAHAAIAAAADAA4AAAAHAAMAAAADAA4AAAAHAAQAAAADAA4AAAAHAPX/AAADAA0AAAD8//X/AAACAA0AAAD9//X/AAACAA0AAAD+//X/AAACAA0AAAD///X/AAACAA0AAAAAAPX/AAACAA0AAAABAPX/AAACAA0AAAACAPX/AAACAA0AAAADAPX/AAACAA0AAAAEAPX/AAACAA0AAAAFAPX/AAACAA0AAAAGAPX/AAACAA0AAADq//X/AAABAA0AAADr//X/AAACAA0AAADs//X/AAACAA0AAADt//X/AAACAA0AAADu//X/AAACAA0AAADv//X/AAACAA0AAADw//X/AAACAA0AAADx//X/AAACAA0AAADy//X/AAACAA0AAADz//X/AAACAA0AAAD0//X/AAACAA0AAAD1//X/AAACAA0AAAD2//X/AAABABAAAAD6//X/AAAAABAAAAD7//X/AAACAA0AAAD5/wUAAAACAA8AAAD4/wUAAAACAA8AAAD3/wUAAAACAA8AAAD1//b/AAAFABAAAAD1//f/AAAFABEAAAD2//b/AAAGABAAAAD2//f/AAAGABEAAAD6//b/AAAFABAAAAD6//f/AAAFABEAAAD7//b/AAAGABAAAAD7//f/AAAGABEAAAA=")
 tile_set = SubResource("TileSet_7rb8s")
 
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="SlimeEnemy" parent="Enemies" instance=ExtResource("2_30viv")]
-position = Vector2(3, -2)
+position = Vector2(3, 8)
 
 [node name="SlimeEnemy2" parent="Enemies" instance=ExtResource("2_30viv")]
-position = Vector2(-122, -67)
+position = Vector2(-127, -51)
 
 [node name="SlimeEnemy3" parent="Enemies" instance=ExtResource("2_30viv")]
-position = Vector2(-239, -8)
+position = Vector2(-256, 5)
 
 [node name="DashSmoke" parent="." instance=ExtResource("2_ellpw")]
 visible = false
 position = Vector2(43, -41)
 
 [node name="Player" parent="." instance=ExtResource("3_yn1l4")]
-position = Vector2(-123, 61)
+position = Vector2(-123, 64)
 collision_layer = 9
-collision_mask = 10
+Q_summon_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -3373,6 +3381,159 @@ texture = ExtResource("1_21ev2")
 region_enabled = true
 region_rect = Rect2(326.922, 423.614, 38.7514, 17.8224)
 
-[node name="CanvasLayer" parent="." instance=ExtResource("5_7mblu")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="BoxContainer" parent="CanvasLayer"]
+offset_right = 89.0
+offset_bottom = 98.0
+scale = Vector2(3, 3)
+
+[node name="Q-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
+texture_filter = 1
+position = Vector2(21.6667, 26.6667)
+texture = ExtResource("6_jqlm6")
+
+[node name="Slime" type="Sprite2D" parent="CanvasLayer/HUD/Q-summon"]
+position = Vector2(-0.333333, -3.33333)
+scale = Vector2(1.17708, 1.29427)
+texture = ExtResource("7_y5w5q")
+
+[node name="R-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
+texture_filter = 1
+position = Vector2(47.6667, 45)
+texture = ExtResource("10_6sndi")
+
+[node name="SkeletonHead" type="Sprite2D" parent="CanvasLayer/HUD/R-summon"]
+visible = false
+position = Vector2(0.333335, -1.33333)
+scale = Vector2(0.901042, 0.848958)
+texture = ExtResource("9_tc3by")
+
+[node name="F-summon" type="Sprite2D" parent="CanvasLayer/HUD"]
+texture_filter = 1
+position = Vector2(25, 64.3333)
+texture = ExtResource("8_uxcqi")
+
+[node name="GhostHead" type="Sprite2D" parent="CanvasLayer/HUD/F-summon"]
+visible = false
+texture_filter = 1
+position = Vector2(-2.33333, -0.333333)
+scale = Vector2(1.52344, 1.28385)
+texture = ExtResource("11_oeyp4")
+
+[node name="NewSummonLabel" type="Label" parent="CanvasLayer"]
+visible = false
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -44.0
+offset_right = 20.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.343396, 0.147218, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_3aa25")
+theme_override_font_sizes/font_size = 48
+text = "New Summon Arised"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScreenTop" type="BoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="Black" type="Sprite2D" parent="CanvasLayer/ScreenTop"]
+position = Vector2(-37, 26.5)
+scale = Vector2(10.2013, 0.244)
+texture = ExtResource("13_d6w0q")
+
+[node name="ScreenBottom" type="BoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Black2" type="Sprite2D" parent="CanvasLayer/ScreenBottom"]
+position = Vector2(-102, 25.4481)
+scale = Vector2(11.1494, 0.283584)
+texture = ExtResource("13_d6w0q")
+
+[node name="Reset" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_top = 51.0
+offset_right = -78.0
+offset_bottom = 51.0
+grow_horizontal = 0
+
+[node name="Gui" type="Sprite2D" parent="CanvasLayer/Reset"]
+texture_filter = 1
+position = Vector2(-100.816, 56.1067)
+scale = Vector2(3.65264, 6.6318)
+texture = ExtResource("14_x7yem")
+region_enabled = true
+region_rect = Rect2(145.08, 81.6194, 45.8891, 13.3809)
+
+[node name="Button" type="Button" parent="CanvasLayer/Reset"]
+layout_mode = 0
+offset_left = -181.981
+offset_top = 15.5327
+offset_right = -22.9806
+offset_bottom = 83.5327
+theme_override_fonts/font = ExtResource("12_3aa25")
+theme_override_font_sizes/font_size = 64
+keep_pressed_outside = true
+text = "Reset"
+
+[node name="Summon" type="Label" parent="."]
+texture_filter = 1
+offset_left = -341.0
+offset_top = 23.0
+offset_right = -207.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("12_3aa25")
+theme_override_font_sizes/font_size = 32
+text = "Q, R, F
+to Summon"
+horizontal_alignment = 1
+
+[node name="Remove" type="Label" parent="."]
+texture_filter = 1
+offset_left = -13.0
+offset_top = 22.0
+offset_right = 121.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("12_3aa25")
+theme_override_font_sizes/font_size = 32
+text = "Backspace
+to Remove"
+horizontal_alignment = 1
 
 [connection signal="animation_finished" from="DashSmoke" to="Player" method="_on_dash_smoke_animation_finished"]
